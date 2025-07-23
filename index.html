@@ -26,6 +26,32 @@
             height: auto;
             display: block;
         }
+
+        /* Styles for the custom carousel */
+        .carousel-container {
+            overflow-x: hidden; /* Hide horizontal scrollbar */
+            scroll-behavior: smooth; /* Smooth scrolling for carousel */
+            -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS */
+        }
+        .carousel-wrapper {
+            display: flex;
+            gap: 2rem; /* Space between cards */
+            padding-bottom: 1rem; /* Space for potential scrollbar on some OS */
+        }
+        .team-member-card {
+            flex: 0 0 auto; /* Do not grow, do not shrink, base on content */
+            width: calc(100% / 1 - 1rem); /* For 1 card per view on small screens */
+            /* Adjusted widths for different screen sizes */
+            @media (min-width: 640px) { /* sm */
+                width: calc(100% / 2 - 1rem); /* For 2 cards per view */
+            }
+            @media (min-width: 1024px) { /* lg */
+                width: calc(100% / 3 - 1.333rem); /* For 3 cards per view */
+            }
+            @media (min-width: 1280px) { /* xl */
+                width: calc(100% / 4 - 1.5rem); /* For 4 cards per view */
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -35,13 +61,14 @@
         <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
             <a href="#" class="flex items-center space-x-2">
                 <!-- Placeholder for University/Faculty Logo -->
-                <img src="https://placehold.co/40x40/ffffff/000000?text=LOGO" alt="OUIT Logo" class="h-10 rounded-full">
+                <img src="./uploads/oulogo.png" alt="OUIT Logo" class="h-10 rounded-full bg-white p-3">
                 <span class="text-xl font-bold">Faculty of Information Technology</span>
             </a>
             <!-- Desktop Navigation -->
             <div class="hidden md:flex space-x-6">
                 <a href="#home" class="hover:text-blue-200 transition duration-300">Home</a>
                 <a href="#about" class="hover:text-blue-200 transition duration-300">About Us</a>
+                <a href="#our-teams" class="hover:text-blue-200 transition duration-300">Our Teams</a>
                 <div class="relative group">
                     <button class="hover:text-blue-200 transition duration-300 flex items-center focus:outline-none">
                         Programs
@@ -65,6 +92,7 @@
         <div id="mobile-menu" class="hidden md:hidden bg-blue-700 py-2">
             <a href="#home" class="block px-4 py-2 hover:bg-blue-600">Home</a>
             <a href="#about" class="block px-4 py-2 hover:bg-blue-600">About Us</a>
+            <a href="#our-teams" class="block px-4 py-2 hover:bg-blue-600">Our Teams</a>
             <a href="#undergraduate-programs" class="block px-4 py-2 hover:bg-blue-600">Undergraduate Programs</a>
             <a href="#graduate-programs" class="block px-4 py-2 hover:bg-blue-600">Graduate Programs</a>
             <a href="#admissions" class="block px-4 py-2 hover:bg-blue-600">Admissions</a>
@@ -75,13 +103,13 @@
 
     <!-- Hero Section -->
     <section id="home" class="relative h-screen bg-cover bg-center flex items-center justify-center text-white"
-        style="background-image: url('https://placehold.co/1920x1080/00008B/FFFFFF?text=IT+Campus+View');">
+        style="background-image: url('./uploads/hcmcou.jpg');">
         <div class="absolute inset-0 bg-black opacity-60"></div>
         <div class="relative z-10 text-center px-4 max-w-4xl">
             <h1 class="text-4xl md:text-6xl font-extrabold leading-tight drop-shadow-lg animate-fade-in-down">
                 Shaping the Future of <span class="text-blue-400">Information Technology</span>
             </h1>
-            <p class="mt-4 text-lg md:text-xl max-w-2xl mx-auto drop-shadow-md animate-fade-in-up">
+            <p class="mt-4 text-lg md:text-xl max-w-xl mx-auto drop-shadow-md animate-fade-in-up">
                 Dedicated to excellence in IT education and research for nearly 35 years.
             </p>
             <div class="mt-8 space-y-4 sm:space-y-0 sm:space-x-4 flex flex-col sm:flex-row justify-center">
@@ -102,21 +130,28 @@
             <div class="flex flex-col md:flex-row items-center gap-12">
                 <div class="md:w-1/2">
                     <p class="text-gray-700 leading-relaxed mb-4 text-justify">
-                        The Faculty of Information Technology (IT), established in September 1990, is one of the founding faculties of Ho Chi Minh City Open University. Over nearly 35 years of development, the Faculty has assembled a dedicated and experienced team of permanent lecturers, including PhDs and Masters who have graduated from prestigious universities both domestically and internationally. Additionally, adjunct lecturers from reputable universities, enterprises, and research institutes in Ho Chi Minh City contribute to the faculty. The Faculty has trained and supplied approximately 5,500 graduates in IT-related disciplines (Computer Science, Informatics, and Management Information Systems) and thousands of non-regular Informatics graduates.
+                        Established in September 1990, the Faculty of Information Technology (FIT) is proud to be one of the earliest founding faculties of Ho Chi Minh City Open University. Over the past 35 years of growth and development, FIT has built a team of experienced and dedicated full-time lecturers, including Ph.D. and M.Sc. holders from prestigious universities both in Vietnam and abroad. In addition, the Faculty regularly invites visiting lecturers from renowned universities, research institutes, and enterprises across Ho Chi Minh City, fostering strong connections between academia and industry.
                     </p>
                     <p class="text-gray-700 leading-relaxed mb-4 text-justify">
-                        In 2021 and 2022, the Management Information Systems program achieved accreditation from the Ministry of Education and Training (MOET), and the Computer Science program received accreditation from the ASEAN University Network (AUN).
+                        To date, the Faculty has trained and contributed a high-quality workforce to society, with approximately 5,500 full-time graduates holding bachelor's degrees in disciplines such as Computer Science, Informatics, and Management Information Systems. Thousands more have completed part-time Informatics programs, reflecting the Faculty’s broad and inclusive approach to education.
                     </p>
                     <p class="text-gray-700 leading-relaxed mb-4 text-justify">
-                        The Faculty trains IT professionals with strong ethics, theoretical knowledge, and proficient practical skills, capable of addressing new issues in the field, thus contributing to the industrialization and modernization of the country through the informatization of economic management, production management, social management, education management, and more.
+                        In recognition of its commitment to academic excellence, the Faculty achieved significant accreditation milestones:
+                        <ul class="list-disc list-inside">
+                            <li>In 2021 and 2022, the Management Information Systems program was accredited by the Ministry of Education and Training (MOET), and the Computer Science program received international accreditation from the ASEAN University Network – Quality Assurance (AUN-QA).</li>
+                            <li>In 2024, the Information Technology program successfully passed national quality assessment under MOET standards.</li>
+                        </ul>
                     </p>
-                    <p class="text-gray-700 leading-relaxed text-justify">
-                        It is a point of pride that alumni from the Faculty have become proficient IT staff, programmers, and researchers at companies both domestically and in developed countries, or have become lecturers at colleges and universities, or have taken on executive and managerial positions at companies, enterprises, and research institutes. Many alumni have pursued higher education (Master’s and PhD) at prestigious institutions both in Vietnam and abroad after completing their undergraduate programs.
+                    <p class="text-gray-700 leading-relaxed mb-4 text-justify">
+                        The Faculty is dedicated to nurturing IT professionals who not only possess strong ethical values and solid theoretical foundations, but also excel in practical skills. Our graduates are equipped to keep pace with rapid technological advancements and actively contribute to the country’s modernization through the digital transformation of economic, social, and educational management systems.
                     </p>
-                    <a href="http://it.ou.edu.vn/pages/view/51-faculty's-lecturers" target="_blank" class="text-blue-600 hover:underline font-semibold mt-4 inline-block">See more here about our Lecturers &rarr;</a>
+                    <p class="text-gray-700 leading-relaxed mb-4 text-justify">
+                        We take great pride in our alumni network, which includes outstanding software engineers, IT professionals, and researchers working in Vietnam and across developed countries. Many alumni have become university lecturers, research leaders, and senior managers in leading companies and institutes. A notable number of graduates have pursued advanced studies at the master’s and doctoral levels at distinguished institutions worldwide, further reflecting the strength and influence of the Faculty’s educational foundation.
+                    </p>
+                    
                 </div>
                 <div class="md:w-1/2">
-                    <img src="https://placehold.co/600x400/ADD8E6/000000?text=Faculty+Team" alt="Faculty Team" class="rounded-lg shadow-xl responsive-img">
+                    <img src="./uploads/IMG_0327.JPG" alt="Faculty Team" class="rounded-lg shadow-xl responsive-img">
                 </div>
             </div>
 
@@ -127,7 +162,7 @@
                         <i class="fas fa-award text-4xl text-blue-600 mb-4"></i>
                         <h4 class="text-xl font-semibold text-blue-800 mb-3">Accredited Programs</h4>
                         <p class="text-gray-600">
-                            Our Management Information Systems program is accredited by MOET (2021, 2022), and Computer Science by AUN.
+                            Our Management Information Systems program is accredited by MOET (2021, 2022), Computer Science is accredited by AUN-QA, and Information Technology was accredited in 2024 under MOET standards.
                         </p>
                     </div>
                     <div class="bg-gray-100 p-6 rounded-lg shadow-md border-t-4 border-green-500 hover:border-green-600 transition duration-300">
@@ -145,6 +180,82 @@
                         </p>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Teams Section (Carousel-like) -->
+    <section id="our-teams" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-blue-800 mb-12">Meet Our Teams</h2>
+            <div class="relative">
+                <div id="team-carousel-container" class="carousel-container relative">
+                    <div id="team-carousel-wrapper" class="carousel-wrapper">
+
+                        <!-- Team Member Card 1 -->
+                        <div class="team-member-card bg-white rounded-lg shadow-lg overflow-hidden flex flex-col items-center p-6 text-center transition-transform duration-300 hover:scale-105">
+                            <img src="./uploads/teams/TS_ TH Vinh.jpg" alt="TRUONG HOANG VINH" class="w-36 h-36 rounded-full object-cover mb-4 border-4 border-blue-500">
+                            <h3 class="text-xl font-bold text-blue-800 mb-1">TRƯƠNG HOÀNG VINH, Ph.D.</h3>
+                            <p class="text-gray-600 mb-2">Title: Dean</p>
+                            <p class="text-gray-600 mb-3">Email: <a href="mailto:vinh.th@ou.edu.vn" class="text-blue-600 hover:underline">vinh.th@ou.edu.vn</a></p>
+                            <a href="http://scholar.google.com/citations?hl=vi&user=5E3HHtsAAAAJ" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300">
+                                Scientific Profile
+                            </a>
+                        </div>
+
+                        <!-- Team Member Card 2 -->
+                        <div class="team-member-card bg-white rounded-lg shadow-lg overflow-hidden flex flex-col items-center p-6 text-center transition-transform duration-300 hover:scale-105">
+                            <img src="./uploads/teams/PHCH Anh.png" alt="LE HOANG AN" class="w-36 h-36 rounded-full object-cover mb-4 border-4 border-blue-500">
+                            <h3 class="text-xl font-bold text-blue-800 mb-1">PHẠM HC HUYÊN ANH</h3>
+                            <p class="text-gray-600 mb-2">Title: Academic Affairs Specialist</p>
+                            <p class="text-gray-600 mb-3">Email: <a href="mailto:anh.phch@ou.edu.vn" class="text-blue-600 hover:underline">anh.phch@ou.edu.vn</a></p>
+                             <a class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300">
+                                STAFF MEMBER
+                            </a>
+                        </div>
+
+                        <!-- Team Member Card 3 -->
+                        <div class="team-member-card bg-white rounded-lg shadow-lg overflow-hidden flex flex-col items-center p-6 text-center transition-transform duration-300 hover:scale-105">
+                            <img src="./uploads/teams/ThS_ NV Bay.jpg" alt="NGUYEN THI THAO" class="w-36 h-36 rounded-full object-cover mb-4 border-4 border-blue-500">
+                            <h3 class="text-xl font-bold text-blue-800 mb-1">NGUYỄN VĂN BẢY, MSc.</h3>
+                            <p class="text-gray-600 mb-2">Title: Student Affairs Specialist</p>
+                            <p class="text-gray-600 mb-3">Email: <a href="mailto:bay.nv@ou.edu.vn" class="text-blue-600 hover:underline">bay.nv@ou.edu.vn</a></p>
+                           <a class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300">
+                                STAFF MEMBER
+                            </a>
+                        </div>
+
+                        <!-- Team Member Card 4 -->
+                        <div class="team-member-card bg-white rounded-lg shadow-lg overflow-hidden flex flex-col items-center p-6 text-center transition-transform duration-300 hover:scale-105">
+                            <img src="./uploads/teams/TS_ NT Dat.jpg" alt="NGUYEN THI THAO" class="w-36 h-36 rounded-full object-cover mb-4 border-4 border-blue-500">
+                            <h3 class="text-xl font-bold text-blue-800 mb-1">NGUYỄN TIẾN ĐẠT, Ph.D.</h3>
+                            <p class="text-gray-600 mb-2">Title: Head of Information Systems Department</p>
+                            <p class="text-gray-600 mb-3">Email:
+                                <a href="mailto:dat.nt@ou.edu.vn" class="text-blue-600 hover:underline">dat.nt@ou.edu.vn</a></p>
+                           <a href="#" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300">
+                                Scientific Profile
+                            </a>
+                        </div>
+                        <!-- Team Member Card 5 -->
+                        <div class="team-member-card bg-white rounded-lg shadow-lg overflow-hidden flex flex-col items-center p-6 text-center transition-transform duration-300 hover:scale-105">
+                            <img src="./uploads/teams/TS_ LV Tuan.jpg" alt="NGUYEN THI THAO" class="w-36 h-36 rounded-full object-cover mb-4 border-4 border-blue-500">
+                            <h3 class="text-xl font-bold text-blue-800 mb-1">LÊ VIẾT TUẤN, Ph.D.</h3>
+                            <p class="text-gray-600 mb-2">Title: Head of Artificial Intelligence Department</p>
+                            <p class="text-gray-600 mb-3">Email:
+                                <a href="mailto:tuan.lv@ou.edu.vn" class="text-blue-600 hover:underline">tuan.lv@ou.edu.vn</a></p>
+                           <a href="https://vt-le.github.io/" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300">
+                                Home Page
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Carousel Navigation Buttons -->
+                <button id="prev-team" class="absolute left-0 top-1/2 -translate-y-1/2 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition duration-300 focus:outline-none">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button id="next-team" class="absolute right-0 top-1/2 -translate-y-1/2 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition duration-300 focus:outline-none">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
             </div>
         </div>
     </section>
@@ -218,7 +329,7 @@
                 <!-- Artificial Intelligence Card -->
                 <div class="program-card bg-white rounded-lg shadow-lg overflow-hidden border-2 border-transparent transition-all duration-300 transform hover:-translate-y-2">
                     <div class="p-6">
-                        <h3 class="text-2xl font-bold text-blue-700 mb-2">Artificial Intelligence <span class="text-red-500 text-lg font-semibold">(New)</span></h3>
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">Artificial Intelligence <span class="text-red-500 text-lg font-semibold">(🔥)</span></h3>
                         <p class="text-gray-600 text-sm mb-4">Program Code: 7480107</p>
                         <p class="text-gray-700 leading-relaxed mb-4 text-justify">
                             The Bachelor’s program in Artificial Intelligence is designed with an application-oriented approach. The goal is to create a workforce with solid foundational knowledge in AI and the ability to intelligently solve practical problems. Graduates will possess good political qualities and ethics, understand and apply AI achievements, and independently research and propose new methods in AI.
@@ -234,7 +345,7 @@
                     <div class="p-6">
                         <h3 class="text-2xl font-bold text-blue-700 mb-2">High-Quality Computer Science</h3>
                         <p class="text-gray-600 text-sm mb-4">Program Code: 7480101C</p>
-                        <p class="text-gray-700 leading-relaxed mb-4 text-justify">
+                        <p class="text-700 leading-relaxed mb-4 text-justify">
                             The High-Quality Computer Science (CS) program is designed to train students to higher standards than the regular program, gradually approaching the quality of training at advanced universities worldwide. Key areas in CS such as AI, machine learning, and data science are intensively taught by experienced lecturers. Graduates will possess good ethics, discipline, responsibility, strong professional knowledge, proficient practical skills, high research capabilities, creativity, and the ability to apply research results in practice, analyze and solve practical problems, and confidently communicate in their specialized foreign language.
                         </p>
                         <a href="#" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300">
@@ -251,20 +362,27 @@
     <section id="graduate-programs" class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-center text-blue-800 mb-12">Graduate Programs</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="bg-gray-100 p-6 rounded-lg shadow-md border-l-4 border-blue-500">
-                    <h3 class="text-2xl font-bold text-blue-700 mb-3">2-Year University Bridge Program</h3>
+                    <h3 class="text-2xl font-bold text-blue-700 mb-3">Taking Master's Courses in Advance for Undergraduate Students</h3>
                     <p class="text-gray-700 leading-relaxed text-justify">
-                        For college graduates, the program duration is 1.5 to 2 years, following the university curriculum in Computer Science (with course exemption considerations). This program provides a pathway for college graduates to earn a university degree.
+                        This initiative aims to create favorable conditions for the university’s undergraduate students to access the Master's program by allowing them to take certain courses in advance. It enables students to accumulate graduate-level credits before officially enrolling in the Master's program, thereby shortening the overall study duration and promoting educational continuity between undergraduate and graduate levels.
                     </p>
-                    <a href="#" class="inline-block text-blue-600 hover:underline font-semibold mt-4">Read More &rarr;</a>
+                    <a href="https://sdh.ou.edu.vn/news/view/1200-thong-bao-ve-viec-dang-ky-hoc-truoc-mot-so-hoc-phan-cua-chuong-trinh-dao-tao-thac-si-danh-cho-sinh-vien-truong-dai-hoc-mo-thanh-pho-ho-chi-minh-nam-2025-dot-2" class="inline-block text-blue-600 hover:underline font-semibold mt-4">Read More &rarr;</a>
                 </div>
                 <div class="bg-gray-100 p-6 rounded-lg shadow-md border-l-4 border-green-500">
                     <h3 class="text-2xl font-bold text-blue-700 mb-3">Master's Program in Computer Science</h3>
                     <p class="text-gray-700 leading-relaxed text-justify">
-                        Our Master's program in Computer Science offers advanced studies and research opportunities for graduates. Details are available in the Master's Admission Notice in Computer Science.
+                        Our Master’s program in Computer Science is offered by the Faculty of Information Technology at Ho Chi Minh City Open University, with two study tracks: research-oriented and application-oriented. The program aims to train high-quality human resources at the master’s level, capable of meeting the demands of the advanced labor market both domestically and internationally.
                     </p>
-                    <a href="#" class="inline-block text-blue-600 hover:underline font-semibold mt-4">View Admission Notice &rarr;</a>
+                    <a href="https://sdh.ou.edu.vn/pages/view/234-chuong-trinh-dao-tao-chuyen-nganh-khoa-hoc-may-tinh" class="inline-block text-blue-600 hover:underline font-semibold mt-4">Learn More &rarr;</a>
+                </div>
+                <div class="bg-gray-100 p-6 rounded-lg shadow-md border-l-4 border-orange-500">
+                    <h3 class="text-2xl font-bold text-blue-700 mb-3">Doctor of Philosophy in Computer Science</h3>
+                    <p class="text-gray-700 leading-relaxed text-justify">
+                        Our Ph.D. program in Computer Science at Ho Chi Minh City Open University is designed to provide in-depth expertise in both theoretical and applied aspects of the field. It prepares scholars for independent research, development of scientific arguments, leadership of specialized research groups, and teaching at both undergraduate and graduate levels.
+                    </p>
+                    <a href="https://sdh.ou.edu.vn/pages/view/691-tien-si-nganh-khoa-hoc-may-tinh" class="inline-block text-blue-600 hover:underline font-semibold mt-4">Learn More &rarr;</a>
                 </div>
             </div>
         </div>
@@ -275,32 +393,32 @@
         <div class="container mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-center text-blue-800 mb-12">Admission Requirements</h2>
             <p class="text-center text-gray-700 mb-10 max-w-3xl mx-auto">
-                Admissions are conducted within the university's general admission system, in accordance with the regulations of the Ministry of Education and Training. The Faculty admits students to all five programs (Computer Science, High-Quality Computer Science, Information Technology, Management Information Systems, Artificial Intelligence) through various methods:
+                Admissions are conducted within the university's general admission system, in accordance with the regulations of the Ministry of Education and Training. The Faculty admits students to all programs through various methods:
             </p>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-blue-400">
-                    <h3 class="text-xl font-semibold text-blue-800 mb-3">High School Exam Results</h3>
-                    <p class="text-gray-700">Based on high school graduation exam results in subject groups A, A1, D1, and D7 (Math scores are weighted double for CS, HQCS, IT).</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-green-400">
-                    <h3 class="text-xl font-semibold text-blue-800 mb-3">Academic Records</h3>
-                    <p class="text-gray-700">Admission based on the academic records of 3 years of high school (grades 10, 11, and the first semester of grade 12).</p>
+                    <h3 class="text-xl font-semibold text-blue-800 mb-3">Direct Admission and Priority Consideration</h3>
+                    <p class="text-gray-700 text-justify">Applicants are admitted directly or given priority consideration based on the current regulations of the Ministry of Education and Training of Vietnam.</p>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-purple-400">
-                    <h3 class="text-xl font-semibold text-blue-800 mb-3">Direct & Prioritized Admission</h3>
-                    <p class="text-gray-700">Direct admission and prioritized admission according to MOET regulations, including for students with excellent academic records.</p>
+                    <h3 class="text-xl font-semibold text-blue-800 mb-3">Admission Based on International Certificates</h3>
+                    <p class="text-gray-700 text-justify">Applicants are considered for admission if they possess one of the following valid international certificates: International Baccalaureate (IB) Diploma with a total score of 26 or higher; A-Level Certificate with a grade of C or higher in each subject; SAT score of 1100 or above, issued by an international testing organization, valid within 2 years and recognized until June 30, 2025.</p>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-red-400">
-                    <h3 class="text-xl font-semibold text-blue-800 mb-3">International Certificates</h3>
-                    <p class="text-gray-700">Prioritized admission for candidates with international baccalaureate (IB) results, Cambridge International A-level certificates, or SAT scores meeting standards.</p>
+                    <h3 class="text-xl font-semibold text-blue-800 mb-3">Admission Based on the 2025 Competency Assessment Exam by Vietnam National University – Ho Chi Minh City (VNU-HCM)</h3>
+                    <p class="text-gray-700 text-justify">Applicants are considered based on their results from the 2025 Competency Assessment organized by VNU-HCM.</p>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-yellow-400">
-                    <h3 class="text-xl font-semibold text-blue-800 mb-3">Foreign Language Certificates</h3>
-                    <p class="text-gray-700">Direct admission for students with foreign language certificates meeting standards.</p>
+                    <h3 class="text-xl font-semibold text-blue-800 mb-3">Admission Based on the 2025 Computer-Based University Entrance Examination (V-SAT)</h3>
+                    <p class="text-gray-700 text-justify">Applicants are considered based on their performance in the 2025 V-SAT, a computer-based national university entrance examination.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-yellow-400">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-3">Admission Based on the 2025 National High School Graduation Examination</h3>
+                    <p class="text-gray-700 text-justify">Applicants are considered based on their scores from the 2025 Vietnamese National High School Graduation Examination.</p>
                 </div>
             </div>
             <div class="text-center mt-12">
-                <a href="#" class="bg-blue-800 hover:bg-blue-900 text-white font-bold py-3 px-8 rounded-lg shadow-md transition duration-300">
+                <a href="https://tuyensinh.ou.edu.vn/" class="bg-blue-800 hover:bg-blue-900 text-white font-bold py-3 px-8 rounded-lg shadow-md transition duration-300">
                     Apply Now
                 </a>
             </div>
@@ -313,7 +431,7 @@
             <h2 class="text-3xl md:text-4xl font-bold text-center text-blue-800 mb-12">Graduate Outcomes / Career Opportunities</h2>
             <div class="flex flex-col md:flex-row items-center gap-12">
                 <div class="md:w-1/2">
-                    <img src="https://placehold.co/600x400/87CEEB/000000?text=Career+Success" alt="Career Success" class="rounded-lg shadow-xl responsive-img">
+                    <img src="./uploads/company-visiting.jpg" alt="Career Success" class="rounded-lg shadow-xl responsive-img">
                 </div>
                 <div class="md:w-1/2">
                     <p class="text-gray-700 leading-relaxed mb-4 text-justify">
@@ -378,7 +496,7 @@
                     </p>
                     <p class="text-gray-700 mb-2">
                         <i class="fas fa-map-marker-alt text-blue-600 mr-2"></i>
-                        6th Floor, Room 604, No. 35 - 37 Hồ Hảo Hớn, Cầu Ông Lãnh Ward, Hồ Chí Minh City, Việt Nam
+                        6th Fl, R.604, No. 35-37 Hồ Hảo Hớn, Cầu Ông Lãnh Ward, Hồ Chí Minh City, Việt Nam
                     </p>
                     <p class="text-gray-700 mb-2">
                         <i class="fas fa-phone-alt text-blue-600 mr-2"></i>
@@ -424,6 +542,7 @@
                 <h3 class="text-xl font-bold text-white mb-4">Quick Links</h3>
                 <ul>
                     <li class="mb-2"><a href="#about" class="hover:text-white transition duration-300">About Us</a></li>
+                    <li class="mb-2"><a href="#our-teams" class="hover:text-white transition duration-300">Our Teams</a></li>
                     <li class="mb-2"><a href="#undergraduate-programs" class="hover:text-white transition duration-300">Undergraduate Programs</a></li>
                     <li class="mb-2"><a href="#graduate-programs" class="hover:text-white transition duration-300">Graduate Programs</a></li>
                     <li class="mb-2"><a href="#admissions" class="hover:text-white transition duration-300">Admissions</a></li>
@@ -447,7 +566,11 @@
         document.addEventListener('DOMContentLoaded', function() {
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
-            const navLinks = document.querySelectorAll('#mobile-menu a, .group button, .group-hover\\:block a'); // Select all nav links
+            const teamCarouselContainer = document.getElementById('team-carousel-container');
+            const teamCarouselWrapper = document.getElementById('team-carousel-wrapper');
+            const prevTeamButton = document.getElementById('prev-team');
+            const nextTeamButton = document.getElementById('next-team');
+            const teamMemberCards = document.querySelectorAll('.team-member-card');
 
             // Toggle mobile menu visibility
             mobileMenuButton.addEventListener('click', function() {
@@ -471,6 +594,56 @@
                     });
                 });
             });
+
+            // Carousel functionality for Our Teams section
+            if (teamCarouselContainer && teamCarouselWrapper && prevTeamButton && nextTeamButton && teamMemberCards.length > 0) {
+                const scrollAmount = teamMemberCards[0].offsetWidth + 32; // Card width + gap (2rem = 32px)
+
+                // Function to update button visibility
+                const updateButtonVisibility = () => {
+                    if (teamCarouselContainer.scrollLeft === 0) {
+                        prevTeamButton.disabled = true;
+                        prevTeamButton.classList.add('opacity-50', 'cursor-not-allowed');
+                    } else {
+                        prevTeamButton.disabled = false;
+                        prevTeamButton.classList.remove('opacity-50', 'cursor-not-allowed');
+                    }
+
+                    // Check if scrolled to the end (allow a small tolerance for fractional pixels)
+                    if (teamCarouselContainer.scrollLeft + teamCarouselContainer.clientWidth >= teamCarouselWrapper.scrollWidth - 5) {
+                        nextTeamButton.disabled = true;
+                        nextTeamButton.classList.add('opacity-50', 'cursor-not-allowed');
+                    } else {
+                        nextTeamButton.disabled = false;
+                        nextTeamButton.classList.remove('opacity-50', 'cursor-not-allowed');
+                    }
+                };
+
+                // Initial button state
+                updateButtonVisibility();
+
+                // Scroll Left
+                prevTeamButton.addEventListener('click', () => {
+                    teamCarouselContainer.scrollBy({
+                        left: -scrollAmount,
+                        behavior: 'smooth'
+                    });
+                });
+
+                // Scroll Right
+                nextTeamButton.addEventListener('click', () => {
+                    teamCarouselContainer.scrollBy({
+                        left: scrollAmount,
+                        behavior: 'smooth'
+                    });
+                });
+
+                // Update button visibility on scroll
+                teamCarouselContainer.addEventListener('scroll', updateButtonVisibility);
+
+                // Update button visibility on window resize (in case card widths change)
+                window.addEventListener('resize', updateButtonVisibility);
+            }
         });
     </script>
 </body>
