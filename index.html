@@ -110,7 +110,7 @@
                 Shaping the Future of <span class="text-blue-400">Information Technology</span>
             </h1>
             <p class="mt-4 text-lg md:text-xl max-w-xl mx-auto drop-shadow-md animate-fade-in-up">
-                Dedicated to excellence in IT education and research for nearly 35 years.
+                Dedicated to excellence in IT education and research for 35 years.
             </p>
             <div class="mt-8 space-y-4 sm:space-y-0 sm:space-x-4 flex flex-col sm:flex-row justify-center">
                 <a href="#undergraduate-programs" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300 transform hover:scale-105">
@@ -137,12 +137,12 @@
                     </p>
                     <p class="text-gray-700 leading-relaxed mb-4 text-justify">
                         In recognition of its commitment to academic excellence, the Faculty achieved significant accreditation milestones:
-                        <ul class="list-disc list-inside">
+                        <ul class="list-disc list-inside text-justify">
                             <li>In 2021 and 2022, the Management Information Systems program was accredited by the Ministry of Education and Training (MOET), and the Computer Science program received international accreditation from the ASEAN University Network – Quality Assurance (AUN-QA).</li>
                             <li>In 2024, the Information Technology program successfully passed national quality assessment under MOET standards.</li>
                         </ul>
                     </p>
-                    <p class="text-gray-700 leading-relaxed mb-4 text-justify">
+                    <p class="text-gray-700 leading-relaxed mt-4 mb-4 text-justify">
                         The Faculty is dedicated to nurturing IT professionals who not only possess strong ethical values and solid theoretical foundations, but also excel in practical skills. Our graduates are equipped to keep pace with rapid technological advancements and actively contribute to the country’s modernization through the digital transformation of economic, social, and educational management systems.
                     </p>
                     <p class="text-gray-700 leading-relaxed mb-4 text-justify">
@@ -261,102 +261,169 @@
     </section>
 
     <!-- Undergraduate Programs Section -->
+    <!-- Undergraduate Programs Section -->
     <section id="undergraduate-programs" class="py-16 bg-gray-50">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-center text-blue-800 mb-12">Our Undergraduate Programs</h2>
             <p class="text-center text-gray-700 mb-10 max-w-3xl mx-auto">
-                The Faculty currently offers 6 career-oriented undergraduate programs: Computer Science, Information Technology, Enhanced Information Technology with Japanese Language, Management Information Systems, Artificial Intelligence (standard program), and Computer Science (high-quality program).
+                The Faculty currently offers 05 career-oriented undergraduate programs in standard and high-quality programs.
             </p>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="flex flex-col md:flex-row justify-center space-y-8 md:space-y-0 md:space-x-12 mb-12">
+                <div>
+                    <h3 class="text-2xl font-semibold text-blue-700 mb-4 text-center">Standard Programs</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2 text-lg">
+                        <li>Computer Science</li>
+                        <li>Management Information Systems</li>
+                        <li>Information Technology</li>
+                        <li>Artificial Intelligence</li>
+                        <li>Software Engineering</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-semibold text-blue-700 mb-4 text-center">High-Quality Programs</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2 text-lg">
+                        <li>Computer Science</li>
+                        <li>Information Technology</li>
+                    </ul>
+                </div>
+            </div>
 
-                <!-- Computer Science Card -->
-                <div class="program-card bg-white rounded-lg shadow-lg overflow-hidden border-2 border-transparent transition-all duration-300 transform hover:-translate-y-2">
+            <h3 class="text-2xl md:text-3xl font-bold text-center text-blue-800 mb-8">Explore Our Programs in Detail</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- Computer Science (Standard) Card -->
+                <div class="program-card bg-white rounded-lg shadow-lg overflow-hidden border-2 border-transparent transition-all duration-300 transform hover:-translate-y-2 cursor-pointer" data-program-id="computer-science-standard">
                     <div class="p-6">
                         <h3 class="text-2xl font-bold text-blue-700 mb-2">Computer Science</h3>
-                        <p class="text-gray-600 text-sm mb-4">Program Code: 7480101</p>
-                        <p class="text-gray-700 leading-relaxed mb-4 text-justify">
-                            The Computer Science program educates graduates with in-depth knowledge of computer science, meeting the demands of research, development, and implementation of IT applications. Graduates can work as programmers, software developers, intelligent application developers, business analysts for software projects, software testers, researchers and developers of intelligent solutions, data analysts, network application developers, network designers and administrators, trainers, and researchers. There are four specialized tracks with specific focuses.
+                        <p class="text-gray-600 text-sm mb-4">Program Code: 7480101 (Standard)</p>
+                        <p class="text-gray-700 leading-relaxed mb-4 text-justify line-clamp-3">
+                            The Computer Science program trains graduates with in-depth knowledge in computer science, capable of engaging in research, development, and implementation of IT applications. Graduates can work as programmers, software engineers, intelligent application developers, business analysts, software testers, R&D specialists for intelligent solutions and data analysis, network application developers, network designers and administrators, as well as trainers and researchers.
                         </p>
-                        <a href="#" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300">
-                            Learn More
-                        </a>
+                        <span class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300">
+                            View Details
+                        </span>
                     </div>
                 </div>
 
-                <!-- Information Technology Card -->
-                <div class="program-card bg-white rounded-lg shadow-lg overflow-hidden border-2 border-transparent transition-all duration-300 transform hover:-translate-y-2">
+                <!-- Computer Science (High-Quality) Card -->
+                <div class="program-card bg-white rounded-lg shadow-lg overflow-hidden border-2 border-transparent transition-all duration-300 transform hover:-translate-y-2 cursor-pointer" data-program-id="computer-science-hqc">
                     <div class="p-6">
-                        <h3 class="text-2xl font-bold text-blue-700 mb-2">Information Technology</h3>
-                        <p class="text-gray-600 text-sm mb-4">Program Code: 7480201</p>
-                        <p class="text-gray-700 leading-relaxed mb-4 text-justify">
-                            The Information Technology program trains graduates with comprehensive expertise and the ability to operate, manage, and develop IT applications, meeting the workforce needs in various specialized fields. Specialized tracks include: Computer Networks, Information Systems, Software Engineering, Computer Graphics – Computer Vision, and Databases – Data Mining.
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">Computer Science</h3>
+                        <p class="text-gray-600 text-sm mb-4">Program Code: 7480101C (High-Quality)</p>
+                        <p class="text-gray-700 leading-relaxed mb-4 text-justify line-clamp-3">
+                            The High-Quality Computer Science program provides in-depth training in computer science with enhanced English proficiency. Students have access to experienced lecturers and industry experts. Graduates can work as programmers, software engineers, intelligent application developers, business analysts, software testers, R&D specialists for intelligent solutions and data analysis, network application developers, network designers and administrators, as well as trainers and researchers.
                         </p>
-                        <a href="#" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300">
-                            Learn More
-                        </a>
+                        <span class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300">
+                            View Details
+                        </span>
                     </div>
                 </div>
 
-                <!-- Information Technology Enhanced with Japanese Language Card -->
-                <div class="program-card bg-white rounded-lg shadow-lg overflow-hidden border-2 border-transparent transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold text-blue-700 mb-2">IT Enhanced with Japanese Language</h3>
-                        <p class="text-gray-600 text-sm mb-4">Program Code: 7480201</p>
-                        <p class="text-gray-700 leading-relaxed mb-4 text-justify">
-                            The Enhanced Information Technology with Japanese Language program trains graduates with political qualities, social responsibility, health, knowledge, and professional skills in the IT field, capable of working in environments using both English and Japanese, thus fostering career and personal development in the context of national integration and development.
-                        </p>
-                        <a href="#" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300">
-                            Learn More
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Management Information Systems Card -->
-                <div class="program-card bg-white rounded-lg shadow-lg overflow-hidden border-2 border-transparent transition-all duration-300 transform hover:-translate-y-2">
+                <!-- Management Information Systems (Standard) Card -->
+                <div class="program-card bg-white rounded-lg shadow-lg overflow-hidden border-2 border-transparent transition-all duration-300 transform hover:-translate-y-2 cursor-pointer" data-program-id="management-information-systems">
                     <div class="p-6">
                         <h3 class="text-2xl font-bold text-blue-700 mb-2">Management Information Systems</h3>
-                        <p class="text-gray-600 text-sm mb-4">Program Code: 7340405</p>
-                        <p class="text-gray-700 leading-relaxed mb-4 text-justify">
-                            The Management Information Systems program educates graduates with in-depth knowledge in management information systems; capable of applying fundamental IT knowledge, economics, and management to manage information systems in enterprises.
+                        <p class="text-gray-600 text-sm mb-4">Program Code: 7340405 (Standard)</p>
+                        <p class="text-gray-700 leading-relaxed mb-4 text-justify line-clamp-3">
+                            The Management Information Systems program trains graduates with in-depth knowledge in information systems and the ability to apply core IT knowledge along with economic and managerial principles to managing information systems in enterprises.
                         </p>
-                        <a href="#" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300">
-                            Learn More
-                        </a>
+                        <span class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300">
+                            View Details
+                        </span>
                     </div>
                 </div>
 
-                <!-- Artificial Intelligence Card -->
-                <div class="program-card bg-white rounded-lg shadow-lg overflow-hidden border-2 border-transparent transition-all duration-300 transform hover:-translate-y-2">
+                <!-- Information Technology (Standard) Card -->
+                <div class="program-card bg-white rounded-lg shadow-lg overflow-hidden border-2 border-transparent transition-all duration-300 transform hover:-translate-y-2 cursor-pointer" data-program-id="information-technology-standard">
                     <div class="p-6">
-                        <h3 class="text-2xl font-bold text-blue-700 mb-2">Artificial Intelligence <span class="text-red-500 text-lg font-semibold">(🔥)</span></h3>
-                        <p class="text-gray-600 text-sm mb-4">Program Code: 7480107</p>
-                        <p class="text-gray-700 leading-relaxed mb-4 text-justify">
-                            The Bachelor’s program in Artificial Intelligence is designed with an application-oriented approach. The goal is to create a workforce with solid foundational knowledge in AI and the ability to intelligently solve practical problems. Graduates will possess good political qualities and ethics, understand and apply AI achievements, and independently research and propose new methods in AI.
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">Information Technology</h3>
+                        <p class="text-gray-600 text-sm mb-4">Program Code: 7480201 (Standard)</p>
+                        <p class="text-gray-700 leading-relaxed mb-4 text-justify line-clamp-3">
+                            The Information Technology program trains graduates with strong professional knowledge and the ability to operate, manage, and develop IT applications to meet workforce demands across various industries.
                         </p>
-                        <a href="#" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300">
-                            Learn More
-                        </a>
+                        <span class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300">
+                            View Details
+                        </span>
                     </div>
                 </div>
 
-                <!-- High-Quality Computer Science Card -->
-                <div class="program-card bg-white rounded-lg shadow-lg overflow-hidden border-2 border-transparent transition-all duration-300 transform hover:-translate-y-2">
+                <!-- Information Technology (High-Quality) Card -->
+                <div class="program-card bg-white rounded-lg shadow-lg overflow-hidden border-2 border-transparent transition-all duration-300 transform hover:-translate-y-2 cursor-pointer" data-program-id="information-technology-hqc">
                     <div class="p-6">
-                        <h3 class="text-2xl font-bold text-blue-700 mb-2">High-Quality Computer Science</h3>
-                        <p class="text-gray-600 text-sm mb-4">Program Code: 7480101C</p>
-                        <p class="text-700 leading-relaxed mb-4 text-justify">
-                            The High-Quality Computer Science (CS) program is designed to train students to higher standards than the regular program, gradually approaching the quality of training at advanced universities worldwide. Key areas in CS such as AI, machine learning, and data science are intensively taught by experienced lecturers. Graduates will possess good ethics, discipline, responsibility, strong professional knowledge, proficient practical skills, high research capabilities, creativity, and the ability to apply research results in practice, analyze and solve practical problems, and confidently communicate in their specialized foreign language.
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">Information Technology</h3>
+                        <p class="text-gray-600 text-sm mb-4">Program Code: 7480201C (High-Quality)</p>
+                        <p class="text-gray-700 leading-relaxed mb-4 text-justify line-clamp-3">
+                            The High-Quality Information Technology program is application-oriented and aims to develop high-quality human resources capable of applying professional knowledge to meet domestic and international labor market demands. Graduates are well-equipped to develop their careers in a globally integrated context. They possess political and ethical values, strong theoretical and practical expertise, creativity, and independent working skills. They also demonstrate problem-solving ability, critical thinking, and a commitment to lifelong learning and community service.
                         </p>
-                        <a href="#" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300">
-                            Learn More
-                        </a>
+                        <span class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300">
+                            View Details
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Artificial Intelligence (Standard) Card -->
+                <div class="program-card bg-white rounded-lg shadow-lg overflow-hidden border-2 border-transparent transition-all duration-300 transform hover:-translate-y-2 cursor-pointer" data-program-id="artificial-intelligence">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">Artificial Intelligence</h3>
+                        <p class="text-gray-600 text-sm mb-4">Program Code: 7480107 (Standard)</p>
+                        <p class="text-gray-700 leading-relaxed mb-4 text-justify line-clamp-3">
+                            The Artificial Intelligence program equips students with solid foundational knowledge in AI and the ability to apply it to real-world problems intelligently. Graduates will be capable of understanding and applying AI advancements, conducting self-directed research, and proposing new methods in the AI domain.
+                        </p>
+                        <span class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300">
+                            View Details
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Software Engineering (Standard) Card -->
+                <div class="program-card bg-white rounded-lg shadow-lg overflow-hidden border-2 border-transparent transition-all duration-300 transform hover:-translate-y-2 cursor-pointer" data-program-id="software-engineering">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">Software Engineering</h3>
+                        <p class="text-gray-600 text-sm mb-4">Program Code: 7480103 (Standard)</p>
+                        <p class="text-gray-700 leading-relaxed mb-4 text-justify line-clamp-3">
+                            The undergraduate Software Engineering program is application-oriented. Graduates possess strong political and ethical values, in-depth knowledge of software development processes, the ability to conduct research and quickly adapt to new technologies and methodologies, and the skills to produce high-quality software products. They are also capable of integrating into international environments and committed to serving the public.
+                        </p>
+                        <span class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300">
+                            View Details
+                        </span>
                     </div>
                 </div>
 
             </div>
         </div>
     </section>
+    <!-- Program Detail Modal -->
+    <div id="program-modal" class="fixed inset-0 hidden items-center justify-center bg-black bg-opacity-70 z-[1000]">
+        <div class="bg-white rounded-lg shadow-xl p-8 m-4 w-full max-w-3xl modal-content relative">
+            <button id="close-modal" class="absolute top-4 right-4 text-gray-600 hover:text-gray-900 text-2xl focus:outline-none">
+                <i class="fas fa-times-circle"></i>
+            </button>
+            <h2 id="modal-program-title" class="text-3xl font-bold text-blue-800 mb-2"></h2>
+            <p id="modal-program-code" class="text-gray-600 text-lg mb-4"></p>
+            <p id="modal-program-description" class="text-gray-700 leading-relaxed mb-6 text-justify"></p>
+
+            <div id="modal-specializations-section" class="mb-6 hidden">
+                <h3 class="text-xl font-semibold text-blue-700 mb-3">Specialized Tracks:</h3>
+                <ul id="modal-specializations-list" class="list-disc list-inside text-gray-700 space-y-1 pl-4 text-justify">
+                    <!-- Specializations will be injected here -->
+                </ul>
+            </div>
+
+            <div id="modal-career-section" class="mb-6 hidden">
+                <h3 class="text-xl font-semibold text-blue-700 mb-3">Career Opportunities:</h3>
+                <ul id="modal-career-list" class="list-disc list-inside text-gray-700 space-y-1 pl-4 text-justify">
+                    <!-- Career opportunities will be injected here -->
+                </ul>
+            </div>
+            
+            <div class="text-right mt-6">
+                <button id="modal-close-button-bottom" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition duration-300">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Graduate Programs Section -->
     <section id="graduate-programs" class="py-16 bg-white">
@@ -571,6 +638,119 @@
             const prevTeamButton = document.getElementById('prev-team');
             const nextTeamButton = document.getElementById('next-team');
             const teamMemberCards = document.querySelectorAll('.team-member-card');
+            // Modal elements
+            const programModal = document.getElementById('program-modal');
+            const closeModalButtons = document.querySelectorAll('#close-modal, #modal-close-button-bottom');
+            const modalProgramTitle = document.getElementById('modal-program-title');
+            const modalProgramCode = document.getElementById('modal-program-code');
+            const modalProgramDescription = document.getElementById('modal-program-description');
+            const modalSpecializationsSection = document.getElementById('modal-specializations-section');
+            const modalSpecializationsList = document.getElementById('modal-specializations-list');
+            const modalCareerSection = document.getElementById('modal-career-section');
+            const modalCareerList = document.getElementById('modal-career-list');
+            const programCards = document.querySelectorAll('.program-card');
+
+            // Program Data
+            const programsData = {
+                "computer-science-standard": {
+                    title: "Computer Science",
+                    code: "7480101",
+                    type: "Standard Program",
+                    description: "The Computer Science program trains graduates with in-depth knowledge in computer science, capable of engaging in research, development, and implementation of IT applications. Graduates can work as programmers, software engineers, intelligent application developers, business analysts, software testers, R&D specialists for intelligent solutions and data analysis, network application developers, network designers and administrators, as well as trainers and researchers.",
+                    specializations: [
+                        { name: "Computer Networks", description: "Graduates can take on roles such as network application developers, network designers and implementers, or system/network administrators in enterprises." },
+                        { name: "Software Engineering", description: "Graduates can work as software developers (Web App, Mobile App, Hybrid App), business analysts, data designers, software testers, and project managers." },
+                        { name: "Artificial Intelligence", description: "Graduates can work as developers of applications integrating intelligent features, or as R&D specialists in software development companies." },
+                        { name: "Data Science", description: "Graduates can become specialists in analyzing and exploiting structured and unstructured data, interactive data application engineers, data visualization experts, decision support system developers, or R&D specialists in data analysis." }
+                    ],
+                    careerOpportunities: []
+                },
+                "computer-science-hqc": {
+                    title: "Computer Science",
+                    code: "7480101C",
+                    type: "High-Quality Program",
+                    description: "The High-Quality Computer Science program provides in-depth training in computer science with enhanced English proficiency. Students have access to experienced lecturers and industry experts. Graduates can work as programmers, software engineers, intelligent application developers, business analysts, software testers, R&D specialists for intelligent solutions and data analysis, network application developers, network designers and administrators, as well as trainers and researchers.",
+                    specializations: [
+                        { name: "Software Engineering", description: "Graduates can work as software developers (Web App, Mobile App, Hybrid App), business analysts, data designers, software testers, and project managers." },
+                        { name: "Artificial Intelligence", description: "Graduates can work as developers of applications integrating intelligent features, or as R&D specialists in software development companies." }
+                    ],
+                    careerOpportunities: []
+                },
+                "management-information-systems": {
+                    title: "Management Information Systems",
+                    code: "7340405",
+                    type: "Standard Program",
+                    description: "The Management Information Systems program trains graduates with in-depth knowledge in information systems and the ability to apply core IT knowledge along with economic and managerial principles to managing information systems in enterprises.",
+                    specializations: [],
+                    careerOpportunities: [
+                        "Economics & Management track: IT specialists solving problems in marketing, human resources, business operations, and enterprise resource planning (ERP).",
+                        "Information Technology track: Information system administrators and operators, database analysts and administrators, software developers, software testers, consultants, trainers, and researchers in information systems."
+                    ]
+                },
+                "information-technology-standard": {
+                    title: "Information Technology",
+                    code: "7480201",
+                    type: "Standard Program",
+                    description: "The Information Technology program trains graduates with strong professional knowledge and the ability to operate, manage, and develop IT applications to meet workforce demands across various industries.",
+                    specializations: [
+                        { name: "Computer Networks" },
+                        { name: "Information Systems" },
+                        { name: "Software Engineering" },
+                        { name: "Computer Graphics and Computer Vision" },
+                        { name: "Databases and Data Mining" }
+                    ],
+                    careerOpportunities: [
+                        "Software developers, project producers, and software project managers.",
+                        "System administrators and operators.",
+                        "Network system designers, implementers, and administrators.",
+                        "Information security and safety specialists.",
+                        "IT consultants, advisors, trainers, and educators."
+                    ]
+                },
+                "information-technology-hqc": {
+                    title: "Information Technology",
+                    code: "7480201C",
+                    type: "High-Quality Program",
+                    description: "The High-Quality Information Technology program is application-oriented and aims to develop high-quality human resources capable of applying professional knowledge to meet domestic and international labor market demands. Graduates are well-equipped to develop their careers in a globally integrated context. They possess political and ethical values, strong theoretical and practical expertise, creativity, and independent working skills. They also demonstrate problem-solving ability, critical thinking, and a commitment to lifelong learning and community service.",
+                    specializations: [],
+                    careerOpportunities: [
+                        "Software developers for specialized application domains.",
+                        "Administrators and operators of information systems, databases, and web systems.",
+                        "Network system designers, implementers, and administrators.",
+                        "Information security and safety specialists.",
+                        "Trainers, educators, and researchers in IT.",
+                        "Researchers in information technology."
+                    ]
+                },
+                "artificial-intelligence": {
+                    title: "Artificial Intelligence",
+                    code: "7480107",
+                    type: "Standard Program",
+                    description: "The Artificial Intelligence program equips students with solid foundational knowledge in AI and the ability to apply it to real-world problems intelligently. Graduates will be capable of understanding and applying AI advancements, conducting self-directed research, and proposing new methods in the AI domain.",
+                    specializations: [],
+                    careerOpportunities: [
+                        "Artificial Intelligence Engineer.",
+                        "Research and Development (R&D) Specialist.",
+                        "Software developer for intelligent solutions.",
+                        "Trainer, educator, and researcher in AI."
+                    ]
+                },
+                "software-engineering": {
+                    title: "Software Engineering",
+                    code: "7480103",
+                    type: "Standard Program",
+                    description: "The undergraduate Software Engineering program is application-oriented. Graduates possess strong political and ethical values, in-depth knowledge of software development processes, the ability to conduct research and quickly adapt to new technologies and methodologies, and the skills to produce high-quality software products. They are also capable of integrating into international environments and committed to serving the public.",
+                    specializations: [],
+                    careerOpportunities: [
+                        "Software developer.",
+                        "Software tester.",
+                        "System development and operations specialist.",
+                        "Business analyst.",
+                        "User interface and experience designer.",
+                        "Trainer, educator, and researcher."
+                    ]
+                }
+            };
 
             // Toggle mobile menu visibility
             mobileMenuButton.addEventListener('click', function() {
@@ -644,6 +824,69 @@
                 // Update button visibility on window resize (in case card widths change)
                 window.addEventListener('resize', updateButtonVisibility);
             }
+            // Program Modal Logic
+            programCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const programId = this.dataset.programId;
+                    const program = programsData[programId];
+
+                    if (program) {
+                        modalProgramTitle.textContent = program.title;
+                        modalProgramCode.textContent = `Program Code: ${program.code} (${program.type})`;
+                        modalProgramDescription.textContent = program.description;
+
+                        // Clear previous specializations
+                        modalSpecializationsList.innerHTML = '';
+                        if (program.specializations && program.specializations.length > 0) {
+                            modalSpecializationsSection.classList.remove('hidden');
+                            program.specializations.forEach(spec => {
+                                const li = document.createElement('li');
+                                li.textContent = spec.name;
+                                if (spec.description) {
+                                    li.textContent += `: ${spec.description}`;
+                                }
+                                modalSpecializationsList.appendChild(li);
+                            });
+                        } else {
+                            modalSpecializationsSection.classList.add('hidden');
+                        }
+
+                        // Clear previous career opportunities
+                        modalCareerList.innerHTML = '';
+                        if (program.careerOpportunities && program.careerOpportunities.length > 0) {
+                            modalCareerSection.classList.remove('hidden');
+                            program.careerOpportunities.forEach(career => {
+                                const li = document.createElement('li');
+                                li.textContent = career;
+                                modalCareerList.appendChild(li);
+                            });
+                        } else {
+                            modalCareerSection.classList.add('hidden');
+                        }
+
+                        programModal.classList.add('flex');
+                        programModal.classList.remove('hidden');
+                        document.body.style.overflow = 'hidden'; // Prevent scrolling body when modal is open
+                    }
+                });
+            });
+
+            closeModalButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    programModal.classList.add('hidden');
+                    programModal.classList.remove('flex');
+                    document.body.style.overflow = ''; // Restore body scrolling
+                });
+            });
+
+            // Close modal when clicking outside the content
+            programModal.addEventListener('click', function(event) {
+                if (event.target === programModal) {
+                    programModal.classList.add('hidden');
+                    programModal.classList.remove('flex');
+                    document.body.style.overflow = '';
+                }
+            });
         });
     </script>
 </body>
