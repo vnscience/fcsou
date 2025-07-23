@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty of Information Technology - Ho Chi Minh City Open University</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons (e.g., social media, menu icon) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* Custom CSS for Inter font and smooth scrolling */
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth; /* Smooth scroll for anchor links */
+        }
+        /* Custom styles for program cards - adding a subtle border on hover */
+        .program-card:hover {
+            border-color: #2563eb; /* Blue-600 */
+        }
+        /* Responsive image styling */
+        .responsive-img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header Section -->
+    <header class="bg-blue-800 text-white shadow-lg fixed w-full z-50">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-2">
+                <!-- Placeholder for University/Faculty Logo -->
+                <img src="https://placehold.co/40x40/ffffff/000000?text=LOGO" alt="OUIT Logo" class="h-10 rounded-full">
+                <span class="text-xl font-bold">Faculty of Information Technology</span>
+            </a>
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex space-x-6">
+                <a href="#home" class="hover:text-blue-200 transition duration-300">Home</a>
+                <a href="#about" class="hover:text-blue-200 transition duration-300">About Us</a>
+                <div class="relative group">
+                    <button class="hover:text-blue-200 transition duration-300 flex items-center focus:outline-none">
+                        Programs
+                        <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="absolute hidden group-hover:block bg-white text-blue-800 rounded-md shadow-lg py-2 mt-2 w-48">
+                        <a href="#undergraduate-programs" class="block px-4 py-2 hover:bg-blue-100">Undergraduate Programs</a>
+                        <a href="#graduate-programs" class="block px-4 py-2 hover:bg-blue-100">Graduate Programs</a>
+                    </div>
+                </div>
+                <a href="#admissions" class="hover:text-blue-200 transition duration-300">Admissions</a>
+                <a href="#student-life" class="hover:text-blue-200 transition duration-300">Student Life</a>
+                <a href="#contact" class="hover:text-blue-200 transition duration-300">Contact Us</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu (Hidden by default, toggled by JS) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-blue-700 py-2">
+            <a href="#home" class="block px-4 py-2 hover:bg-blue-600">Home</a>
+            <a href="#about" class="block px-4 py-2 hover:bg-blue-600">About Us</a>
+            <a href="#undergraduate-programs" class="block px-4 py-2 hover:bg-blue-600">Undergraduate Programs</a>
+            <a href="#graduate-programs" class="block px-4 py-2 hover:bg-blue-600">Graduate Programs</a>
+            <a href="#admissions" class="block px-4 py-2 hover:bg-blue-600">Admissions</a>
+            <a href="#student-life" class="block px-4 py-2 hover:bg-blue-600">Student Life</a>
+            <a href="#contact" class="block px-4 py-2 hover:bg-blue-600">Contact Us</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen bg-cover bg-center flex items-center justify-center text-white"
+        style="background-image: url('https://placehold.co/1920x1080/00008B/FFFFFF?text=IT+Campus+View');">
+        <div class="absolute inset-0 bg-black opacity-60"></div>
+        <div class="relative z-10 text-center px-4 max-w-4xl">
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight drop-shadow-lg animate-fade-in-down">
+                Shaping the Future of <span class="text-blue-400">Information Technology</span>
+            </h1>
+            <p class="mt-4 text-lg md:text-xl max-w-2xl mx-auto drop-shadow-md animate-fade-in-up">
+                Dedicated to excellence in IT education and research for nearly 35 years.
+            </p>
+            <div class="mt-8 space-y-4 sm:space-y-0 sm:space-x-4 flex flex-col sm:flex-row justify-center">
+                <a href="#undergraduate-programs" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300 transform hover:scale-105">
+                    Explore Programs
+                </a>
+                <a href="#about" class="border-2 border-white text-white font-bold py-3 px-6 rounded-lg hover:bg-white hover:text-blue-800 transition duration-300 transform hover:scale-105">
+                    Learn More About Us
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-blue-800 mb-12">Welcome to the Faculty of Information Technology</h2>
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2">
+                    <p class="text-gray-700 leading-relaxed mb-4 text-justify">
+                        The Faculty of Information Technology (IT), established in September 1990, is one of the founding faculties of Ho Chi Minh City Open University. Over nearly 35 years of development, the Faculty has assembled a dedicated and experienced team of permanent lecturers, including PhDs and Masters who have graduated from prestigious universities both domestically and internationally. Additionally, adjunct lecturers from reputable universities, enterprises, and research institutes in Ho Chi Minh City contribute to the faculty. The Faculty has trained and supplied approximately 5,500 graduates in IT-related disciplines (Computer Science, Informatics, and Management Information Systems) and thousands of non-regular Informatics graduates.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed mb-4 text-justify">
+                        In 2021 and 2022, the Management Information Systems program achieved accreditation from the Ministry of Education and Training (MOET), and the Computer Science program received accreditation from the ASEAN University Network (AUN).
+                    </p>
+                    <p class="text-gray-700 leading-relaxed mb-4 text-justify">
+                        The Faculty trains IT professionals with strong ethics, theoretical knowledge, and proficient practical skills, capable of addressing new issues in the field, thus contributing to the industrialization and modernization of the country through the informatization of economic management, production management, social management, education management, and more.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed text-justify">
+                        It is a point of pride that alumni from the Faculty have become proficient IT staff, programmers, and researchers at companies both domestically and in developed countries, or have become lecturers at colleges and universities, or have taken on executive and managerial positions at companies, enterprises, and research institutes. Many alumni have pursued higher education (Master’s and PhD) at prestigious institutions both in Vietnam and abroad after completing their undergraduate programs.
+                    </p>
+                    <a href="http://it.ou.edu.vn/pages/view/51-faculty's-lecturers" target="_blank" class="text-blue-600 hover:underline font-semibold mt-4 inline-block">See more here about our Lecturers &rarr;</a>
+                </div>
+                <div class="md:w-1/2">
+                    <img src="https://placehold.co/600x400/ADD8E6/000000?text=Faculty+Team" alt="Faculty Team" class="rounded-lg shadow-xl responsive-img">
+                </div>
+            </div>
+
+            <div class="mt-16 text-center">
+                <h3 class="text-2xl font-bold text-blue-700 mb-6">Our Commitment to Quality Education</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-gray-100 p-6 rounded-lg shadow-md border-t-4 border-blue-500 hover:border-blue-600 transition duration-300">
+                        <i class="fas fa-award text-4xl text-blue-600 mb-4"></i>
+                        <h4 class="text-xl font-semibold text-blue-800 mb-3">Accredited Programs</h4>
+                        <p class="text-gray-600">
+                            Our Management Information Systems program is accredited by MOET (2021, 2022), and Computer Science by AUN.
+                        </p>
+                    </div>
+                    <div class="bg-gray-100 p-6 rounded-lg shadow-md border-t-4 border-green-500 hover:border-green-600 transition duration-300">
+                        <i class="fas fa-user-tie text-4xl text-green-600 mb-4"></i>
+                        <h4 class="text-xl font-semibold text-blue-800 mb-3">Industry-Ready Graduates</h4>
+                        <p class="text-gray-600">
+                            We train IT professionals with strong ethics, theoretical knowledge, and proficient practical skills for the modern workforce.
+                        </p>
+                    </div>
+                    <div class="bg-gray-100 p-6 rounded-lg shadow-md border-t-4 border-purple-500 hover:border-purple-600 transition duration-300">
+                        <i class="fas fa-graduation-cap text-4xl text-purple-600 mb-4"></i>
+                        <h4 class="text-xl font-semibold text-blue-800 mb-3">Successful Alumni Network</h4>
+                        <p class="text-gray-600">
+                            Our alumni thrive as IT professionals, programmers, researchers, and leaders globally.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Undergraduate Programs Section -->
+    <section id="undergraduate-programs" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-blue-800 mb-12">Our Undergraduate Programs</h2>
+            <p class="text-center text-gray-700 mb-10 max-w-3xl mx-auto">
+                The Faculty currently offers 6 career-oriented undergraduate programs: Computer Science, Information Technology, Enhanced Information Technology with Japanese Language, Management Information Systems, Artificial Intelligence (standard program), and Computer Science (high-quality program).
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- Computer Science Card -->
+                <div class="program-card bg-white rounded-lg shadow-lg overflow-hidden border-2 border-transparent transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">Computer Science</h3>
+                        <p class="text-gray-600 text-sm mb-4">Program Code: 7480101</p>
+                        <p class="text-gray-700 leading-relaxed mb-4 text-justify">
+                            The Computer Science program educates graduates with in-depth knowledge of computer science, meeting the demands of research, development, and implementation of IT applications. Graduates can work as programmers, software developers, intelligent application developers, business analysts for software projects, software testers, researchers and developers of intelligent solutions, data analysts, network application developers, network designers and administrators, trainers, and researchers. There are four specialized tracks with specific focuses.
+                        </p>
+                        <a href="#" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300">
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Information Technology Card -->
+                <div class="program-card bg-white rounded-lg shadow-lg overflow-hidden border-2 border-transparent transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">Information Technology</h3>
+                        <p class="text-gray-600 text-sm mb-4">Program Code: 7480201</p>
+                        <p class="text-gray-700 leading-relaxed mb-4 text-justify">
+                            The Information Technology program trains graduates with comprehensive expertise and the ability to operate, manage, and develop IT applications, meeting the workforce needs in various specialized fields. Specialized tracks include: Computer Networks, Information Systems, Software Engineering, Computer Graphics – Computer Vision, and Databases – Data Mining.
+                        </p>
+                        <a href="#" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300">
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Information Technology Enhanced with Japanese Language Card -->
+                <div class="program-card bg-white rounded-lg shadow-lg overflow-hidden border-2 border-transparent transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">IT Enhanced with Japanese Language</h3>
+                        <p class="text-gray-600 text-sm mb-4">Program Code: 7480201</p>
+                        <p class="text-gray-700 leading-relaxed mb-4 text-justify">
+                            The Enhanced Information Technology with Japanese Language program trains graduates with political qualities, social responsibility, health, knowledge, and professional skills in the IT field, capable of working in environments using both English and Japanese, thus fostering career and personal development in the context of national integration and development.
+                        </p>
+                        <a href="#" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300">
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Management Information Systems Card -->
+                <div class="program-card bg-white rounded-lg shadow-lg overflow-hidden border-2 border-transparent transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">Management Information Systems</h3>
+                        <p class="text-gray-600 text-sm mb-4">Program Code: 7340405</p>
+                        <p class="text-gray-700 leading-relaxed mb-4 text-justify">
+                            The Management Information Systems program educates graduates with in-depth knowledge in management information systems; capable of applying fundamental IT knowledge, economics, and management to manage information systems in enterprises.
+                        </p>
+                        <a href="#" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300">
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Artificial Intelligence Card -->
+                <div class="program-card bg-white rounded-lg shadow-lg overflow-hidden border-2 border-transparent transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">Artificial Intelligence <span class="text-red-500 text-lg font-semibold">(New)</span></h3>
+                        <p class="text-gray-600 text-sm mb-4">Program Code: 7480107</p>
+                        <p class="text-gray-700 leading-relaxed mb-4 text-justify">
+                            The Bachelor’s program in Artificial Intelligence is designed with an application-oriented approach. The goal is to create a workforce with solid foundational knowledge in AI and the ability to intelligently solve practical problems. Graduates will possess good political qualities and ethics, understand and apply AI achievements, and independently research and propose new methods in AI.
+                        </p>
+                        <a href="#" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300">
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+
+                <!-- High-Quality Computer Science Card -->
+                <div class="program-card bg-white rounded-lg shadow-lg overflow-hidden border-2 border-transparent transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">High-Quality Computer Science</h3>
+                        <p class="text-gray-600 text-sm mb-4">Program Code: 7480101C</p>
+                        <p class="text-gray-700 leading-relaxed mb-4 text-justify">
+                            The High-Quality Computer Science (CS) program is designed to train students to higher standards than the regular program, gradually approaching the quality of training at advanced universities worldwide. Key areas in CS such as AI, machine learning, and data science are intensively taught by experienced lecturers. Graduates will possess good ethics, discipline, responsibility, strong professional knowledge, proficient practical skills, high research capabilities, creativity, and the ability to apply research results in practice, analyze and solve practical problems, and confidently communicate in their specialized foreign language.
+                        </p>
+                        <a href="#" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300">
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Graduate Programs Section -->
+    <section id="graduate-programs" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-blue-800 mb-12">Graduate Programs</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-gray-100 p-6 rounded-lg shadow-md border-l-4 border-blue-500">
+                    <h3 class="text-2xl font-bold text-blue-700 mb-3">2-Year University Bridge Program</h3>
+                    <p class="text-gray-700 leading-relaxed text-justify">
+                        For college graduates, the program duration is 1.5 to 2 years, following the university curriculum in Computer Science (with course exemption considerations). This program provides a pathway for college graduates to earn a university degree.
+                    </p>
+                    <a href="#" class="inline-block text-blue-600 hover:underline font-semibold mt-4">Read More &rarr;</a>
+                </div>
+                <div class="bg-gray-100 p-6 rounded-lg shadow-md border-l-4 border-green-500">
+                    <h3 class="text-2xl font-bold text-blue-700 mb-3">Master's Program in Computer Science</h3>
+                    <p class="text-gray-700 leading-relaxed text-justify">
+                        Our Master's program in Computer Science offers advanced studies and research opportunities for graduates. Details are available in the Master's Admission Notice in Computer Science.
+                    </p>
+                    <a href="#" class="inline-block text-blue-600 hover:underline font-semibold mt-4">View Admission Notice &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admissions Section -->
+    <section id="admissions" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-blue-800 mb-12">Admission Requirements</h2>
+            <p class="text-center text-gray-700 mb-10 max-w-3xl mx-auto">
+                Admissions are conducted within the university's general admission system, in accordance with the regulations of the Ministry of Education and Training. The Faculty admits students to all five programs (Computer Science, High-Quality Computer Science, Information Technology, Management Information Systems, Artificial Intelligence) through various methods:
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-blue-400">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-3">High School Exam Results</h3>
+                    <p class="text-gray-700">Based on high school graduation exam results in subject groups A, A1, D1, and D7 (Math scores are weighted double for CS, HQCS, IT).</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-green-400">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-3">Academic Records</h3>
+                    <p class="text-gray-700">Admission based on the academic records of 3 years of high school (grades 10, 11, and the first semester of grade 12).</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-purple-400">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-3">Direct & Prioritized Admission</h3>
+                    <p class="text-gray-700">Direct admission and prioritized admission according to MOET regulations, including for students with excellent academic records.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-red-400">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-3">International Certificates</h3>
+                    <p class="text-gray-700">Prioritized admission for candidates with international baccalaureate (IB) results, Cambridge International A-level certificates, or SAT scores meeting standards.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-yellow-400">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-3">Foreign Language Certificates</h3>
+                    <p class="text-gray-700">Direct admission for students with foreign language certificates meeting standards.</p>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <a href="#" class="bg-blue-800 hover:bg-blue-900 text-white font-bold py-3 px-8 rounded-lg shadow-md transition duration-300">
+                    Apply Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Career Opportunities Section -->
+    <section id="career-opportunities" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-blue-800 mb-12">Graduate Outcomes / Career Opportunities</h2>
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2">
+                    <img src="https://placehold.co/600x400/87CEEB/000000?text=Career+Success" alt="Career Success" class="rounded-lg shadow-xl responsive-img">
+                </div>
+                <div class="md:w-1/2">
+                    <p class="text-gray-700 leading-relaxed mb-4 text-justify">
+                        The IT sector has been, is, and will continue to be a key area to drive the country's economic development, receiving special attention from the Party and the State. In developed countries, the IT sector plays a crucial role in economic and social development. Therefore, graduates in IT fields (Computer Science, High-Quality Computer Science, Information Technology, Management Information Systems, etc.) are promised abundant career opportunities and stable jobs in domestic and international enterprises with attractive income.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed mb-4 text-justify">
+                        Graduates have opportunities to work in companies and enterprises directly or indirectly involved in IT in Vietnam and in some developed countries (e.g., Japan, etc.). Graduates can engage in scientific research as researchers or teach at vocational schools, colleges, and universities in IT. Graduates from the Faculty of IT at Ho Chi Minh City Open University are present across the country in various fields, holding positions from programmers, software developers, IT staff, system administrators, specialists in economic, production, management agencies, and business sectors to leadership and teaching positions in colleges and universities.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed text-justify">
+                        Most graduates secure employment after graduation. Statistics over many years show that the employment rate of graduates from the Faculty of IT – Ho Chi Minh City Open University is over 90%, with more than 50% securing jobs in their field of study before graduation. After working for 1-5 years, graduates can earn from USD 700 to USD 1500 per month. Exceptional cases can earn significantly higher, up to several thousand USD per month. In the future, the demand for IT workforce (Computer Science, High-Quality Computer Science, Information Technology, Management Information Systems, etc.) will remain high both domestically and internationally, especially in the era of Industry 4.0.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Student Life & Activities Section -->
+    <section id="student-life" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-blue-800 mb-12">Student Life & Activities</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-blue-500">
+                    <i class="fas fa-lightbulb text-4xl text-blue-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold text-blue-800 mb-3">Distinctive Training Program</h3>
+                    <p class="text-gray-700 text-justify">
+                        Designed according to the credit-based system, drawing from advanced IT training programs worldwide (referencing ACM standards). Courses emphasize application capabilities, practical skills, self-study, and independent research.
+                    </p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-green-500">
+                    <i class="fas fa-handshake text-4xl text-green-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold text-blue-800 mb-3">Enterprise Collaboration</h3>
+                    <p class="text-gray-700 text-justify">
+                        The Faculty collaborates with IT enterprises, providing scholarships, organizing company tours, and annual career orientation programs with alumni and industry representatives.
+                    </p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-purple-500">
+                    <i class="fas fa-flask text-4xl text-purple-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold text-blue-800 mb-3">Scientific Research Activities</h3>
+                    <p class="text-gray-700 text-justify">
+                        To foster research passion, the Faculty organizes annual student research and academic competitions like ACM/ICPC, IT Olympiad, Scientific Research Conferences, and weekly seminars.
+                    </p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-yellow-500">
+                    <i class="fas fa-users text-4xl text-yellow-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold text-blue-800 mb-3">Student Associations & Clubs</h3>
+                    <p class="text-gray-700 text-justify">
+                        Supports overall student development through activities like Green Summer Campaign, Voluntary Spring Campaign, and weekly IT Club activities for study support, skill training, and professional exchange.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-blue-800 mb-12">Contact Us</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <p class="text-gray-700 text-lg mb-4">
+                        <strong>OFFICE OF FACULTY OF INFORMATION TECHNOLOGY</strong>
+                    </p>
+                    <p class="text-gray-700 mb-2">
+                        <i class="fas fa-map-marker-alt text-blue-600 mr-2"></i>
+                        6th Floor, Room 604, No. 35 - 37 Hồ Hảo Hớn, Cầu Ông Lãnh Ward, Hồ Chí Minh City, Việt Nam
+                    </p>
+                    <p class="text-gray-700 mb-2">
+                        <i class="fas fa-phone-alt text-blue-600 mr-2"></i>
+                        <strong>Phone:</strong> (028) 3838.6603
+                    </p>
+                    <p class="text-gray-700 mb-2">
+                        <i class="fas fa-globe text-blue-600 mr-2"></i>
+                        <strong>Website:</strong> <a href="http://it.ou.edu.vn" class="text-blue-600 hover:underline" target="_blank">it.ou.edu.vn</a>
+                    </p>
+                    <p class="text-gray-700 mb-4">
+                        <i class="fas fa-envelope text-blue-600 mr-2"></i>
+                        <strong>Email:</strong> <a href="mailto:fcs@ou.edu.vn" class="text-blue-600 hover:underline">fcs@ou.edu.vn</a>
+                    </p>
+                    <div class="flex space-x-4 mt-6">
+                        <a href="#" class="text-blue-600 hover:text-blue-800 transition duration-300"><i class="fab fa-facebook-square text-3xl"></i></a>
+                        <a href="#" class="text-blue-600 hover:text-blue-800 transition duration-300"><i class="fab fa-youtube-square text-3xl"></i></a>
+                        <!-- Add more social media icons as needed -->
+                    </div>
+                </div>
+                <div class="w-full h-80 md:h-96 bg-gray-200 rounded-lg shadow-md overflow-hidden">
+                    <!-- Google Maps Embed (Replace with actual embed code) -->
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.645524338879!2d106.69083231471811!3d10.761661992329244!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f1c06f40287%3A0x7d174629452295f7!2sHo%20Chi%20Minh%20City%20Open%20University!5e0!3m2!1sen!2s!4v1678901234567!5m2!1sen!2s"
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-900 text-gray-300 py-10">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <h3 class="text-xl font-bold text-white mb-4">Faculty of Information Technology</h3>
+                <p>Ho Chi Minh City Open University</p>
+                <p class="mt-2">
+                    6th Floor, Room 604, No. 35 - 37 Hồ Hảo Hớn,<br>
+                    Cầu Ông Lãnh Ward, Hồ Chí Minh City, Việt Nam
+                </p>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold text-white mb-4">Quick Links</h3>
+                <ul>
+                    <li class="mb-2"><a href="#about" class="hover:text-white transition duration-300">About Us</a></li>
+                    <li class="mb-2"><a href="#undergraduate-programs" class="hover:text-white transition duration-300">Undergraduate Programs</a></li>
+                    <li class="mb-2"><a href="#graduate-programs" class="hover:text-white transition duration-300">Graduate Programs</a></li>
+                    <li class="mb-2"><a href="#admissions" class="hover:text-white transition duration-300">Admissions</a></li>
+                    <li class="mb-2"><a href="#student-life" class="hover:text-white transition duration-300">Student Life</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold text-white mb-4">Contact Info</h3>
+                <p class="mb-2"><strong>Phone:</strong> (028) 3838.6603</p>
+                <p class="mb-2"><strong>Email:</strong> <a href="mailto:fcs@ou.edu.vn" class="hover:text-white transition duration-300">fcs@ou.edu.vn</a></p>
+                <p class="mb-2"><strong>Website:</strong> <a href="http://it.ou.edu.vn" class="hover:text-white transition duration-300" target="_blank">it.ou.edu.vn</a></p>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-500">
+            &copy; 2025 Faculty of Information Technology, Ho Chi Minh City Open University. All Rights Reserved.
+        </div>
+    </footer>
+
+    <!-- JavaScript for Mobile Menu Toggle and Smooth Scrolling -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navLinks = document.querySelectorAll('#mobile-menu a, .group button, .group-hover\\:block a'); // Select all nav links
+
+            // Toggle mobile menu visibility
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Close mobile menu when a link is clicked (for smooth scrolling)
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // Smooth scrolling for all internal anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
