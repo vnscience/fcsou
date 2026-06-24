@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="vi" class="h-full bg-slate-50">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Directory - Khoa CNTT</title>
+    <!-- Tailwind CSS for modern responsive styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter for premium global typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Academic & Social Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom scrollbar for better visual quality */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen text-slate-800 antialiased">
+
+    <script>
+        // Language state
+        let currentLang = 'vi'; // 'vi' or 'en'
+        let currentDept = 'all';
+        let searchQuery = '';
+
+        // Translation dictionary for static UI elements
+        const translations = {
+            vi: {
+                title: "ĐỘI NGŨ GIẢNG VIÊN - NHÀ KHOA HỌC",
+                subtitle: "Khoa Công nghệ Thông tin | Trường Đại học Mở Thành phố Hồ Chí Minh",
+                searchPlaceholder: "Tìm kiếm giảng viên, hướng nghiên cứu, môn học...",
+                deptAll: "Tất cả Bộ môn",
+                deptCS: "Khoa học Máy tính",
+                deptIT: "Công nghệ Thông tin",
+                deptMIS: "Hệ thống Thông tin Quản lý",
+                deptSE: "Công nghệ Phần mềm",
+                deptAI: "Trí tuệ Nhân tạo",
+                deptIS: "An toàn Thông tin",
+                viewProfile: "Xem hồ sơ chi tiết",
+                contactInfo: "Thông tin liên hệ công khai",
+                researchInterests: "Hướng nghiên cứu chính",
+                education: "Quá trình đào tạo",
+                teaching: "Hoạt động giảng dạy",
+                publications: "Công trình nghiên cứu tiêu biểu",
+                projects: "Đề tài/ Dự án nghiên cứu",
+                awards: "Danh hiệu & Giải thưởng",
+                close: "Đóng",
+                noResults: "Không tìm thấy giảng viên nào phù hợp với điều kiện tìm kiếm.",
+                notSpecified: "Chưa cập nhật",
+                office: "Văn phòng làm việc",
+                website: "Website cá nhân / Lab"
+            },
+            en: {
+                title: "FACULTY & RESEARCHERS DIRECTORY",
+                subtitle: "Faculty of Computer Science | Ho Chi Minh City Open University",
+                searchPlaceholder: "Search by name, research interests, courses...",
+                deptAll: "All",
+                deptCS: "Computer Science",
+                deptIT: "Information Technology",
+                deptMIS: "Management Information Systems",
+                deptSE: "Software Engineering",
+                deptAI: "Artificial Intelligence",
+                deptIS: "Information Security",
+                viewProfile: "View Detailed Profile",
+                contactInfo: "Public Contact Information",
+                researchInterests: "Primary Research Interests",
+                education: "Education Background",
+                teaching: "Teaching Courses",
+                publications: "Selected Key Publications",
+                projects: "Research Projects",
+                awards: "Honors & Awards",
+                close: "Close",
+                noResults: "No faculty found matching your search criteria.",
+                notSpecified: "Not updated yet",
+                office: "Office",
+                website: "Personal / Lab Website"
+            }
+        };
+
+        // Standardized, public-only faculty data
+        const facultyData = [
+            {
+                id: 1,
+                dept: "cs",
+                image: "https://it.ou.edu.vn/wp-content/uploads/2025/12/NV-BAY.jpg",
+                vi: {
+                    name: "ThS. Nguyễn Văn Bảy",
+                    role: "Giảng viên",
+                    deptName: "Chương trình Khoa học Máy tính",
+                    office: "Phòng 604, 35-37 Hồ Hảo Hớn, P. Cầu Ông Lãnh, Tp.HCM",
+                    email: "bay.nv@ou.edu.vn",
+                    website: "https://sites.google.com/view/baynv",
+                    scholar: "https://scholar.google.com/citations?user=1oDzNQ0AAAAJ&hl=en",
+                    orcid: "https://orcid.org/0009-0000-7474-5193",
+                    scopus: "https://scopus.com",
+                    linkedin: "https://www.linkedin.com/in/nvb99/",
+                    interests: [
+                        "Trí tuệ nhân tạo (AI) & Học máy",
+                        "Xử lý ngôn ngữ tự nhiên (NLP) cho tiếng Việt",
+                        "Phân tích dữ liệu lớn (Big Data)"
+                    ],
+                    education: [
+                        "2027 (dự kiến): Tiến sĩ Khoa học Máy tính - Trường ĐH Mở Tp.HCM, Việt Nam",
+                        "2026: Cử nhân Ngôn ngữ Anh - Trường ĐH Trà Vinh, Việt Nam",
+                        "2023: Thạc sĩ Khoa học Máy tính - Trường ĐH Mở Tp.HCM, Việt Nam",
+                        "2021: Cử nhân Khoa học Máy tính - Trường ĐH Mở Tp.HCM, Việt Nam"
+                    ],
+                    teaching: [
+                        "Khai phá dữ liệu",
+                        "Cơ sở lập trình",
+                        "Kỹ thuật lập trình",
+                        "Hệ điều hành & Kiến trúc máy tính"
+                    ],
+                    publications: [
+                        "B. N. Van and V. T. Hoang, “A Short Review for Handwritten Math Expression Recognition Techniques,” Proceedings of the International Conference, 2024, ISSN: 1877-0509, doi: 10.1016/j.procs.2024.04.025.",
+                        "B. N. Van, A. Nguyen, K. T. Trung, T. H. Huong, H. D. T. Hong, H. N. Trung, and V. T. Hoang, “Water Meter Reading Based on Text Recognition Techniques and Deep Learning,” IEEE Access, vol. 13, 2025, ISSN: 2169-3536, doi: 10.1109/ACCESS.2025.3547225.",
+                        "A. X. Wang, M. Q. Le, H.-T. Duong, B. N. Van, and B. P. Nguyen, “CTVAE: Contrastive Tabular Variational Autoencoder for Imbalance Data,” Knowledge and Information Systems, 2025, ISSN: 0219-3116, doi: 10.1007/s10115-025-02377-7.",
+                        "V. T. Hoang, V.-T. Le, N. Dinh, K. Tran-Trung, B. N. Van, H. D. T. Hong, and T. H. Huong, “Deep Learning-Based Faulty Wood Detection with Area Attention,” Computers, Materials & Continua, 2025, ISSN: 1546-2218, doi: 10.32604/cmc.2025.066506.",
+                        "N. Dinh, V. T. Hoang, B. N. Van, T. H. Huong, H. D. T. Hong, H. N. Trung, and K. T. Trung, “Enhancing Smart Contract Security Through DevSecOps: An Adaptive Approach for Vulnerability Detection,” IEEE Access, vol. 13, 2025, ISSN: 2169-3536, doi: 10.1109/ACCESS.2025.3606572.",
+                        "B. N. Van, T. N. Quoc, V. T. Hoang, V.-T. Le, and L. Hou, “Sumen: End-To-End Transformer Model for Image-To-LaTeX with Enhanced Performance and Large Datasets,” Lecture Notes in Networks and Systems, 2025, ISSN: 2367-3389, doi: 10.1007/978-981-96-8901-9.",
+                        "N. Dinh, V. T. Hoang, V.-T. Le, K. Tran-Trung, H. D. T. Hong, B. N. Van, H. N. Trung, T. H. Huong, and K. Meethongjan, “YOLOv10-HQGNN: A Hybrid Quantum Graph Learning Framework for Real-Time Faulty Insulator Detection,” Computers, Materials & Continua, 2026, ISSN: 1546-2226, doi: 10.32604/cmc.2025.069587."
+                    ],
+                    projects: [
+                        "2022 - 2023: Nhận dạng công thức toán học viết tay trực tuyến. Vườn ươm Khoa học Công nghệ - Sở Khoa học và Công nghệ (Chủ nhiệm đề tài).",
+                    ],
+                    awards: [
+                        "2025: Chiến sĩ thi đua cấp cơ sở"
+                    ]
+                },
+                en: {
+                    name: "M.Sc. Nguyen Van Bay",
+                    role: "Lecturer",
+                    deptName: "Computer Science Program",
+                    office: "Room 604, 35-37 Ho Hao Hon Street, Cau Ong Lanh Ward, Ho Chi Minh City, Vietnam",
+                    email: "bay.nv@ou.edu.vn",
+                    website: "https://sites.google.com/view/baynv",
+                    scholar: "https://scholar.google.com/citations?user=1oDzNQ0AAAAJ&hl=en",
+                    orcid: "https://orcid.org/0009-0000-7474-5193",
+                    scopus: "https://scopus.com",
+                    linkedin: "https://www.linkedin.com/in/nvb99/",
+                    interests: [
+                        "Artificial Intelligence (AI) and Machine Learning",
+                        "Natural Language Processing (NLP) for Vietnamese",
+                        "Big Data Analytics"
+                    ],
+                    education: [
+                        "Expected 2027: Ph.D. in Computer Science - Ho Chi Minh City Open University, Vietnam",
+                        "2026: B.A. in English Language - Tra Vinh University, Vietnam",
+                        "2023: M.Sc. in Computer Science - Ho Chi Minh City Open University, Vietnam",
+                        "2021: B.Sc. in Computer Science - Ho Chi Minh City Open University, Vietnam"
+                    ],
+                    teaching: [
+                        "Data Mining",
+                        "Introduction to Programming",
+                        "Programming Techniques",
+                        "Operating Systems and Computer Architecture"
+                    ],
+                    publications: [
+                        "B. N. Van and V. T. Hoang, 'A Short Review for Handwritten Math Expression Recognition Techniques,' Proceedings of the International Conference, 2024, ISSN: 1877-0509, doi: 10.1016/j.procs.2024.04.025.",
+                        "B. N. Van, A. Nguyen, K. T. Trung, T. H. Huong, H. D. T. Hong, H. N. Trung, and V. T. Hoang, 'Water Meter Reading Based on Text Recognition Techniques and Deep Learning,' IEEE Access, vol. 13, 2025, ISSN: 2169-3536, doi: 10.1109/ACCESS.2025.3547225.",
+                        "A. X. Wang, M. Q. Le, H.-T. Duong, B. N. Van, and B. P. Nguyen, 'CTVAE: Contrastive Tabular Variational Autoencoder for Imbalance Data,' Knowledge and Information Systems, 2025, ISSN: 0219-3116, doi: 10.1007/s10115-025-02377-7.",
+                        "V. T. Hoang, V.-T. Le, N. Dinh, K. Tran-Trung, B. N. Van, H. D. T. Hong, and T. H. Huong, 'Deep Learning-Based Faulty Wood Detection with Area Attention,' Computers, Materials & Continua, 2025, ISSN: 1546-2218, doi: 10.32604/cmc.2025.066506.",
+                        "N. Dinh, V. T. Hoang, B. N. Van, T. H. Huong, H. D. T. Hong, H. N. Trung, and K. T. Trung, 'Enhancing Smart Contract Security Through DevSecOps: An Adaptive Approach for Vulnerability Detection,' IEEE Access, vol. 13, 2025, ISSN: 2169-3536, doi: 10.1109/ACCESS.2025.3606572.",
+                        "B. N. Van, T. N. Quoc, V. T. Hoang, V.-T. Le, and L. Hou, 'Sumen: End-To-End Transformer Model for Image-To-LaTeX with Enhanced Performance and Large Datasets,' Lecture Notes in Networks and Systems, 2025, ISSN: 2367-3389, doi: 10.1007/978-981-96-8901-9.",
+                        "N. Dinh, V. T. Hoang, V.-T. Le, K. Tran-Trung, H. D. T. Hong, B. N. Van, H. N. Trung, T. H. Huong, and K. Meethongjan, 'YOLOv10-HQGNN: A Hybrid Quantum Graph Learning Framework for Real-Time Faulty Insulator Detection,' Computers, Materials & Continua, 2026, ISSN: 1546-2226, doi: 10.32604/cmc.2025.069587."
+                    ],
+                    projects: [
+                        "2022 - 2023: Online Handwritten Mathematical Expression Recognition. Science and Technology Incubator Program, Department of Science and Technology of Ho Chi Minh City. (Principal Investigator)"
+                    ],
+                    awards: [
+                        "2025: Ministerial Commendation for Outstanding Performance"
+                    ]
+                }
+            },
+            {
+                id: 2,
+                dept: "it",
+                image: "https://placehold.co/300x300/e2e8f0/1e293b?text=Dr.+Tran",
+                vi: {
+                    name: "TS. Trần Thị B",
+                    role: "Phó Trưởng Bộ môn An toàn Thông tin",
+                    deptName: "Bộ môn An toàn Thông tin",
+                    office: "Phòng 411, Tòa nhà C2, Cơ sở 1",
+                    email: "tranb@school.edu.vn",
+                    website: "https://cybersec.school.edu.vn/~tranb",
+                    scholar: "https://scholar.google.com",
+                    orcid: "https://orcid.org/0000-0003-2415-8822",
+                    scopus: "https://scopus.com",
+                    linkedin: "https://linkedin.com",
+                    interests: [
+                        "An toàn thông tin và Bảo mật Hệ thống",
+                        "Mật mã học hiện đại & Blockchain",
+                        "An ninh mạng trong môi trường IoT"
+                    ],
+                    education: [
+                        "2018: Tiến sĩ An toàn Thông tin - Đại học NUS, Singapore",
+                        "2013: Kỹ sư CNTT chuyên ngành An toàn thông tin - Trường Đại học CNTT"
+                    ],
+                    teaching: [
+                        "IT4055 - Mật mã học và An toàn thông tin",
+                        "IT4088 - Kiểm thử và đánh giá an toàn hệ thống",
+                        "IT5012 - An ninh mạng nâng cao (Cao học)"
+                    ],
+                    publications: [
+                        "Tran, T. B., & Wang, L. (2024). 'Lightweight Cryptographic Protocols for Secure IoT Communication'. IEEE Internet of Things Journal, Q1. DOI: 10.1109/JIOT.2024.9922",
+                        "Tran, T. B., et al. (2022). 'A Blockchain-based decentralized identity management framework'. Computers & Security, Elsevier, Q1. DOI: 10.1016/j.cose.2022.1028"
+                    ],
+                    projects: [
+                        "2023 - 2025: Phát triển giải pháp bảo mật dữ liệu phi tập trung dựa trên Blockchain cho dịch vụ công trực tuyến. Đề tài cấp Tỉnh/Thành phố. (Chủ nhiệm đề tài)"
+                    ],
+                    awards: [
+                        "2023: Chiến sĩ thi đua cấp Bộ",
+                        "2018: Outstanding Ph.D. Thesis Award - NUS"
+                    ]
+                },
+                en: {
+                    name: "Dr. Tran Thi B",
+                    role: "Vice Chair of Information Security Department",
+                    deptName: "Dept. of Information Security",
+                    office: "Room 411, Building C2, Campus 1",
+                    email: "tranb@school.edu.vn",
+                    website: "https://cybersec.school.edu.vn/~tranb",
+                    scholar: "https://scholar.google.com",
+                    orcid: "https://orcid.org/0000-0003-2415-8822",
+                    scopus: "https://scopus.com",
+                    linkedin: "https://linkedin.com",
+                    interests: [
+                        "Cybersecurity and Systems Security",
+                        "Modern Cryptography & Blockchain Technology",
+                        "Security Protocols for Internet of Things (IoT)"
+                    ],
+                    education: [
+                        "2018: Ph.D. in Information Security - National University of Singapore (NUS)",
+                        "2013: B.Eng. in Information Security - University of Information Technology"
+                    ],
+                    teaching: [
+                        "IT4055 - Cryptography and Information Security",
+                        "IT4088 - Security Penetration Testing and Assessment",
+                        "IT5012 - Advanced Cybersecurity (Graduate Level)"
+                    ],
+                    publications: [
+                        "Tran, T. B., & Wang, L. (2024). 'Lightweight Cryptographic Protocols for Secure IoT Communication'. IEEE Internet of Things Journal, Q1. DOI: 10.1109/JIOT.2024.9922",
+                        "Tran, T. B., et al. (2022). 'A Blockchain-based decentralized identity management framework'. Computers & Security, Elsevier, Q1. DOI: 10.1016/j.cose.2022.1028"
+                    ],
+                    projects: [
+                        "2023 - 2025: Developing decentralized identity management solution based on Blockchain for public services. Province-level Research Project. (PI)"
+                    ],
+                    awards: [
+                        "2023: Ministerial Excellence Commendation",
+                        "2018: Outstanding Ph.D. Thesis Award - NUS"
+                    ]
+                }
+            }
+        ];
+    </script>
+
+    <!-- MAIN NAVIGATION & HERO HEADER -->
+    <header class="bg-gradient-to-r from-slate-900 to-indigo-950 text-white shadow-lg sticky top-0 z-40 border-b border-indigo-900/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Brand logo & text -->
+                <div class="flex items-center space-x-3">
+                    <div class="bg-indigo-600 p-2.5 rounded-xl shadow-md flex items-center justify-center">
+                        <i class="fa-solid fa-graduation-cap text-2xl text-white"></i>
+                    </div>
+                    <div>
+                        <h1 id="ui-brand-title" class="text-lg font-bold tracking-tight leading-tight sm:text-xl text-white">
+                            FCS PORTAL
+                        </h1>
+                        <p id="ui-brand-desc" class="text-xs text-indigo-200">Faculty of Computer Science</p>
+                    </div>
+                </div>
+
+                <!-- Language Selector Toggle -->
+                <div class="flex items-center space-x-2">
+                    <button onclick="setLanguage('vi')" id="lang-vi-btn" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-300 border border-slate-700 bg-indigo-600 text-white shadow-sm">
+                        🇻🇳 Tiếng Việt
+                    </button>
+                    <button onclick="setLanguage('en')" id="lang-en-btn" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-300 border border-slate-700 hover:bg-slate-800 text-slate-300">
+                        🇬🇧 English
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION WITH SLOGAN -->
+    <section class="bg-white border-b border-slate-200 py-10 sm:py-14">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 id="ui-hero-title" class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                ĐỘI NGŨ GIẢNG VIÊN - NHÀ KHOA HỌC
+            </h2>
+            <p id="ui-hero-subtitle" class="mt-3 text-lg text-slate-500 max-w-3xl mx-auto">
+                Khoa Công nghệ Thông tin | Trường Đại học Mở Thành phố Hồ Chí Minh
+            </p>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE FILTER & SEARCH SYSTEM -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 mb-8">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                
+                <!-- Search bar input -->
+                <div class="relative flex-grow max-w-xl">
+                    <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                        <i class="fa-solid fa-magnifying-glass text-slate-400"></i>
+                    </span>
+                    <input type="text" id="search-input" oninput="handleSearch(this.value)" class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all placeholder:text-slate-400" placeholder="Tìm kiếm giảng viên, hướng nghiên cứu, môn học...">
+                </div>
+
+                <!-- Live counter of visible items -->
+                <div class="text-sm font-medium text-slate-500 flex items-center">
+                    <span id="counter-badge" class="bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full font-bold mr-2">0</span>
+                    <span id="ui-counter-label">giảng viên phù hợp</span>
+                </div>
+            </div>
+
+            <!-- Department Category Filters -->
+            <div class="mt-6 flex flex-wrap gap-2" id="dept-filter-group">
+                <button onclick="setDeptFilter('all')" data-dept="all" class="dept-btn px-4 py-2 text-xs font-semibold rounded-xl bg-indigo-600 text-white shadow-sm transition-all duration-200">
+                    Tất cả Chương trình
+                </button>
+                <button onclick="setDeptFilter('cs')" data-dept="cs" class="dept-btn px-4 py-2 text-xs font-semibold rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-all duration-200">
+                    Khoa học Máy tính
+                </button>
+                <button onclick="setDeptFilter('it')" data-dept="it" class="dept-btn px-4 py-2 text-xs font-semibold rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-all duration-200">
+                    Công nghệ Thông tin
+                </button>
+                <button onclick="setDeptFilter('mis')" data-dept="mis" class="dept-btn px-4 py-2 text-xs font-semibold rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-all duration-200">
+                    Hệ thống Thông tin Quản lý
+                </button>
+                <button onclick="setDeptFilter('se')" data-dept="se" class="dept-btn px-4 py-2 text-xs font-semibold rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-all duration-200">
+                    Kỹ thuật phần mềm
+                </button>
+                <button onclick="setDeptFilter('ai')" data-dept="ai" class="dept-btn px-4 py-2 text-xs font-semibold rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-all duration-200">
+                    Trí tuệ nhân tạo
+                </button>
+                <button onclick="setDeptFilter('is')" data-dept="is" class="dept-btn px-4 py-2 text-xs font-semibold rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-all duration-200">
+                    An toàn thông tin
+                </button>
+            </div>
+        </div>
+
+        <!-- FACULTY GRID CONTAINER -->
+        <div id="faculty-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+            <!-- Dynamic Injection via JavaScript -->
+        </div>
+
+        <!-- No search results notification -->
+        <div id="no-results-banner" class="hidden bg-white border border-slate-200 rounded-2xl p-12 text-center shadow-sm max-w-lg mx-auto mt-12">
+            <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-slate-100 text-slate-400 mb-4 text-2xl">
+                <i class="fa-solid fa-users-slash"></i>
+            </div>
+            <h3 class="text-base font-semibold text-slate-900" id="ui-no-results-title">Không tìm thấy giảng viên</h3>
+            <p class="mt-1 text-sm text-slate-500" id="ui-no-results-desc">Vui lòng thử tìm kiếm với từ khóa khác.</p>
+        </div>
+    </main>
+
+    <!-- COMPREHENSIVE BILINGUAL PROFILE DETAILED MODAL (DRAWER ARCHITECTURE) -->
+    <div id="profile-modal" class="fixed inset-0 z-50 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <!-- Backdrop background Overlay -->
+        <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 bg-slate-900/60 transition-opacity" aria-hidden="true" onclick="closeModal()"></div>
+
+            <!-- Trick the browser into centering the modal contents. -->
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+            <!-- Modal Panel Main Wrapper -->
+            <div class="inline-block align-bottom bg-white rounded-2xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-3xl sm:w-full border border-slate-200">
+                
+                <!-- Color ribbon accent -->
+                <div class="h-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
+
+                <!-- Modal Header: Title bar + Close button -->
+                <div class="bg-slate-50 border-b border-slate-150 px-6 py-4 flex items-center justify-between">
+                    <span id="modal-dept-badge" class="bg-indigo-100 text-indigo-800 text-xs px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">
+                        CS
+                    </span>
+                    <button type="button" onclick="closeModal()" class="bg-white hover:bg-slate-100 text-slate-400 hover:text-slate-600 rounded-lg p-2 transition-colors border border-slate-200">
+                        <span class="sr-only">Close</span>
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+
+                <!-- Scrollable Body Content -->
+                <div class="px-6 py-6 max-h-[80vh] overflow-y-auto" id="modal-content-area">
+                    
+                    <!-- 1. Header Area with Avatar & Quick Info -->
+                    <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-8 pb-6 border-b border-slate-100">
+                        <img id="modal-avatar" src="" alt="Faculty Portrait" class="w-32 h-32 rounded-2xl object-cover shadow-md border-4 border-slate-50 bg-slate-100 flex-shrink-0">
+                        
+                        <div class="text-center sm:text-left flex-grow">
+                            <h3 id="modal-name" class="text-2xl font-bold text-slate-900 leading-snug">
+                                <!-- JS Populated -->
+                            </h3>
+                            <p id="modal-role" class="text-sm font-semibold text-indigo-600 mt-1">
+                                <!-- JS Populated -->
+                            </p>
+                            <p id="modal-dept-full" class="text-xs text-slate-500 mt-1">
+                                <!-- JS Populated -->
+                            </p>
+
+                            <!-- Mini contact links grid -->
+                            <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                                <div class="flex items-center gap-2 text-slate-600">
+                                    <i class="fa-solid fa-envelope text-slate-400 w-4"></i>
+                                    <a id="modal-email-link" href="#" class="hover:underline hover:text-indigo-600"></a>
+                                </div>
+                                <div class="flex items-center gap-2 text-slate-600">
+                                    <i class="fa-solid fa-door-open text-slate-400 w-4"></i>
+                                    <span id="modal-office"></span>
+                                </div>
+                                <div class="flex items-center gap-2 text-slate-600 col-span-1 sm:col-span-2">
+                                    <i class="fa-solid fa-globe text-slate-400 w-4"></i>
+                                    <a id="modal-website-link" href="#" target="_blank" class="hover:underline hover:text-indigo-600 truncate"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Academic Indices Block (Scholar / Scopus / ORCID) -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+                        <a id="modal-scholar" href="#" target="_blank" class="flex flex-col items-center justify-center p-3 bg-slate-50 hover:bg-indigo-50 border border-slate-200 rounded-xl transition-all group">
+                            <span class="text-indigo-600 text-lg mb-1 group-hover:scale-110 transition-transform"><i class="fa-solid fa-graduation-cap"></i></span>
+                            <span class="text-[10px] font-bold tracking-wider text-slate-500 group-hover:text-indigo-700">GOOGLE SCHOLAR</span>
+                        </a>
+                        <a id="modal-scopus" href="#" target="_blank" class="flex flex-col items-center justify-center p-3 bg-slate-50 hover:bg-indigo-50 border border-slate-200 rounded-xl transition-all group">
+                            <span class="text-indigo-600 text-lg mb-1 group-hover:scale-110 transition-transform"><i class="fa-solid fa-graduation-cap"></i></span>
+                            <span class="text-[10px] font-bold tracking-wider text-slate-500 group-hover:text-indigo-700">SCOPUS</span>
+                        </a>
+                        <a id="modal-orcid" href="#" target="_blank" class="flex flex-col items-center justify-center p-3 bg-slate-50 hover:bg-indigo-50 border border-slate-200 rounded-xl transition-all group">
+                            <span class="text-emerald-600 text-lg mb-1 group-hover:scale-110 transition-transform"><i class="fa-brands fa-orcid"></i></span>
+                            <span class="text-[10px] font-bold tracking-wider text-slate-500 group-hover:text-emerald-700">ORCID ID</span>
+                        </a>
+                        <a id="modal-linkedin" href="#" target="_blank" class="flex flex-col items-center justify-center p-3 bg-slate-50 hover:bg-indigo-50 border border-slate-200 rounded-xl transition-all group">
+                            <span class="text-blue-600 text-lg mb-1 group-hover:scale-110 transition-transform"><i class="fa-brands fa-linkedin-in"></i></span>
+                            <span class="text-[10px] font-bold tracking-wider text-slate-500 group-hover:text-blue-700">LINKEDIN</span>
+                        </a>
+                    </div>
+
+                    <!-- 3. Dynamic Section Layout (Standardized Content Blocks) -->
+                    <div class="space-y-6">
+                        <!-- Research Interests -->
+                        <div class="bg-indigo-50/50 p-4 rounded-xl border border-indigo-100/60">
+                            <h4 class="text-sm font-bold text-indigo-900 flex items-center gap-2 uppercase tracking-wide">
+                                <i class="fa-solid fa-bullseye"></i> <span id="label-interests">Research Interests</span>
+                            </h4>
+                            <ul id="modal-list-interests" class="mt-2 text-xs text-slate-700 space-y-1.5 pl-1 leading-relaxed">
+                                <!-- Populated dynamically -->
+                            </ul>
+                        </div>
+
+                        <!-- Education Background -->
+                        <div>
+                            <h4 class="text-sm font-bold text-slate-800 flex items-center gap-2 border-b border-slate-200 pb-2 uppercase tracking-wide">
+                                <i class="fa-solid fa-university text-slate-400"></i> <span id="label-education">Education Background</span>
+                            </h4>
+                            <ul id="modal-list-education" class="mt-3 text-xs text-slate-700 list-none space-y-2.5 pl-1 leading-relaxed">
+                                <!-- Populated dynamically -->
+                            </ul>
+                        </div>
+
+                        <!-- Teaching Courses -->
+                        <div>
+                            <h4 class="text-sm font-bold text-slate-800 flex items-center gap-2 border-b border-slate-200 pb-2 uppercase tracking-wide">
+                                <i class="fa-solid fa-book-open text-slate-400"></i> <span id="label-teaching">Teaching Courses</span>
+                            </h4>
+                            <ul id="modal-list-teaching" class="mt-3 text-xs text-slate-700 list-none space-y-2 pl-1 leading-relaxed">
+                                <!-- Populated dynamically -->
+                            </ul>
+                        </div>
+
+                        <!-- Selected Key Publications -->
+                        <div>
+                            <h4 class="text-sm font-bold text-slate-800 flex items-center gap-2 border-b border-slate-200 pb-2 uppercase tracking-wide">
+                                <i class="fa-solid fa-file-invoice text-slate-400"></i> <span id="label-publications">Selected Key Publications</span>
+                            </h4>
+                            <ul id="modal-list-publications" class="mt-3 text-xs text-slate-700 list-inside space-y-2.5 pl-1 leading-relaxed">
+                                <!-- Populated dynamically -->
+                            </ul>
+                        </div>
+
+                        <!-- Research Projects (As PI) -->
+                        <div>
+                            <h4 class="text-sm font-bold text-slate-800 flex items-center gap-2 border-b border-slate-200 pb-2 uppercase tracking-wide">
+                                <i class="fa-solid fa-diagram-project text-slate-400"></i> <span id="label-projects">Research Projects</span>
+                            </h4>
+                            <ul id="modal-list-projects" class="mt-3 text-xs text-slate-700 list-none space-y-2 pl-1 leading-relaxed">
+                                <!-- Populated dynamically -->
+                            </ul>
+                        </div>
+
+                        <!-- Honors & Awards -->
+                        <div>
+                            <h4 class="text-sm font-bold text-slate-800 flex items-center gap-2 border-b border-slate-200 pb-2 uppercase tracking-wide">
+                                <i class="fa-solid fa-trophy text-slate-400"></i> <span id="label-awards">Honors & Awards</span>
+                            </h4>
+                            <ul id="modal-list-awards" class="mt-3 text-xs text-slate-700 list-none space-y-2 pl-1 leading-relaxed">
+                                <!-- Populated dynamically -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="bg-slate-50 border-t border-slate-150 px-6 py-4 flex justify-end">
+                    <button type="button" onclick="closeModal()" id="btn-modal-close" class="px-5 py-2.5 bg-white hover:bg-slate-100 text-slate-700 text-xs font-semibold rounded-xl border border-slate-200 transition-all">
+                        Đóng
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER WITH COPYRIGHT -->
+    <footer class="bg-slate-950 text-slate-400 py-8 border-t border-slate-800 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs">
+            <p>© 2026 Faculty of Computer Science. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- DIRECTORY LOGIC & CONTROLLER ENGINE -->
+    <script>
+        // Init functions when loaded
+        window.onload = function() {
+            setLanguage('vi'); // Start with Vietnamese default
+            renderDirectory();
+        };
+
+        // Render functions for directory
+        function renderDirectory() {
+            const grid = document.getElementById('faculty-grid');
+            const noResults = document.getElementById('no-results-banner');
+            grid.innerHTML = '';
+
+            const filteredList = facultyData.filter(item => {
+                const langData = item[currentLang];
+                
+                // Dept check
+                const matchDept = currentDept === 'all' || item.dept === currentDept;
+                
+                // Search query check
+                const normalizedQuery = searchQuery.toLowerCase().trim();
+                const matchSearch = normalizedQuery === '' || 
+                    langData.name.toLowerCase().includes(normalizedQuery) ||
+                    langData.role.toLowerCase().includes(normalizedQuery) ||
+                    langData.deptName.toLowerCase().includes(normalizedQuery) ||
+                    langData.interests.some(interest => interest.toLowerCase().includes(normalizedQuery)) ||
+                    (langData.publications && langData.publications.some(pub => pub.toLowerCase().includes(normalizedQuery)));
+
+                return matchDept && matchSearch;
+            });
+
+            // Update visible counter
+            document.getElementById('counter-badge').innerText = filteredList.length;
+
+            if (filteredList.length === 0) {
+                grid.classList.add('hidden');
+                noResults.classList.remove('hidden');
+                return;
+            }
+
+            grid.classList.remove('hidden');
+            noResults.classList.add('hidden');
+
+            filteredList.forEach(item => {
+                const data = item[currentLang];
+                
+                // Generate research interests markup as mini tags (limit to 2 for preview speed & aesthetics)
+                const tags = data.interests.slice(0, 2).map(tag => 
+                    `<span class="inline-block bg-slate-50 hover:bg-indigo-50 border border-slate-200 text-slate-600 hover:text-indigo-700 transition-all rounded-lg px-2.5 py-1 text-[11px] font-medium truncate max-w-full">${tag}</span>`
+                ).join('');
+
+                const cardHtml = `
+                    <div class="bg-white border border-slate-200 rounded-2xl p-5 hover:shadow-lg transition-all duration-300 flex flex-col justify-between group">
+                        <div>
+                            <!-- Upper Grid with Photo & Main titles -->
+                            <div class="flex items-start gap-4 mb-4">
+                                <img src="${item.image}" alt="${data.name}" class="w-20 h-20 rounded-xl object-cover border-2 border-slate-100 bg-slate-50 group-hover:scale-105 transition-all duration-300">
+                                <div class="min-w-0">
+                                    <h3 class="font-bold text-slate-900 group-hover:text-indigo-600 transition-colors text-base truncate" title="${data.name}">
+                                        ${data.name}
+                                    </h3>
+                                    <p class="text-xs font-semibold text-slate-500 mt-0.5 leading-tight truncate" title="${data.role}">
+                                        ${data.role}
+                                    </p>
+                                    <span class="inline-block mt-2 bg-indigo-50 text-indigo-700 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                                        ${item.dept.toUpperCase()}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Research interests preview list -->
+                            <div class="space-y-1 mb-5 flex flex-wrap gap-1">
+                                ${tags}
+                            </div>
+                        </div>
+
+                        <!-- Action Links and View detail triggers -->
+                        <div class="border-t border-slate-100 pt-4 flex items-center justify-between">
+                            <!-- Direct public icons links -->
+                            <div class="flex space-x-2">
+                                <a href="mailto:${data.email}" class="text-slate-400 hover:text-indigo-600 p-1.5 hover:bg-indigo-50 rounded-lg transition-colors text-xs" title="Email: ${data.email}">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </a>
+                                <a href="${data.scholar}" target="_blank" class="text-slate-400 hover:text-indigo-600 p-1.5 hover:bg-indigo-50 rounded-lg transition-colors text-xs" title="Google Scholar">
+                                    <i class="fa-solid fa-graduation-cap"></i>
+                                </a>
+                                <a href="${data.orcid}" target="_blank" class="text-slate-400 hover:text-emerald-600 p-1.5 hover:bg-emerald-50 rounded-lg transition-colors text-xs" title="ORCID ID">
+                                    <i class="fa-brands fa-orcid"></i>
+                                </a>
+                            </div>
+
+                            <!-- View full profile detailed modal button -->
+                            <button onclick="openProfileModal(${item.id})" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 transition-colors flex items-center gap-1.5 group/btn">
+                                <span>${translations[currentLang].viewProfile}</span>
+                                <i class="fa-solid fa-arrow-right text-[10px] group-hover/btn:translate-x-1 transition-transform"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.insertAdjacentHTML('beforeend', cardHtml);
+            });
+        }
+
+        // Handle text search input
+        function handleSearch(val) {
+            searchQuery = val;
+            renderDirectory();
+        }
+
+        // Set department active filters
+        function setDeptFilter(dept) {
+            currentDept = dept;
+            
+            // Highlight active visual indicator of departments
+            const buttons = document.querySelectorAll('.dept-btn');
+            buttons.forEach(btn => {
+                if (btn.getAttribute('data-dept') === dept) {
+                    btn.className = "dept-btn px-4 py-2 text-xs font-semibold rounded-xl bg-indigo-600 text-white shadow-sm transition-all duration-200";
+                } else {
+                    btn.className = "dept-btn px-4 py-2 text-xs font-semibold rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-all duration-200";
+                }
+            });
+
+            renderDirectory();
+        }
+
+        // Set bilingual language configuration
+        function setLanguage(lang) {
+            currentLang = lang;
+            
+            // Toggle global indicators active classes
+            if (lang === 'vi') {
+                document.getElementById('lang-vi-btn').className = "px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-300 border border-slate-700 bg-indigo-600 text-white shadow-sm";
+                document.getElementById('lang-en-btn').className = "px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-300 border border-slate-700 hover:bg-slate-800 text-slate-300";
+            } else {
+                document.getElementById('lang-en-btn').className = "px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-300 border border-slate-700 bg-indigo-600 text-white shadow-sm";
+                document.getElementById('lang-vi-btn').className = "px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-300 border border-slate-700 hover:bg-slate-800 text-slate-300";
+            }
+
+            // Repopulate general landing texts
+            document.getElementById('ui-brand-title').innerText = translations[lang].title;
+            document.getElementById('ui-hero-title').innerText = translations[lang].title;
+            document.getElementById('ui-hero-subtitle').innerText = translations[lang].subtitle;
+            document.getElementById('search-input').placeholder = translations[lang].searchPlaceholder;
+            document.getElementById('ui-counter-label').innerText = translations[lang].counterLabel || (lang === 'vi' ? 'giảng viên phù hợp' : 'matching faculty members');
+            document.getElementById('btn-modal-close').innerText = translations[lang].close;
+            document.getElementById('ui-no-results-title').innerText = translations[lang].noResults;
+            document.getElementById('ui-no-results-desc').innerText = lang === 'vi' ? 'Vui lòng thử lại bằng từ khóa khác.' : 'Please try again using different search queries.';
+
+            // Re-translate department filter selectors inside buttons
+            const buttons = document.querySelectorAll('.dept-btn');
+            buttons.forEach(btn => {
+                const targetDept = btn.getAttribute('data-dept');
+                if (targetDept === 'all') btn.innerText = translations[lang].deptAll;
+                if (targetDept === 'cs') btn.innerText = translations[lang].deptCS;
+                if (targetDept === 'it') btn.innerText = translations[lang].deptIT;
+                if (targetDept === 'mis') btn.innerText = translations[lang].deptMIS;
+                if (targetDept === 'se') btn.innerText = translations[lang].deptSE;
+                if (targetDept === 'ai') btn.innerText = translations[lang].deptAI;
+                if (targetDept === 'is') btn.innerText = translations[lang].deptIS;
+            });
+
+            // Re-render whole screen dynamic content
+            renderDirectory();
+        }
+
+        // Modal Action: Open Profile
+        function openProfileModal(id) {
+            const faculty = facultyData.find(item => item.id === id);
+            if (!faculty) return;
+
+            const data = faculty[currentLang];
+            const deptLabel = faculty.dept.toUpperCase();
+
+            // Populate Modal Static Headings based on active language
+            document.getElementById('label-interests').innerText = translations[currentLang].researchInterests;
+            document.getElementById('label-education').innerText = translations[currentLang].education;
+            document.getElementById('label-teaching').innerText = translations[currentLang].teaching;
+            document.getElementById('label-publications').innerText = translations[currentLang].publications;
+            document.getElementById('label-projects').innerText = translations[currentLang].projects;
+            document.getElementById('label-awards').innerText = translations[currentLang].awards;
+
+            // Fill individual header metadata
+            document.getElementById('modal-dept-badge').innerText = deptLabel;
+            document.getElementById('modal-avatar').src = faculty.image;
+            document.getElementById('modal-name').innerText = data.name;
+            document.getElementById('modal-role').innerText = data.role;
+            document.getElementById('modal-dept-full').innerText = data.deptName;
+            
+            // Email link
+            const emailEl = document.getElementById('modal-email-link');
+            emailEl.innerText = data.email;
+            emailEl.href = `mailto:${data.email}`;
+
+            // Office address text
+            document.getElementById('modal-office').innerText = data.office || translations[currentLang].notSpecified;
+
+            // Website personal link
+            const webEl = document.getElementById('modal-website-link');
+            if(data.website) {
+                webEl.innerText = data.website.replace("https://", "").replace("http://", "");
+                webEl.href = data.website;
+                webEl.parentElement.classList.remove('hidden');
+            } else {
+                webEl.parentElement.classList.add('hidden');
+            }
+
+            // Scholar, Scopus, ORCID Links
+            document.getElementById('modal-scholar').href = data.scholar || "#";
+            document.getElementById('modal-scopus').href = data.scopus || "#";
+            document.getElementById('modal-orcid').href = data.orcid || "#";
+            document.getElementById('modal-linkedin').href = data.linkedin || "#";
+
+            // Render detailed arrays
+            renderModalList('modal-list-interests', data.interests, true);
+            renderModalList('modal-list-education', data.education, false, 'fa-solid fa-graduation-cap text-indigo-400');
+            renderModalList('modal-list-teaching', data.teaching, false, 'fa-solid fa-chalkboard-user text-slate-400');
+            renderModalList('modal-list-publications', data.publications, true);
+            renderModalList('modal-list-projects', data.projects, false, 'fa-solid fa-square-check text-slate-400');
+            renderModalList('modal-list-awards', data.awards, false, 'fa-solid fa-medal text-amber-500');
+
+            // Unhide complete Modal component
+            document.getElementById('profile-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Lock background scrolling
+        }
+
+        // Modal list injection helper
+        function renderModalList(elementId, itemsList, isStandardBullet, iconClass = '') {
+            const container = document.getElementById(elementId);
+            container.innerHTML = '';
+
+            const parentBlock = container.parentElement;
+
+            if (!itemsList || itemsList.length === 0) {
+                // Hide containing section entirely if empty
+                parentBlock.classList.add('hidden');
+                return;
+            }
+            parentBlock.classList.remove('hidden');
+
+            itemsList.forEach((item, index) => {
+                let li = document.createElement('li');
+                if (isStandardBullet) {
+                    li.className = "relative pl-5 leading-relaxed text-slate-600";
+                    li.innerHTML = `<span class="absolute left-0 top-2.5 h-1.5 w-1.5 rounded-full bg-indigo-500"></span>${item}`;
+                } else if (iconClass) {
+                    li.className = "flex items-start gap-2.5 leading-relaxed text-slate-600";
+                    li.innerHTML = `<i class="${iconClass} mt-1 flex-shrink-0 text-sm"></i> <span>${item}</span>`;
+                } else {
+                    li.className = "text-slate-600";
+                    li.innerText = item;
+                }
+                container.appendChild(li);
+            });
+        }
+
+        // Close details modal
+        function closeModal() {
+            document.getElementById('profile-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto'; // Restore normal scrolling
+        }
+    </script>
+</body>
+</html>
