@@ -69,7 +69,7 @@
                 title: "GIẢNG VIÊN - NHÀ KHOA HỌC",
                 subtitle: "Khoa Công nghệ Thông tin | Trường Đại học Mở Thành phố Hồ Chí Minh",
                 searchPlaceholder: "Tìm kiếm giảng viên, hướng nghiên cứu, môn học...",
-                deptAll: "Tất cả Bộ môn",
+                deptAll: "Tất cả",
                 deptCS: "Khoa học Máy tính",
                 deptIT: "Công nghệ Thông tin",
                 deptMIS: "Hệ thống Thông tin Quản lý",
@@ -123,124 +123,411 @@
 
         // Standardized, public-only faculty data
         const facultyData = [
+            // { id: 0, // Someone
+            //     dept: "",
+            //     image: "",
+            //     vi: {
+            //         name: "",
+            //         role: "",
+            //         deptName: "",
+            //         office: "Phòng 604, 35-37 Hồ Hảo Hớn",
+            //         email: "",
+            //         website: "#",
+            //         scholar: "#",
+            //         orcid: "#",
+            //         researchGate: "#",
+            //         linkedin: "#",
+            //         interests: [
+            //             ""
+            //         ],
+            //         education: [
+            //             ""
+            //         ],
+            //         teaching: [
+            //             ""
+            //         ],
+            //         publications: [
+            //             ""
+            //         ],
+            //         projects: [
+            //             ""
+            //         ],
+            //         awards: [
+            //             ""
+            //         ]
+            //     },
+            //     en: {
+            //         name: "",
+            //         role: "",
+            //         deptName: "",
+            //         office: "Room 604, 35-37 Ho Hao Hon Street",
+            //         email: "",
+            //         website: "#",
+            //         scholar: "#",
+            //         orcid: "#",
+            //         researchGate: "#",
+            //         linkedin: "#",
+            //         interests: [
+            //             ""
+            //         ],
+            //         education: [
+            //             ""
+            //         ],
+            //         teaching: [
+            //             ""
+            //         ],
+            //         publications: [
+            //             ""
+            //         ],
+            //         projects: [
+            //             ""
+            //         ],
+            //         awards: [
+            //             ""
+            //         ]
+            //     }
+            // },
             {
-    id: 1,
-    dept: "cs",
-    image: "https://it.ou.edu.vn/wp-content/uploads/2025/12/01.TS_-TH-Vinh.jpg",
+                id: 1, // Truong Hoang Vinh
+                dept: "cs",
+                image: "https://it.ou.edu.vn/wp-content/uploads/2025/12/01.TS_-TH-Vinh.jpg",
 
-    vi: {
-        name: "TS. Trương Hoàng Vinh",
-        role: "Trưởng Khoa",
-        deptName: "Chương trình Khoa học Máy tính",
-        office: "Phòng 604, 35-37 Hồ Hảo Hớn",
-        email: "vinh.th@ou.edu.vn",
-        website: "#",
-        scholar: "https://scholar.google.com/citations?user=5E3HHtsAAAAJ&hl=en",
-        orcid: "https://orcid.org/0000-0002-3464-3894",
-        researchGate: "https://www.researchgate.net/profile/Vinh-Truong-Hoang",
-        linkedin: "#",
-        shortBio: "Trương Hoàng Vinh nhận bằng Thạc sĩ Khoa học Máy tính tại Đại học Montpellier, Pháp, năm 2008 và bằng Tiến sĩ Khoa học Máy tính tại Đại học Littoral Côte d'Opale, Pháp, năm 2018. Hiện nay, ông là Trưởng Khoa Công nghệ Thông tin, Trường Đại học Mở Thành phố Hồ Chí Minh. Hướng nghiên cứu của ông tập trung vào khoa học dữ liệu, thị giác máy tính, xử lý ảnh và lựa chọn đặc trưng.",
-        interests: [
-            "Khoa học dữ liệu",
-            "Thị giác máy tính và Xử lý ảnh"
-        ],
+                vi: {
+                    name: "TS. Trương Hoàng Vinh",
+                    role: "Trưởng Khoa",
+                    deptName: "Chương trình Khoa học Máy tính",
+                    office: "Phòng 604, 35-37 Hồ Hảo Hớn",
+                    email: "vinh.th@ou.edu.vn",
+                    website: "#",
+                    scholar: "https://scholar.google.com/citations?user=5E3HHtsAAAAJ&hl=en",
+                    orcid: "https://orcid.org/0000-0002-3464-3894",
+                    researchGate: "https://www.researchgate.net/profile/Vinh-Truong-Hoang",
+                    linkedin: "#",
+                    shortBio: "Vinh Truong Hoang received the M.Sc. degree in Computer Science from the University of Montpellier, France, in 2008 and the Ph.D. degree in Computer Science from the University of Littoral Côte d'Opale, France, in 2018. He is currently the Dean of the Faculty of Information Technology, Ho Chi Minh City Open University, Vietnam. His research interests include data science, computer vision, image processing, and feature selection.",
+                    interests: [
+                        "Khoa học dữ liệu",
+                        "Thị giác máy tính và Xử lý ảnh"
+                    ],
 
-        education: [
-            "2006: Cử nhân Toán tin - Trường Đại học Khoa học Tự nhiên, Đại học Quốc gia TP.HCM",
-            "2008: Thạc sĩ Khoa học Máy tính - Đại học Montpellier, Pháp",
-            "2018: Tiến sĩ Khoa học Máy tính - Đại học Littoral Côte d'Opale, Pháp"
-        ],
+                    education: [
+                        "2006: Cử nhân Toán tin - Trường Đại học Khoa học Tự nhiên, Đại học Quốc gia TP.HCM",
+                        "2008: Thạc sĩ Khoa học Máy tính - Đại học Montpellier, Pháp",
+                        "2018: Tiến sĩ Khoa học Máy tính - Đại học Littoral Côte d'Opale, Pháp"
+                    ],
 
-        teaching: [
-            "Toán cho máy học",
-            "Xử lý ảnh",
-            "Thị giác máy tính",
-            "Những vấn đề hiện đại của Khoa học máy tính"
-        ],
+                    teaching: [
+                        "Toán cho máy học",
+                        "Xử lý ảnh",
+                        "Thị giác máy tính",
+                        "Những vấn đề hiện đại của Khoa học máy tính"
+                    ],
 
-        publications: [
-            "A. T. D. Nguyen, T. Vo và V. T. Hoang, \"Hybrid-RL: An Incremental Deep Clustering Framework with Reinforcement Learning for Adaptive Customer Segmentation,\" 2026, doi: 10.32604/cmc.2026.082845.",
-            "G. Peng, F. Dornaika, D. Hamad và V. T. Hoang, \"Multi-view Semi-supervised Classification via Innovative Graph Construction and Smoothness-aware Graph Convolution,\" 2026, doi: 10.1016/j.knosys.2026.115586.",
-            "L. Nguyen Thi My, T. Vo và V. Truong Hoang, \"Real-time Pill Image Recognition on Edge Devices with Adaptive Lightweight Attention,\" 2026, doi: 10.1007/s11554-025-01831-7.",
-            "N. Dinh và cộng sự, \"YOLOv10-HQGNN: A Hybrid Quantum Graph Learning Framework for Real-Time Faulty Insulator Detection,\" 2026, doi: 10.32604/cmc.2025.069587.",
-            "T. N. Quoc và cộng sự, \"Smartphone-Based Colorimetric Sensing with Reference Calibration and Ensemble Machine Learning for Enhanced Detection of Nitrite and Ammonium Ions,\" 2026, doi: 10.1016/j.aca.2026.345097.",
-            "V. T. Hoang và cộng sự, \"NestLipGNN: A Hierarchical Graph Neural Network Framework with Nested Multi-Granularity Learning for Robust Visual Speech Recognition,\" 2026, doi: 10.32604/cmc.2026.078089.",
-            "V. T. Hoang, V.-T. Le, N. Dinh, K. Tran-Trung, B. N. Van, H. D. T. Hong và T. H. Huong, \"Deep Learning-Based Faulty Wood Detection with Area Attention,\" 2025, doi: 10.32604/cmc.2025.066506.",
-            "N. Dinh, V. T. Hoang, B. N. Van, T. H. Huong, H. D. T. Hong, H. N. Trung và K. T. Trung, \"Enhancing Smart Contract Security Through DevSecOps: An Adaptive Approach for Vulnerability Detection,\" 2025, doi: 10.1109/ACCESS.2025.3606572.",
-            "T. H. Moges và cộng sự, \"Age of Information-aware Trajectory Optimization for Time-sensitive UAV Systems in Uplink SCMA Networks,\" 2025, doi: 10.1016/j.comnet.2025.111369.",
-            "B. N. Van, A. Nguyen, K. Tran-Trung, T. H. Huong, H. D. T. Hong, H. N. Trung và V. T. Hoang, \"Water Meter Reading Based on Text Recognition Techniques and Deep Learning,\" 2025, doi: 10.1109/ACCESS.2025.3547225."
-        ],
+                    publications: [
+                        "A. T. D. Nguyen, T. Vo, and V. T. Hoang, \"Hybrid-RL: An Incremental Deep Clustering Framework with Reinforcement Learning for Adaptive Customer Segmentation,\" 2026, doi: 10.32604/cmc.2026.082845.",
+                        "G. Peng, F. Dornaika, D. Hamad, and V. T. Hoang, \"Multi-view Semi-supervised Classification via Innovative Graph Construction and Smoothness-aware Graph Convolution,\" 2026, doi: 10.1016/j.knosys.2026.115586.",
+                        "L. Nguyen Thi My, T. Vo, and V. Truong Hoang, \"Real-time Pill Image Recognition on Edge Devices with Adaptive Lightweight Attention,\" 2026, doi: 10.1007/s11554-025-01831-7.",
+                        "N. Dinh et al., \"YOLOv10-HQGNN: A Hybrid Quantum Graph Learning Framework for Real-Time Faulty Insulator Detection,\" 2026, doi: 10.32604/cmc.2025.069587.",
+                        "T. N. Quoc et al., \"Smartphone-Based Colorimetric Sensing with Reference Calibration and Ensemble Machine Learning for Enhanced Detection of Nitrite and Ammonium Ions,\" 2026, doi: 10.1016/j.aca.2026.345097.",
+                        "V. T. Hoang et al., \"NestLipGNN: A Hierarchical Graph Neural Network Framework with Nested Multi-Granularity Learning for Robust Visual Speech Recognition,\" 2026, doi: 10.32604/cmc.2026.078089.",
+                        "V. T. Hoang, V.-T. Le, N. Dinh, K. Tran-Trung, B. N. Van, H. D. T. Hong, and T. H. Huong, \"Deep Learning-Based Faulty Wood Detection with Area Attention,\" 2025, doi: 10.32604/cmc.2025.066506.",
+                        "N. Dinh, V. T. Hoang, B. N. Van, T. H. Huong, H. D. T. Hong, H. N. Trung, and K. T. Trung, \"Enhancing Smart Contract Security Through DevSecOps: An Adaptive Approach for Vulnerability Detection,\" 2025, doi: 10.1109/ACCESS.2025.3606572.",
+                        "T. H. Moges et al., \"Age of Information-aware Trajectory Optimization for Time-sensitive UAV Systems in Uplink SCMA Networks,\" 2025, doi: 10.1016/j.comnet.2025.111369.",
+                        "B. N. Van, A. Nguyen, K. Tran-Trung, T. H. Huong, H. D. T. Hong, H. N. Trung, and V. T. Hoang, \"Water Meter Reading Based on Text Recognition Techniques and Deep Learning,\" 2025, doi: 10.1109/ACCESS.2025.3547225."
+                    ],
 
-        projects: [
-            "2022: Tăng cường dữ liệu văn bản tiếng Việt cho bài toán nhận dạng cảm xúc theo hướng tiếp cận học sâu. Sở Khoa học và Công nghệ TP.HCM. Thành viên. Đã nghiệm thu.",
-            "2023: Dự đoán giới tính thông qua tên người Việt sử dụng học sâu. Chương trình Vườn ươm - Sở Khoa học và Công nghệ TP.HCM. Thành viên. Đã nghiệm thu.",
-            "2023: Ứng dụng mô hình trí tuệ nhân tạo để dự báo thời tiết dựa trên nhận dạng ảnh bầu trời. Đề tài nghiên cứu khoa học cấp Bộ. Chủ nhiệm đề tài. Đã nghiệm thu."
-        ],
+                    projects: [
+                        "2022: Tăng cường dữ liệu văn bản tiếng Việt cho bài toán nhận dạng cảm xúc theo hướng tiếp cận học sâu. Sở Khoa học và Công nghệ TP.HCM. Thành viên. Đã nghiệm thu.",
+                        "2023: Dự đoán giới tính thông qua tên người Việt sử dụng học sâu. Chương trình Vườn ươm - Sở Khoa học và Công nghệ TP.HCM. Thành viên. Đã nghiệm thu.",
+                        "2023: Ứng dụng mô hình trí tuệ nhân tạo để dự báo thời tiết dựa trên nhận dạng ảnh bầu trời. Đề tài nghiên cứu khoa học cấp Bộ. Chủ nhiệm đề tài. Đã nghiệm thu."
+                    ],
 
-        awards: [
-            "2025: Chiến sĩ thi đua cấp cơ sở",
-            "2024: Chiến sĩ thi đua cấp cơ sở"
-        ]
-    },
+                    awards: [
+                        "2025: Chiến sĩ thi đua cấp cơ sở",
+                        "2024: Chiến sĩ thi đua cấp cơ sở"
+                    ]
+                },
 
-    en: {
-        name: "Dr. Truong Hoang Vinh",
-        role: "Dean",
-        deptName: "Computer Science Program",
-        office: "Room 604, 35-37 Ho Hao Hon Street",
-        email: "vinh.th@ou.edu.vn",
-        website: "#",
-        scholar: "https://scholar.google.com/citations?user=5E3HHtsAAAAJ&hl=en",
-        orcid: "https://orcid.org/0000-0002-3464-3894",
-        researchGate: "https://www.researchgate.net/profile/Vinh-Truong-Hoang",
-        linkedin: "#",
-        shortBio: "Truong Hoang Vinh received the M.Sc. degree in Computer Science from the University of Montpellier, France, in 2008 and the Ph.D. degree in Computer Science from the University of Littoral Côte d'Opale, France, in 2018. He is currently the Dean of the Faculty of Information Technology, Ho Chi Minh City Open University, Vietnam. His research interests include data science, computer vision, image processing, and feature selection.",
+                en: {
+                    name: "Dr. Truong Hoang Vinh",
+                    role: "Dean",
+                    deptName: "Computer Science Program",
+                    office: "Room 604, 35-37 Ho Hao Hon Street",
+                    email: "vinh.th@ou.edu.vn",
+                    website: "#",
+                    scholar: "https://scholar.google.com/citations?user=5E3HHtsAAAAJ&hl=en",
+                    orcid: "https://orcid.org/0000-0002-3464-3894",
+                    researchGate: "https://www.researchgate.net/profile/Vinh-Truong-Hoang",
+                    linkedin: "#",
+                    shortBio: "Vinh Truong Hoang received the M.Sc. degree in Computer Science from the University of Montpellier, France, in 2008 and the Ph.D. degree in Computer Science from the University of Littoral Côte d'Opale, France, in 2018. He is currently the Dean of the Faculty of Information Technology, Ho Chi Minh City Open University, Vietnam. His research interests include data science, computer vision, image processing, and feature selection.",
 
-        interests: [
-            "Data Science",
-            "Computer Vision and Image Processing"
-        ],
+                    interests: [
+                        "Data Science",
+                        "Computer Vision and Image Processing"
+                    ],
 
-        education: [
-            "2006: B.Sc. in Mathematics and Computer Science - University of Science, Vietnam National University Ho Chi Minh City, Vietnam",
-            "2008: M.Sc. in Computer Science - University of Montpellier, France",
-            "2018: Ph.D. in Computer Science - University of Littoral Côte d'Opale, France"
-        ],
+                    education: [
+                        "2006: B.Sc. in Mathematics and Computer Science - University of Science, Vietnam National University Ho Chi Minh City, Vietnam",
+                        "2008: M.Sc. in Computer Science - University of Montpellier, France",
+                        "2018: Ph.D. in Computer Science - University of Littoral Côte d'Opale, France"
+                    ],
 
-        teaching: [
-            "Mathematic for Machine Learning",
-            "Image Processing",
-            "Computer Vision",
-            "Modern Topics in Computer Science"
-        ],
+                    teaching: [
+                        "Mathematic for Machine Learning",
+                        "Image Processing",
+                        "Computer Vision",
+                        "Modern Topics in Computer Science"
+                    ],
 
-        publications: [
-            "A. T. D. Nguyen, T. Vo, and V. T. Hoang, \"Hybrid-RL: An Incremental Deep Clustering Framework with Reinforcement Learning for Adaptive Customer Segmentation,\" 2026, doi: 10.32604/cmc.2026.082845.",
-            "G. Peng, F. Dornaika, D. Hamad, and V. T. Hoang, \"Multi-view Semi-supervised Classification via Innovative Graph Construction and Smoothness-aware Graph Convolution,\" 2026, doi: 10.1016/j.knosys.2026.115586.",
-            "L. Nguyen Thi My, T. Vo, and V. Truong Hoang, \"Real-time Pill Image Recognition on Edge Devices with Adaptive Lightweight Attention,\" 2026, doi: 10.1007/s11554-025-01831-7.",
-            "N. Dinh et al., \"YOLOv10-HQGNN: A Hybrid Quantum Graph Learning Framework for Real-Time Faulty Insulator Detection,\" 2026, doi: 10.32604/cmc.2025.069587.",
-            "T. N. Quoc et al., \"Smartphone-Based Colorimetric Sensing with Reference Calibration and Ensemble Machine Learning for Enhanced Detection of Nitrite and Ammonium Ions,\" 2026, doi: 10.1016/j.aca.2026.345097.",
-            "V. T. Hoang et al., \"NestLipGNN: A Hierarchical Graph Neural Network Framework with Nested Multi-Granularity Learning for Robust Visual Speech Recognition,\" 2026, doi: 10.32604/cmc.2026.078089.",
-            "V. T. Hoang, V.-T. Le, N. Dinh, K. Tran-Trung, B. N. Van, H. D. T. Hong, and T. H. Huong, \"Deep Learning-Based Faulty Wood Detection with Area Attention,\" 2025, doi: 10.32604/cmc.2025.066506.",
-            "N. Dinh, V. T. Hoang, B. N. Van, T. H. Huong, H. D. T. Hong, H. N. Trung, and K. T. Trung, \"Enhancing Smart Contract Security Through DevSecOps: An Adaptive Approach for Vulnerability Detection,\" 2025, doi: 10.1109/ACCESS.2025.3606572.",
-            "T. H. Moges et al., \"Age of Information-aware Trajectory Optimization for Time-sensitive UAV Systems in Uplink SCMA Networks,\" 2025, doi: 10.1016/j.comnet.2025.111369.",
-            "B. N. Van, A. Nguyen, K. Tran-Trung, T. H. Huong, H. D. T. Hong, H. N. Trung, and V. T. Hoang, \"Water Meter Reading Based on Text Recognition Techniques and Deep Learning,\" 2025, doi: 10.1109/ACCESS.2025.3547225."
-        ],
+                    publications: [
+                        "A. T. D. Nguyen, T. Vo, and V. T. Hoang, \"Hybrid-RL: An Incremental Deep Clustering Framework with Reinforcement Learning for Adaptive Customer Segmentation,\" 2026, doi: 10.32604/cmc.2026.082845.",
+                        "G. Peng, F. Dornaika, D. Hamad, and V. T. Hoang, \"Multi-view Semi-supervised Classification via Innovative Graph Construction and Smoothness-aware Graph Convolution,\" 2026, doi: 10.1016/j.knosys.2026.115586.",
+                        "L. Nguyen Thi My, T. Vo, and V. Truong Hoang, \"Real-time Pill Image Recognition on Edge Devices with Adaptive Lightweight Attention,\" 2026, doi: 10.1007/s11554-025-01831-7.",
+                        "N. Dinh et al., \"YOLOv10-HQGNN: A Hybrid Quantum Graph Learning Framework for Real-Time Faulty Insulator Detection,\" 2026, doi: 10.32604/cmc.2025.069587.",
+                        "T. N. Quoc et al., \"Smartphone-Based Colorimetric Sensing with Reference Calibration and Ensemble Machine Learning for Enhanced Detection of Nitrite and Ammonium Ions,\" 2026, doi: 10.1016/j.aca.2026.345097.",
+                        "V. T. Hoang et al., \"NestLipGNN: A Hierarchical Graph Neural Network Framework with Nested Multi-Granularity Learning for Robust Visual Speech Recognition,\" 2026, doi: 10.32604/cmc.2026.078089.",
+                        "V. T. Hoang, V.-T. Le, N. Dinh, K. Tran-Trung, B. N. Van, H. D. T. Hong, and T. H. Huong, \"Deep Learning-Based Faulty Wood Detection with Area Attention,\" 2025, doi: 10.32604/cmc.2025.066506.",
+                        "N. Dinh, V. T. Hoang, B. N. Van, T. H. Huong, H. D. T. Hong, H. N. Trung, and K. T. Trung, \"Enhancing Smart Contract Security Through DevSecOps: An Adaptive Approach for Vulnerability Detection,\" 2025, doi: 10.1109/ACCESS.2025.3606572.",
+                        "T. H. Moges et al., \"Age of Information-aware Trajectory Optimization for Time-sensitive UAV Systems in Uplink SCMA Networks,\" 2025, doi: 10.1016/j.comnet.2025.111369.",
+                        "B. N. Van, A. Nguyen, K. Tran-Trung, T. H. Huong, H. D. T. Hong, H. N. Trung, and V. T. Hoang, \"Water Meter Reading Based on Text Recognition Techniques and Deep Learning,\" 2025, doi: 10.1109/ACCESS.2025.3547225."
+                    ],
 
-        projects: [
-            "2022: Vietnamese Text Data Augmentation for Emotion Recognition Using Deep Learning Approaches. Ho Chi Minh City Department of Science and Technology. Project Member. Completed.",
-            "2023: Gender Prediction from Vietnamese Names Using Deep Learning. Ho Chi Minh City Department of Science and Technology Incubator Program. Project Member. Completed.",
-            "2023: Application of Artificial Intelligence Models for Weather Forecasting Based on Sky Image Recognition. Ministerial-level Research Project. Principal Investigator. Completed."
-        ],
+                    projects: [
+                        "2022: Vietnamese Text Data Augmentation for Emotion Recognition Using Deep Learning Approaches. Ho Chi Minh City Department of Science and Technology. Project Member. Completed.",
+                        "2023: Gender Prediction from Vietnamese Names Using Deep Learning. Ho Chi Minh City Department of Science and Technology Incubator Program. Project Member. Completed.",
+                        "2023: Application of Artificial Intelligence Models for Weather Forecasting Based on Sky Image Recognition. Ministerial-level Research Project. Principal Investigator. Completed."
+                    ],
 
-        awards: [
-            "2025: Commendation of Outstanding Faculty Member",
-            "2024: Commendation of Outstanding Faculty Member"
-        ]
-    }
-},
-            {
-                id: 2,
+                    awards: [
+                        "2025: Commendation of Outstanding Faculty Member",
+                        "2024: Commendation of Outstanding Faculty Member"
+                    ]
+                }
+            }
+            , {
+                id: 2, // Le Viet Tuan
+                dept: "ai",
+                image: "https://it.ou.edu.vn/wp-content/uploads/2025/12/03.TS_-LV-Tuan.jpg",
+                vi: {
+                    name: "TS. Lê Viết Tuấn",
+                    role: "Giám đốc",
+                    deptName: "Chương trình Trí tuệ nhân tạo",
+                    office: "Phòng 604, 35-37 Hồ Hảo Hớn",
+                    email: "tuan.lv@ou.edu.vn",
+                    website: "https://vt-le.github.io",
+                    scholar: "https://scholar.google.com/citations?user=vje71PYAAAAJ&hl=en",
+                    orcid: "https://orcid.org/0000-0002-2289-8128",
+                    researchGate: "https://www.researchgate.net/profile/Viet-Tuan-Le",
+                    linkedin: "#",
+                    interests: [
+                        "Anomaly detection",
+                        "Deep generative models"
+                    ],
+                    education: [
+                        ""
+                    ],
+                    teaching: [
+                        "Học máy",
+                        "Học sâu",
+                        "Học tăng cường"
+                    ],
+                    publications: [
+                        "V. T. Le and Y. G. Kim, \"Attention-based Residual Autoencoder for Video Anomaly Detection,\" Applied Intelligence, vol. 53, no. 3, pp. 3240–3254, 2023. doi: 10.1007/s10489-022-03810-9",
+
+                        "H. T. Duong, V. T. Le, and V. T. Hoang, \"Deep Learning-Based Anomaly Detection in Video Surveillance: A Survey,\" Sensors, vol. 23, no. 11, 5024, 2023. doi: 10.3390/s23115024",
+
+                        "V. T. Le, K. Tran-Trung, and V. T. Hoang, \"A Comprehensive Review of Recent Deep Learning Techniques for Human Activity Recognition,\" Computational Intelligence and Neuroscience, 2022, 8323962. doi: 10.1155/2022/8323962",
+
+                        "A. X. Wang, V. T. Le, H. N. Trung, and B. P. Nguyen, \"Addressing Imbalance in Health Data: Synthetic Minority Oversampling Using Deep Learning,\" Computers in Biology and Medicine, vol. 188, 109830, 2025. doi: 10.1016/j.compbiomed.2025.109830",
+
+                        "D. P. C. Le, D. Wang, and V. T. Le, \"A Comprehensive Survey of Recent Transformers in Image, Video and Diffusion Models,\" Computers, Materials & Continua, vol. 80, no. 1, 2024. doi: 10.32604/cmc.2024.044210",
+
+                        "D. T. Luu, V. T. Le, and D. M. Vo, \"Questioning, Answering, and Captioning for Zero-Shot Detailed Image Caption,\" in Proc. Asian Conference on Computer Vision (ACCV), 2024, pp. 242–259",
+
+                        "V. T. Le, H. Jin, and Y. G. Kim, \"HSTforU: Hierarchical Spatio-Temporal Transformer for U-Net Based Anomaly Detection in Video,\" Applied Intelligence, vol. 55, 2025. doi: 10.1007/s10489-024-05411-2",
+
+                        "T. Le-Viet and V. T. Hoang, \"Local Binary Pattern Based on Image Gradient for Bark Image Classification,\" in Proc. Signal Processing Systems, 2019, pp. 143–148",
+
+                        "L. Nguyen, V. T. Le, T. Vo, and V. Hoang, \"A Comprehensive Review of Pill Image Recognition,\" Computers, Materials & Continua, vol. 82, no. 3, 2025. doi: 10.32604/cmc.2025.055210",
+
+                        "M. T. P. Nguyen, V. T. Le, H. T. Duong, and V. T. Hoang, \"Detection of Kidney Stone Based on Super Resolution Techniques and YOLOv7 Under Limited Training Samples,\" in Proc. Intelligence of Things Conference, 2023, pp. 23–33"
+                    ],
+                    projects: [
+                        ""
+                    ],
+                    awards: [
+                        ""
+                    ]
+                },
+                en: {
+                    name: "Dr. Le Viet Tuan",
+                    role: "Director",
+                    deptName: "Artificial Intelligence Program",
+                    office: "Room 604, 35-37 Ho Hao Hon Street",
+                    email: "tuan.lv@ou.edu.vn",
+                    website: "https://vt-le.github.io",
+                    scholar: "https://scholar.google.com/citations?user=vje71PYAAAAJ&hl=en",
+                    orcid: "https://orcid.org/0000-0002-2289-8128",
+                    researchGate: "https://www.researchgate.net/profile/Viet-Tuan-Le",
+                    linkedin: "#",
+                    interests: [
+                        "Anomaly detection",
+                        "Deep generative models"
+                    ],
+                    education: [
+                        ""
+                    ],
+                    teaching: [
+                        "Machine Learning",
+                        "Deep Learning",
+                        "Reinforcement Learning"
+                    ],
+                    publications: [
+                        "V. T. Le and Y. G. Kim, \"Attention-based Residual Autoencoder for Video Anomaly Detection,\" Applied Intelligence, vol. 53, no. 3, pp. 3240–3254, 2023. doi: 10.1007/s10489-022-03810-9",
+
+                        "H. T. Duong, V. T. Le, and V. T. Hoang, \"Deep Learning-Based Anomaly Detection in Video Surveillance: A Survey,\" Sensors, vol. 23, no. 11, 5024, 2023. doi: 10.3390/s23115024",
+
+                        "V. T. Le, K. Tran-Trung, and V. T. Hoang, \"A Comprehensive Review of Recent Deep Learning Techniques for Human Activity Recognition,\" Computational Intelligence and Neuroscience, 2022, 8323962. doi: 10.1155/2022/8323962",
+
+                        "A. X. Wang, V. T. Le, H. N. Trung, and B. P. Nguyen, \"Addressing Imbalance in Health Data: Synthetic Minority Oversampling Using Deep Learning,\" Computers in Biology and Medicine, vol. 188, 109830, 2025. doi: 10.1016/j.compbiomed.2025.109830",
+
+                        "D. P. C. Le, D. Wang, and V. T. Le, \"A Comprehensive Survey of Recent Transformers in Image, Video and Diffusion Models,\" Computers, Materials & Continua, vol. 80, no. 1, 2024. doi: 10.32604/cmc.2024.044210",
+
+                        "D. T. Luu, V. T. Le, and D. M. Vo, \"Questioning, Answering, and Captioning for Zero-Shot Detailed Image Caption,\" in Proc. Asian Conference on Computer Vision (ACCV), 2024, pp. 242–259",
+
+                        "V. T. Le, H. Jin, and Y. G. Kim, \"HSTforU: Hierarchical Spatio-Temporal Transformer for U-Net Based Anomaly Detection in Video,\" Applied Intelligence, vol. 55, 2025. doi: 10.1007/s10489-024-05411-2",
+
+                        "T. Le-Viet and V. T. Hoang, \"Local Binary Pattern Based on Image Gradient for Bark Image Classification,\" in Proc. Signal Processing Systems, 2019, pp. 143–148",
+
+                        "L. Nguyen, V. T. Le, T. Vo, and V. Hoang, \"A Comprehensive Review of Pill Image Recognition,\" Computers, Materials & Continua, vol. 82, no. 3, 2025. doi: 10.32604/cmc.2025.055210",
+
+                        "M. T. P. Nguyen, V. T. Le, H. T. Duong, and V. T. Hoang, \"Detection of Kidney Stone Based on Super Resolution Techniques and YOLOv7 Under Limited Training Samples,\" in Proc. Intelligence of Things Conference, 2023, pp. 23–33"
+                    ],
+                    projects: [
+                        ""
+                    ],
+                    awards: [
+                        ""
+                    ]
+                }
+            }
+            , {
+                id: 3, // Duong Thi Hong Ha
+                dept: "mis",
+                image: "https://it.ou.edu.vn/wp-content/uploads/2025/12/DTHHa.jpg",
+
+                vi: {
+                    name: "ThS. Dương Thị Hồng Hà",
+                    role: "Giảng viên",
+                    gender: "Nữ",
+                    deptName: "Chương trình Hệ thống thông tin quản lý",
+                    office: "Phòng 604, 35-37 Hồ Hảo Hớn",
+                    email: "ha.dth@ou.edu.vn",
+                    website: "#",
+                    scholar: "https://scholar.google.com/citations?hl=vi&user=Zg9CufMAAAAJ",
+                    orcid: "https://orcid.org/0000-0002-1052-0988",
+                    researchGate: "https://www.researchgate.net/profile/Duong-Hong-Ha",
+                    linkedin: "#",
+
+                    interests: [
+                        "Thị giác máy tính",
+                        "Học sâu (Deep Learning)",
+                        "Phân loại ảnh",
+                        "Mạng nơ-ron tích chập (CNN)",
+                        "Thuật toán phân loại",
+                        "Support Vector Machine (SVM)",
+                        "K-Nearest Neighbors (K-NN)",
+                        "Machine Learning"
+                    ],
+
+                    education: [
+                        "2008: Cử nhân Công nghệ Thông tin - Trường Đại học Công nghệ Thông tin TP.HCM",
+                        "2011: Cử nhân Kế toán - Trường Đại học Mở TP.HCM",
+                        "2021: Thạc sĩ Khoa học Máy tính - Trường Đại học Mở TP.HCM"
+                    ],
+
+                    experience: [
+                        "04/2024 - nay: Giảng viên, Trường Đại học Mở TP.HCM - Giảng dạy và hỗ trợ đào tạo trong lĩnh vực Khoa học Máy tính"
+                    ],
+
+                    publications: [
+                        "V. T. Hoang et al., 'UniModal-LSR: A Unified Multimodal Framework for Joint Lip Reading and Sign Language Recognition in Video Sequences,' Computers, Materials & Continua, 2026. https://doi.org/10.32604/cmc.2026.078743",
+                        "V. T. Hoang et al., 'NestLipGNN: A Hierarchical Graph Neural Network Framework with Nested Multi-Granularity Learning for Robust Visual Speech Recognition,' Computers, Materials & Continua, 2026. https://doi.org/10.32604/cmc.2026.078089",
+                        "N. Dinh et al., 'YOLOv10-HQGNN: A Hybrid Quantum Graph Learning Framework for Real-Time Faulty Insulator Detection,' Computers, Materials & Continua, 2026. https://doi.org/10.32604/cmc.2025.069587",
+                        "V. T. Hoang et al., 'Deep Learning-Based Faulty Wood Detection with Area Attention,' Computers, Materials & Continua, 2025. https://doi.org/10.32604/cmc.2025.066506",
+                        "N. Dinh et al., 'Enhancing Smart Contract Security Through DevSecOps: An Adaptive Approach for Vulnerability Detection,' IEEE Access, 2025. https://doi.org/10.1109/ACCESS.2025.3606572",
+                        "B. N. Van et al., 'Water Meter Reading Based on Text Recognition Techniques and Deep Learning,' IEEE Access, 2025. https://doi.org/10.1109/ACCESS.2025.3547225",
+                        "K. T. Tran et al., 'Weather Forecast Based on Color Cloud Image Recognition under Local Descriptor and Histogram Selection,' Electronics, 2022. https://doi.org/10.3390/electronics11213460",
+                        "H. D. T. Hong & V. T. Hoang, 'A Comparative Study of Color Spaces for Cloud Image Recognition Based on LBP and LTP Features,' Springer, 2021. https://doi.org/10.1007/978-3-030-49264-9_34",
+                        "T. Bui et al., 'An Approach to Representing Traffic State on Urban Roads,' ACIIDS 2018, Springer, 2018. https://doi.org/10.1007/978-3-319-75420-8_17"
+                    ],
+
+                    patents: [],
+                    awards: [],
+                    projects: [],
+                    references: {
+                        scholar: "https://scholar.google.com/citations?hl=vi&user=Zg9CufMAAAAJ",
+                        orcid: "https://orcid.org/0000-0002-1052-0988",
+                        researchGate: "https://www.researchgate.net/profile/Duong-Hong-Ha"
+                    }
+                },
+
+                en: {
+                    name: "M.Sc. Duong Thi Hong Ha",
+                    role: "Lecturer",
+                    gender: "Female",
+                    deptName: "Management Information Systems Program",
+                    office: "Room 604, 35-37 Ho Hao Hon Street",
+                    email: "ha.dth@ou.edu.vn",
+                    website: "#",
+                    scholar: "https://scholar.google.com/citations?hl=en&user=Zg9CufMAAAAJ",
+                    orcid: "https://orcid.org/0000-0002-1052-0988",
+                    researchGate: "https://www.researchgate.net/profile/Duong-Hong-Ha",
+                    linkedin: "#",
+
+                    interests: [
+                        "Computer Vision",
+                        "Deep Learning",
+                        "Image Classification",
+                        "Convolutional Neural Networks (CNN)",
+                        "Classification Algorithms",
+                        "Support Vector Machines (SVM)",
+                        "K-Nearest Neighbors (K-NN)",
+                        "Machine Learning"
+                    ],
+
+                    education: [
+                        "2008: B.Sc. in Information Technology - University of Information Technology, Ho Chi Minh City, Vietnam",
+                        "2011: B.Sc. in Accounting - Ho Chi Minh City Open University, Vietnam",
+                        "2021: M.Sc. in Computer Science - Ho Chi Minh City Open University, Vietnam"
+                    ],
+
+                    experience: [
+                        "04/2024 - Present: Lecturer, Ho Chi Minh City Open University - Teaching and academic activities in Computer Science"
+                    ],
+
+                    publications: [
+                        "V. T. Hoang et al., 'UniModal-LSR: A Unified Multimodal Framework for Joint Lip Reading and Sign Language Recognition in Video Sequences,' Computers, Materials & Continua, 2026. https://doi.org/10.32604/cmc.2026.078743",
+                        "V. T. Hoang et al., 'NestLipGNN: A Hierarchical Graph Neural Network Framework with Nested Multi-Granularity Learning for Robust Visual Speech Recognition,' Computers, Materials & Continua, 2026. https://doi.org/10.32604/cmc.2026.078089",
+                        "N. Dinh et al., 'YOLOv10-HQGNN: A Hybrid Quantum Graph Learning Framework for Real-Time Faulty Insulator Detection,' Computers, Materials & Continua, 2026. https://doi.org/10.32604/cmc.2025.069587",
+                        "V. T. Hoang et al., 'Deep Learning-Based Faulty Wood Detection with Area Attention,' Computers, Materials & Continua, 2025. https://doi.org/10.32604/cmc.2025.066506",
+                        "N. Dinh et al., 'Enhancing Smart Contract Security Through DevSecOps: An Adaptive Approach for Vulnerability Detection,' IEEE Access, 2025. https://doi.org/10.1109/ACCESS.2025.3606572",
+                        "B. N. Van et al., 'Water Meter Reading Based on Text Recognition Techniques and Deep Learning,' IEEE Access, 2025. https://doi.org/10.1109/ACCESS.2025.3547225",
+                        "K. T. Tran et al., 'Weather Forecast Based on Color Cloud Image Recognition under Local Descriptor and Histogram Selection,' Electronics, 2022. https://doi.org/10.3390/electronics11213460",
+                        "H. D. T. Hong & V. T. Hoang, 'A Comparative Study of Color Spaces for Cloud Image Recognition Based on LBP and LTP Features,' Springer, 2021. https://doi.org/10.1007/978-3-030-49264-9_34",
+                        "T. Bui et al., 'An Approach to Representing Traffic State on Urban Roads,' ACIIDS 2018, Springer, 2018. https://doi.org/10.1007/978-3-319-75420-8_17"
+                    ],
+                    patents: [],
+                    awards: [],
+                    projects: [],
+                    references: {
+                        scholar: "https://scholar.google.com/citations?hl=en&user=Zg9CufMAAAAJ",
+                        orcid: "https://orcid.org/0000-0002-1052-0988",
+                        researchGate: "https://www.researchgate.net/profile/Duong-Hong-Ha"
+                    }
+                }
+            }
+            , {
+                id: 4, // Nguyen Van Bay
                 dept: "cs",
                 image: "https://it.ou.edu.vn/wp-content/uploads/2025/12/NV-BAY.jpg",
                 vi: {
@@ -254,7 +541,7 @@
                     orcid: "https://orcid.org/0009-0000-7474-5193",
                     researchGate: "https://www.researchgate.net/profile/Bay-Nguyen-2",
                     linkedin: "https://www.linkedin.com/in/nvb99/",
-                    shortBio: "Nguyễn Văn Bảy nhận bằng Thạc sĩ tại Trường Đại học Mở Thành phố Hồ Chí Minh, Việt Nam. Hiện nay, ông là giảng viên tại Trường Đại học Mở Thành phố Hồ Chí Minh. Hướng nghiên cứu của ông tập trung vào học máy (machine learning) và nhận dạng ký tự quang học (optical character recognition - OCR).",
+                    shortBio: "Bay Nguyen Van received his master's degree from Ho Chi Minh City Open University, Vietnam. He is a lecturer at the same university, with research interests in machine learning and optical character recognition.",
                     interests: [
                         "Nhận dạng ký tự quang học",
                         "Xử lý ảnh và thị giác máy tính"
@@ -329,9 +616,9 @@
                         "2025: Commendation of Outstanding Faculty Member"
                     ]
                 }
-            },
-            {
-                id: 3,
+            }
+            , {
+                id: 5, // Nguyen Quoc Huy
                 dept: "ai",
                 image: "https://it.ou.edu.vn/wp-content/uploads/2026/05/NQ-Huy.png",
                 vi: {
@@ -345,7 +632,7 @@
                     orcid: "https://orcid.org/0000-0002-5511-5513",
                     researchGate: "https://www.researchgate.net/profile/Huy-Nguyen-610",
                     linkedin: "#",
-                    shortBio: "Nguyễn Quốc Huy nhận bằng Thạc sĩ Khoa học Máy tính năm 2025 tại Trường Đại học Mở Thành phố Hồ Chí Minh. Hướng nghiên cứu cốt lõi của ông liên quan mật thiết đến Thị giác máy tính (Computer Vision), Phát hiện vật thể thời gian thực và các mô hình Học sâu ứng dụng.",
+                    shortBio: "Nguyen Quoc Huy received his M.Sc. in Computer Science in 2025 from Ho Chi Minh City Open University. His primary research interests include Computer Vision, real-time object detection systems, and applied deep neural networks.",
                     interests: [
                         "Thị giác máy tính",
                         "Xử lý ngôn ngữ tự nhiên",
@@ -499,7 +786,7 @@
                         id="dept-filter-group">
                         <button onclick="setDeptFilter('all')" data-dept="all"
                             class="dept-btn shrink-0 px-3.5 py-1.5 sm:px-4 sm:py-2 text-xs font-semibold rounded-xl bg-indigo-600 text-white shadow-sm transition-all duration-200">
-                            Tất cả Bộ môn
+                            Tất cả
                         </button>
                         <button onclick="setDeptFilter('cs')" data-dept="cs"
                             class="dept-btn shrink-0 px-3.5 py-1.5 sm:px-4 sm:py-2 text-xs font-semibold rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-all duration-200">
