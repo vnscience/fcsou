@@ -1,0 +1,2564 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syllabus AI Builder & Editor - Phụ lục 5 HCMOU</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts Inter -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Cinzel:wght@500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Mammoth.js for client-side Word Document reading -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+    <!-- html2pdf.js for faithful A4 printing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- html-docx-js for client-side DOCX export (Browser-safe version) -->
+    <script src="https://cdn.jsdelivr.net/npm/html-docx-js@0.3.1/dist/html-docx.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Style for high-fidelity paper preview */
+        .paper-page {
+            font-family: "Times New Roman", Times, serif;
+            background: white;
+            color: black;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 40px 50px;
+        }
+
+        .paper-page table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 12px 0;
+        }
+
+        .paper-page th,
+        .paper-page td {
+            border: 1px solid #000;
+            padding: 6px 8px;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .paper-page th {
+            background-color: #f3f4f6;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        /* Simple custom scrollbars */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+    <!-- Top Navigation Header -->
+    <header class="bg-slate-900 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="bg-blue-600 p-2.5 rounded-xl shadow-inner flex items-center justify-center">
+                    <i class="fa-solid fa-file-invoice-dollar text-white text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold tracking-tight leading-none text-slate-100 flex items-center">
+                        SyllabusCraft AI <span
+                            class="ml-2 px-2 py-0.5 text-[10px] uppercase font-bold tracking-widest bg-blue-500/20 text-blue-300 rounded border border-blue-500/30">Pro</span>
+                    </h1>
+                    <p class="text-[11px] text-slate-400 font-medium">HCMOU Phụ lục 5-Appendix 5 Template Engineer</p>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <div
+                    class="hidden md:flex items-center space-x-2 bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span class="text-xs font-semibold text-slate-300">Local Cache Active</span>
+                </div>
+
+                <!-- API Configuration Button -->
+                <button onclick="toggleModal('apiKeyModal')"
+                    class="flex items-center space-x-2 px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white rounded-lg border border-slate-700 transition duration-150 text-sm font-medium">
+                    <i class="fa-solid fa-key text-yellow-500"></i>
+                    <span class="hidden sm:inline">Configure Gemini Key</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Notification Container -->
+    <div id="toast-container" class="fixed top-20 right-4 z-[9999] flex flex-col gap-2"></div>
+
+    <!-- Main Workflow Layout -->
+    <main class="flex-grow max-w-[1600px] w-full mx-auto p-4 lg:p-6 grid grid-cols-1 xl:grid-cols-12 gap-6">
+
+        <!-- Left Column: Intelligent Control Hub & Imports -->
+        <div class="xl:col-span-4 flex flex-col gap-6">
+
+            <!-- Import & Extraction Controls Card -->
+            <section
+                class="bg-white rounded-2xl shadow-sm border border-slate-200/80 p-5 flex flex-col gap-5 transition duration-200 hover:shadow-md">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <h2 class="text-sm font-bold uppercase tracking-wider text-slate-500 flex items-center">
+                        <i class="fa-solid fa-cloud-arrow-up text-blue-600 mr-2 text-base"></i>Import & AI Extract
+                    </h2>
+                    <span class="text-xs bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full font-bold">Step 1</span>
+                </div>
+
+                <!-- File upload drop zone -->
+                <div class="relative group">
+                    <label for="syllabusFile"
+                        class="flex flex-col items-center justify-center w-full h-36 border-2 border-dashed border-slate-300 hover:border-blue-500 bg-slate-50 hover:bg-blue-50/20 rounded-xl cursor-pointer transition duration-150 group">
+                        <div class="flex flex-col items-center justify-center pt-5 pb-6 px-4 text-center">
+                            <div
+                                class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 mb-2 group-hover:scale-110 transition duration-150">
+                                <i class="fa-solid fa-file-word text-blue-600 text-2xl group-hover:text-blue-700"></i>
+                            </div>
+                            <p class="text-xs font-semibold text-slate-700 mb-0.5">Upload DOCX or JSON Syllabus</p>
+                            <p class="text-[10px] text-slate-500">Supports standard HCMOU layout Word files</p>
+                        </div>
+                        <input type="file" id="syllabusFile" class="hidden" accept=".docx,.json"
+                            onchange="handleFileUpload(event)">
+                    </label>
+                </div>
+
+                <!-- AI Control Operations -->
+                <div class="flex flex-col gap-3">
+                    <button id="aiExtractBtn" onclick="runAiExtraction()" disabled
+                        class="w-full flex items-center justify-center space-x-2.5 py-3 px-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold rounded-xl shadow-sm transition duration-150 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <span>Extract with Gemini AI</span>
+                    </button>
+
+                    <button onclick="loadSampleSyllabus()"
+                        class="w-full py-2 px-3 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-xl border border-slate-200 transition duration-150">
+                        <i class="fa-solid fa-database mr-1.5 text-slate-500"></i>Load Comprehensive HCMOU Syllabus
+                        Sample
+                    </button>
+                </div>
+
+                <!-- Progress Log Panel -->
+                <div id="aiStatusLog"
+                    class="hidden flex flex-col gap-2 p-3.5 bg-slate-900 text-slate-200 rounded-xl border border-slate-800 text-[11px] font-mono leading-relaxed max-h-40 overflow-y-auto">
+                    <div
+                        class="flex items-center justify-between text-blue-400 font-bold border-b border-slate-800 pb-1 mb-1">
+                        <span>AI EXTRACTION STATUS</span>
+                        <i class="fa-solid fa-spinner animate-spin"></i>
+                    </div>
+                    <div id="statusEntries" class="space-y-1"></div>
+                </div>
+            </section>
+
+            <!-- Advanced Document Actions Card -->
+            <section
+                class="bg-white rounded-2xl shadow-sm border border-slate-200/80 p-5 flex flex-col gap-4 transition duration-200 hover:shadow-md">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <h2 class="text-sm font-bold uppercase tracking-wider text-slate-500 flex items-center">
+                        <i class="fa-solid fa-file-export text-emerald-600 mr-2 text-base"></i>Export Output Suite
+                    </h2>
+                    <span class="text-xs bg-emerald-50 text-emerald-600 px-2 py-0.5 rounded-full font-bold">Step
+                        3</span>
+                </div>
+
+                <p class="text-xs text-slate-500 leading-relaxed">
+                    Produce beautiful outputs honoring the exact layout guidelines. Fully localized and perfectly
+                    structured.
+                </p>
+
+                <div class="grid grid-cols-1 gap-2.5">
+                    <!-- Export Word Document -->
+                    <button onclick="exportAsWord()"
+                        class="flex items-center justify-between p-3 bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-200 rounded-xl transition duration-150 text-left group">
+                        <div class="flex items-center space-x-3">
+                            <div class="bg-blue-100 p-2.5 rounded-lg text-blue-600 group-hover:bg-blue-200 transition">
+                                <i class="fa-solid fa-file-word text-lg"></i>
+                            </div>
+                            <div>
+                                <span class="block text-xs font-bold text-slate-800">Export Word DOCX File</span>
+                                <span class="block text-[10px] text-slate-500">Perfect table compatibility</span>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-slate-400 group-hover:translate-x-1 transition"></i>
+                    </button>
+
+                    <!-- Export PDF Document -->
+                    <button onclick="exportAsPDF()"
+                        class="flex items-center justify-between p-3 bg-slate-50 hover:bg-rose-50 border border-slate-200 hover:border-rose-200 rounded-xl transition duration-150 text-left group">
+                        <div class="flex items-center space-x-3">
+                            <div class="bg-rose-100 p-2.5 rounded-lg text-rose-600 group-hover:bg-rose-200 transition">
+                                <i class="fa-solid fa-file-pdf text-lg"></i>
+                            </div>
+                            <div>
+                                <span class="block text-xs font-bold text-slate-800">Export Printable PDF</span>
+                                <span class="block text-[10px] text-slate-500">A4 layout-perfect styling</span>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-slate-400 group-hover:translate-x-1 transition"></i>
+                    </button>
+
+                    <!-- Export JSON State Document -->
+                    <button onclick="exportAsJSON()"
+                        class="flex items-center justify-between p-3 bg-slate-50 hover:bg-indigo-50 border border-slate-200 hover:border-indigo-200 rounded-xl transition duration-150 text-left group">
+                        <div class="flex items-center space-x-3">
+                            <div
+                                class="bg-indigo-100 p-2.5 rounded-lg text-indigo-600 group-hover:bg-indigo-200 transition">
+                                <i class="fa-solid fa-code text-lg"></i>
+                            </div>
+                            <div>
+                                <span class="block text-xs font-bold text-slate-800">Export RAW JSON Backup</span>
+                                <span class="block text-[10px] text-slate-500">Perfect for re-uploading & backup</span>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-slate-400 group-hover:translate-x-1 transition"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Helper / Smart Rule Panel -->
+            <section
+                class="bg-slate-900 text-slate-200 rounded-2xl p-5 flex flex-col gap-3.5 border border-slate-800 shadow-md">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center">
+                    <i class="fa-solid fa-calculator text-blue-500 mr-2"></i>HCMOU Credit & Self-Study Formula
+                </h3>
+                <p class="text-[11px] text-slate-400 leading-relaxed">
+                    1 credit equivalent to 50 learning hours. 1 class-hour = 50 mins.
+                    Formula guidelines automatically enforced:
+                </p>
+                <div class="grid grid-cols-2 gap-2 text-[10px] font-mono border-t border-slate-800 pt-3">
+                    <div class="bg-slate-800/50 p-2 rounded border border-slate-800/80">
+                        <span class="block text-slate-500 font-semibold mb-0.5">3 Credit (2 Theory, 1 Practice)</span>
+                        <span class="text-blue-400 font-bold">90 Self-study hrs</span>
+                    </div>
+                    <div class="bg-slate-800/50 p-2 rounded border border-slate-800/80">
+                        <span class="block text-slate-500 font-semibold mb-0.5">3 Credit (3 Theory, 0 Practice)</span>
+                        <span class="text-blue-400 font-bold">105 Self-study hrs</span>
+                    </div>
+                </div>
+                <p class="text-[10px] italic text-amber-400/80 mt-1">
+                    * Dynamic smart triggers calculate this automatically in the form when credits change.
+                </p>
+            </section>
+        </div>
+
+        <!-- Right Column: Workspace Interface -->
+        <div class="xl:col-span-8 flex flex-col gap-5">
+
+            <!-- Primary View & Editor Modes Tabs -->
+            <div
+                class="bg-white p-2 rounded-2xl shadow-sm border border-slate-200/80 flex items-center justify-between">
+                <div class="flex items-center space-x-1.5">
+                    <button onclick="setWorkspaceMode('form')" id="modeTab-form"
+                        class="flex items-center space-x-2 px-4 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-150 bg-blue-600 text-white shadow-sm">
+                        <i class="fa-solid fa-list-check"></i>
+                        <span>Interactive Form Editor</span>
+                    </button>
+
+                    <button onclick="setWorkspaceMode('preview')" id="modeTab-preview"
+                        class="flex items-center space-x-2 px-4 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-150 text-slate-500 hover:text-slate-800 hover:bg-slate-100">
+                        <i class="fa-solid fa-print"></i>
+                        <span>A4 Document Preview</span>
+                    </button>
+                </div>
+
+                <span
+                    class="text-xs font-semibold text-slate-400 mr-2 uppercase tracking-widest hidden sm:inline">Workspace</span>
+            </div>
+
+            <!-- MAIN WORKSPACE VIEWS -->
+
+            <!-- VIEW 1: INTERACTIVE FORM CONTAINER -->
+            <div id="view-form" class="space-y-6">
+
+                <!-- Tabbed Navigation inside form view for giant form blocks -->
+                <div class="flex flex-wrap gap-1 border-b border-slate-200 pb-1 overflow-x-auto">
+                    <button onclick="setFormSectionTab('tab-general')" id="formTab-tab-general"
+                        class="px-3.5 py-2 text-xs font-bold rounded-lg transition-all border-b-2 border-blue-600 text-blue-600 whitespace-nowrap">
+                        1. General Info & Overview
+                    </button>
+                    <button onclick="setFormSectionTab('tab-objectives')" id="formTab-tab-objectives"
+                        class="px-3.5 py-2 text-xs font-bold rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition whitespace-nowrap">
+                        2. Objectives & CLOs
+                    </button>
+                    <button onclick="setFormSectionTab('tab-integration')" id="formTab-tab-integration"
+                        class="px-3.5 py-2 text-xs font-bold rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition whitespace-nowrap">
+                        3. PLO-CLO Matrix
+                    </button>
+                    <button onclick="setFormSectionTab('tab-materials')" id="formTab-tab-materials"
+                        class="px-3.5 py-2 text-xs font-bold rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition whitespace-nowrap">
+                        4. Materials
+                    </button>
+                    <button onclick="setFormSectionTab('tab-assessments')" id="formTab-tab-assessments"
+                        class="px-3.5 py-2 text-xs font-bold rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition whitespace-nowrap">
+                        5. Assessment Format
+                    </button>
+                    <button onclick="setFormSectionTab('tab-schedule')" id="formTab-tab-schedule"
+                        class="px-3.5 py-2 text-xs font-bold rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition whitespace-nowrap">
+                        6. Teaching Schedule
+                    </button>
+                    <button onclick="setFormSectionTab('tab-policies')" id="formTab-tab-policies"
+                        class="px-3.5 py-2 text-xs font-bold rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition whitespace-nowrap">
+                        7. Policy & Signatures
+                    </button>
+                </div>
+
+                <!-- FORM PANEL 1: GENERAL INFO -->
+                <div id="formSection-tab-general"
+                    class="form-section-content bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80 space-y-5">
+                    <div class="border-b border-slate-100 pb-3 mb-4">
+                        <h3 class="text-sm font-bold uppercase text-slate-700 flex items-center">
+                            <i class="fa-solid fa-circle-info text-blue-500 mr-2 text-base"></i>1. General Course
+                            Specifications
+                        </h3>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1.5">Course Title
+                                (Vietnamese)</label>
+                            <input type="text" id="inp-titleVi"
+                                oninput="updateStateField('generalInfo.titleVi', this.value)"
+                                class="w-full px-3.5 py-2 border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1.5">Course Title (English)</label>
+                            <input type="text" id="inp-titleEn"
+                                oninput="updateStateField('generalInfo.titleEn', this.value)"
+                                class="w-full px-3.5 py-2 border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1.5">Course Code</label>
+                            <input type="text" id="inp-code" oninput="updateStateField('generalInfo.code', this.value)"
+                                class="w-full px-3.5 py-2 border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1.5">Language of Instruction</label>
+                            <select id="inp-language" onchange="updateStateField('generalInfo.language', this.value)"
+                                class="w-full px-3.5 py-2 border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition outline-none bg-white">
+                                <option value="Vietnamese">Tiếng Việt/Vietnamese</option>
+                                <option value="English">Tiếng Anh/English</option>
+                                <option value="Both">Cả hai/Both</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-slate-100 pt-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1.5">Knowledge Component</label>
+                            <select id="inp-knowledge"
+                                onchange="updateStateField('generalInfo.knowledgeComponent', this.value)"
+                                class="w-full px-3.5 py-2 border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition outline-none bg-white">
+                                <option value="General">Kiến thức chung/General</option>
+                                <option value="Foundation">Kiến thức cơ sở/Foundation</option>
+                                <option value="Discipline">Kiến thức ngành/Discipline</option>
+                                <option value="Thesis">Đề án/Luận văn tốt nghiệp/ Thesis</option>
+                            </select>
+                        </div>
+                        <div>
+                            <div class="grid grid-cols-3 gap-2">
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 mb-1">Theory
+                                        Credits</label>
+                                    <input type="number" id="inp-credTheory" min="0"
+                                        oninput="onCreditsChanged('theory', this.value)"
+                                        class="w-full px-2 py-1.5 border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 mb-1">Practice
+                                        Credits</label>
+                                    <input type="number" id="inp-credPractice" min="0"
+                                        oninput="onCreditsChanged('practice', this.value)"
+                                        class="w-full px-2 py-1.5 border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-500 mb-1">Self-study
+                                        Hours</label>
+                                    <input type="number" id="inp-credSelfStudy" min="0"
+                                        oninput="updateStateField('generalInfo.credits.selfStudy', parseInt(this.value) || 0)"
+                                        class="w-full px-2 py-1.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold text-blue-600 transition outline-none">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Academic Administration Details -->
+                    <div class="border-t border-slate-100 pt-4 space-y-4">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Course Administration</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                            <div>
+                                <label
+                                    class="block text-[11px] font-semibold text-slate-600 mb-1">Academics/Lecturers</label>
+                                <input type="text" id="inp-academics"
+                                    oninput="updateStateField('administration.academics', this.value)"
+                                    class="w-full px-3.5 py-2 border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/20 transition outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-semibold text-slate-600 mb-1">Email Address</label>
+                                <input type="email" id="inp-adminEmail"
+                                    oninput="updateStateField('administration.email', this.value)"
+                                    class="w-full px-3.5 py-2 border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/20 transition outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-semibold text-slate-600 mb-1">Office Room</label>
+                                <input type="text" id="inp-adminRoom"
+                                    oninput="updateStateField('administration.room', this.value)"
+                                    class="w-full px-3.5 py-2 border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/20 transition outline-none">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course Overview Details -->
+                    <div class="border-t border-slate-100 pt-4 space-y-3">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Course Description</h4>
+                        <textarea id="inp-description" oninput="updateStateField('overview.description', this.value)"
+                            rows="4"
+                            class="w-full p-3 border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/20 transition outline-none"
+                            placeholder="Provide description of the course..."></textarea>
+                    </div>
+
+                    <!-- Requirements table -->
+                    <div class="border-t border-slate-100 pt-4 space-y-3">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Pre-requisite, Preceding &
+                            Co-courses</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                                <span class="block text-xs font-bold text-slate-700 mb-1.5">Pre-requisites (Tiên
+                                    quyết)</span>
+                                <input type="text" id="inp-reqPrereq"
+                                    oninput="updateStateField('overview.requirements.prereq', this.value)"
+                                    class="w-full px-2.5 py-1.5 border border-slate-300 rounded-lg text-xs"
+                                    placeholder="e.g. Basic IT - Code: CS101">
+                            </div>
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                                <span class="block text-xs font-bold text-slate-700 mb-1.5">Preceding courses (Học phần
+                                    học trước)</span>
+                                <input type="text" id="inp-reqPreceding"
+                                    oninput="updateStateField('overview.requirements.preceding', this.value)"
+                                    class="w-full px-2.5 py-1.5 border border-slate-300 rounded-lg text-xs"
+                                    placeholder="e.g. Intro Web Tech - Code: WE101">
+                            </div>
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                                <span class="block text-xs font-bold text-slate-700 mb-1.5">Co-courses (Học phần song
+                                    hành)</span>
+                                <input type="text" id="inp-reqCo"
+                                    oninput="updateStateField('overview.requirements.cocourse', this.value)"
+                                    class="w-full px-2.5 py-1.5 border border-slate-300 rounded-lg text-xs"
+                                    placeholder="e.g. Parallel Lab - Code: PL101">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FORM PANEL 2: OBJECTIVES & CLOs -->
+                <div id="formSection-tab-objectives"
+                    class="form-section-content hidden bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80 space-y-6">
+                    <div class="border-b border-slate-100 pb-3 flex justify-between items-center">
+                        <h3 class="text-sm font-bold uppercase text-slate-700 flex items-center">
+                            <i class="fa-solid fa-bullseye text-blue-500 mr-2"></i>2. Course Objectives (CO) & Learning
+                            Outcomes (CLO)
+                        </h3>
+                    </div>
+
+                    <!-- Objectives (CO) section -->
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">1. Objectives (CO)
+                                List</h4>
+                            <button onclick="addObjectiveRow()"
+                                class="px-3 py-1 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-lg text-xs font-bold transition flex items-center">
+                                <i class="fa-solid fa-plus mr-1"></i> Add Course Objective (CO)
+                            </button>
+                        </div>
+
+                        <div class="overflow-x-auto rounded-xl border border-slate-200">
+                            <table class="w-full text-left text-xs">
+                                <thead class="bg-slate-50 text-slate-600 uppercase font-bold">
+                                    <tr>
+                                        <th class="p-3 w-16">CO ID</th>
+                                        <th class="p-3">Description (Mô tả - Viết bằng cả hai ngôn ngữ)</th>
+                                        <th class="p-3 w-40">Allocated PLOs</th>
+                                        <th class="p-3 w-16 text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="coTableBody" class="divide-y divide-slate-100">
+                                    <!-- Generated via javascript state binding -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Learning Outcomes (CLO) section -->
+                    <div class="space-y-4 border-t border-slate-100 pt-6">
+                        <div class="flex items-center justify-between">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">2. Course Learning
+                                Outcomes (CLO)</h4>
+                            <button onclick="addCloRow()"
+                                class="px-3 py-1 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-lg text-xs font-bold transition flex items-center">
+                                <i class="fa-solid fa-plus mr-1"></i> Add Learning Outcome (CLO)
+                            </button>
+                        </div>
+
+                        <div class="overflow-x-auto rounded-xl border border-slate-200">
+                            <table class="w-full text-left text-xs">
+                                <thead class="bg-slate-50 text-slate-600 uppercase font-bold">
+                                    <tr>
+                                        <th class="p-3 w-20">CLO ID</th>
+                                        <th class="p-3 w-24">Parent CO</th>
+                                        <th class="p-3">Description (Vietnamese & English) - Apply SMART criteria</th>
+                                        <th class="p-3 w-16 text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="cloTableBody" class="divide-y divide-slate-100">
+                                    <!-- Generated dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FORM PANEL 3: PLO-CLO INTEGRATION MATRIX -->
+                <div id="formSection-tab-integration"
+                    class="form-section-content hidden bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80 space-y-6">
+                    <div class="border-b border-slate-100 pb-3 flex justify-between items-center">
+                        <h3 class="text-sm font-bold uppercase text-slate-700 flex items-center">
+                            <i class="fa-solid fa-table-cells text-blue-500 mr-2"></i>3. Integrated Program Outcomes
+                            Matrix (PLO - CLO)
+                        </h3>
+                        <button onclick="addPloColumn()"
+                            class="px-3 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-bold transition">
+                            <i class="fa-solid fa-plus mr-1"></i> Add PLO Target Column
+                        </button>
+                    </div>
+
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Specify the degree of alignment for each outcome. Define rating criteria scores:
+                        <strong>1: Min alignment</strong> up to <strong>5: Core integration mapping</strong>. Only
+                        values &ge; 3 are populated.
+                    </p>
+
+                    <div class="overflow-x-auto rounded-xl border border-slate-200">
+                        <table class="w-full text-left text-xs border-collapse">
+                            <thead class="bg-slate-50 text-slate-600 uppercase font-bold">
+                                <tr id="matrixHeader">
+                                    <!-- Generated dynamically -->
+                                </tr>
+                            </thead>
+                            <tbody id="matrixBody" class="divide-y divide-slate-100">
+                                <!-- Generated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- FORM PANEL 4: MATERIALS -->
+                <div id="formSection-tab-materials"
+                    class="form-section-content hidden bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80 space-y-5">
+                    <div class="border-b border-slate-100 pb-3">
+                        <h3 class="text-sm font-bold uppercase text-slate-700 flex items-center">
+                            <i class="fa-solid fa-book text-blue-500 mr-2"></i>4. Textbooks, Referenced Materials &
+                            Software
+                        </h3>
+                    </div>
+
+                    <!-- Main Textbooks list -->
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <h4 class="text-xs font-bold text-slate-600 uppercase tracking-wide">Main Required Textbooks
+                                (IEEE Guidelines)</h4>
+                            <button onclick="addMaterialRow('textbooks')"
+                                class="px-2 py-1 bg-slate-100 hover:bg-slate-200 rounded-lg text-xs font-semibold">Add
+                                Textbook</button>
+                        </div>
+                        <div id="textbooksContainer" class="space-y-2"></div>
+                    </div>
+
+                    <!-- Other Referenced Materials list -->
+                    <div class="space-y-3 border-t border-slate-100 pt-4">
+                        <div class="flex justify-between items-center">
+                            <h4 class="text-xs font-bold text-slate-600 uppercase tracking-wide">Other Reference
+                                Materials</h4>
+                            <button onclick="addMaterialRow('references')"
+                                class="px-2 py-1 bg-slate-100 hover:bg-slate-200 rounded-lg text-xs font-semibold">Add
+                                Reference</button>
+                        </div>
+                        <div id="referencesContainer" class="space-y-2"></div>
+                    </div>
+
+                    <!-- Softwares list -->
+                    <div class="space-y-3 border-t border-slate-100 pt-4">
+                        <div class="flex justify-between items-center">
+                            <h4 class="text-xs font-bold text-slate-600 uppercase tracking-wide">Software and Tools
+                                Requirements</h4>
+                            <button onclick="addMaterialRow('software')"
+                                class="px-2 py-1 bg-slate-100 hover:bg-slate-200 rounded-lg text-xs font-semibold">Add
+                                Software</button>
+                        </div>
+                        <div id="softwareContainer" class="space-y-2"></div>
+                    </div>
+                </div>
+
+                <!-- FORM PANEL 5: ASSESSMENTS -->
+                <div id="formSection-tab-assessments"
+                    class="form-section-content hidden bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80 space-y-6">
+                    <div class="border-b border-slate-100 pb-3 flex justify-between items-center">
+                        <h3 class="text-sm font-bold uppercase text-slate-700 flex items-center">
+                            <i class="fa-solid fa-chart-line text-blue-500 mr-2"></i>5. Student Assessment
+                            Specifications & Weights
+                        </h3>
+                    </div>
+
+                    <!-- Formative Assessment Components (A1) -->
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center">
+                                <span class="w-2.5 h-2.5 rounded bg-amber-500 mr-2"></span>Formative Assessment List
+                                (A1)
+                            </h4>
+                            <button onclick="addAssessmentRow('formative')"
+                                class="px-3 py-1 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-lg text-xs font-bold transition flex items-center">
+                                <i class="fa-solid fa-plus mr-1"></i> Add Assessment Item
+                            </button>
+                        </div>
+
+                        <div class="overflow-x-auto rounded-xl border border-slate-200">
+                            <table class="w-full text-left text-xs">
+                                <thead class="bg-slate-50 text-slate-600 uppercase font-bold">
+                                    <tr>
+                                        <th class="p-3 w-20">Type ID</th>
+                                        <th class="p-3 w-40">Assessment Method</th>
+                                        <th class="p-3">Timeline (Assessment Time)</th>
+                                        <th class="p-3 w-32">Allocated CLOs</th>
+                                        <th class="p-3 w-24">Weight (%)</th>
+                                        <th class="p-3 w-16 text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="assessmentFormativeBody" class="divide-y divide-slate-100"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Summative Assessment Components (A2) -->
+                    <div class="space-y-4 border-t border-slate-100 pt-6">
+                        <div class="flex items-center justify-between">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center">
+                                <span class="w-2.5 h-2.5 rounded bg-emerald-500 mr-2"></span>Summative End of Term (A2)
+                            </h4>
+                            <button onclick="addAssessmentRow('summative')"
+                                class="px-3 py-1 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-lg text-xs font-bold transition flex items-center">
+                                <i class="fa-solid fa-plus mr-1"></i> Add End Assessment Item
+                            </button>
+                        </div>
+
+                        <div class="overflow-x-auto rounded-xl border border-slate-200">
+                            <table class="w-full text-left text-xs">
+                                <thead class="bg-slate-50 text-slate-600 uppercase font-bold">
+                                    <tr>
+                                        <th class="p-3 w-20">Type ID</th>
+                                        <th class="p-3 w-40">Assessment Method</th>
+                                        <th class="p-3">Timeline (Assessment Time)</th>
+                                        <th class="p-3 w-32">Allocated CLOs</th>
+                                        <th class="p-3 w-24">Weight (%)</th>
+                                        <th class="p-3 w-16 text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="assessmentSummativeBody" class="divide-y divide-slate-100"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Final Exam Type Checkboxes -->
+                    <div class="border-t border-slate-100 pt-6 space-y-4">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Official End-of-Course
+                            Final Exam Formats</h4>
+                        <div class="grid grid-cols-2 md:grid-cols-5 gap-3 text-xs text-slate-700">
+                            <label
+                                class="flex items-center space-x-2 bg-slate-50 p-2 rounded-lg cursor-pointer hover:bg-slate-100">
+                                <input type="checkbox" id="examFmt-1" onchange="updateExamFormat(1, this.checked)"
+                                    class="rounded text-blue-600">
+                                <span>1. Essay (Tiểu luận)</span>
+                            </label>
+                            <label
+                                class="flex items-center space-x-2 bg-slate-50 p-2 rounded-lg cursor-pointer hover:bg-slate-100">
+                                <input type="checkbox" id="examFmt-2" onchange="updateExamFormat(2, this.checked)"
+                                    class="rounded text-blue-600">
+                                <span>2. Practicum Computer</span>
+                            </label>
+                            <label
+                                class="flex items-center space-x-2 bg-slate-50 p-2 rounded-lg cursor-pointer hover:bg-slate-100">
+                                <input type="checkbox" id="examFmt-3" onchange="updateExamFormat(3, this.checked)"
+                                    class="rounded text-blue-600">
+                                <span>3. Multiple Choice MCQ</span>
+                            </label>
+                            <label
+                                class="flex items-center space-x-2 bg-slate-50 p-2 rounded-lg cursor-pointer hover:bg-slate-100">
+                                <input type="checkbox" id="examFmt-4" onchange="updateExamFormat(4, this.checked)"
+                                    class="rounded text-blue-600">
+                                <span>4. Written & Oral MCQ</span>
+                            </label>
+                            <label
+                                class="flex items-center space-x-2 bg-slate-50 p-2 rounded-lg cursor-pointer hover:bg-slate-100">
+                                <input type="checkbox" id="examFmt-5" onchange="updateExamFormat(5, this.checked)"
+                                    class="rounded text-blue-600">
+                                <span>5. Computer MCQ</span>
+                            </label>
+                            <label
+                                class="flex items-center space-x-2 bg-slate-50 p-2 rounded-lg cursor-pointer hover:bg-slate-100">
+                                <input type="checkbox" id="examFmt-6" onchange="updateExamFormat(6, this.checked)"
+                                    class="rounded text-blue-600">
+                                <span>6. Audio-Oral</span>
+                            </label>
+                            <label
+                                class="flex items-center space-x-2 bg-slate-50 p-2 rounded-lg cursor-pointer hover:bg-slate-100">
+                                <input type="checkbox" id="examFmt-7" onchange="updateExamFormat(7, this.checked)"
+                                    class="rounded text-blue-600">
+                                <span>7. 4 Skills Combo</span>
+                            </label>
+                            <label
+                                class="flex items-center space-x-2 bg-slate-50 p-2 rounded-lg cursor-pointer hover:bg-slate-100">
+                                <input type="checkbox" id="examFmt-8" onchange="updateExamFormat(8, this.checked)"
+                                    class="rounded text-blue-600">
+                                <span>8. Subjective Essay</span>
+                            </label>
+                            <label
+                                class="flex items-center space-x-2 bg-slate-50 p-2 rounded-lg cursor-pointer hover:bg-slate-100">
+                                <input type="checkbox" id="examFmt-9" onchange="updateExamFormat(9, this.checked)"
+                                    class="rounded text-blue-600">
+                                <span>9. Oral Exam</span>
+                            </label>
+                            <label
+                                class="flex items-center space-x-2 bg-slate-50 p-2 rounded-lg cursor-pointer hover:bg-slate-100">
+                                <input type="checkbox" id="examFmt-10" onchange="updateExamFormat(10, this.checked)"
+                                    class="rounded text-blue-600">
+                                <span>10. Other Format</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FORM PANEL 6: TEACHING SCHEDULE -->
+                <div id="formSection-tab-schedule"
+                    class="form-section-content hidden bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80 space-y-5">
+                    <div class="border-b border-slate-100 pb-3 flex justify-between items-center">
+                        <h3 class="text-sm font-bold uppercase text-slate-700 flex items-center">
+                            <i class="fa-solid fa-calendar-days text-blue-500 mr-2"></i>6. Teaching & Instruction Weekly
+                            Plan
+                        </h3>
+                        <button onclick="addScheduleRow()"
+                            class="px-3 py-1 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-lg text-xs font-bold transition flex items-center">
+                            <i class="fa-solid fa-plus mr-1"></i> Add Session Row
+                        </button>
+                    </div>
+
+                    <p class="text-xs text-slate-500 leading-relaxed mb-4">
+                        Detail course progress by sessions or weeks. Associate student active hours, theories,
+                        practicums, evaluation references and books.
+                    </p>
+
+                    <div class="overflow-x-auto rounded-xl border border-slate-200">
+                        <table class="w-full text-left text-xs min-w-[900px]">
+                            <thead class="bg-slate-50 text-slate-600 uppercase font-bold text-[10px]">
+                                <tr>
+                                    <th class="p-3 w-16">Week</th>
+                                    <th class="p-3 w-48">Content (Nội dung)</th>
+                                    <th class="p-3 w-28">CLO Target</th>
+                                    <th class="p-3 w-44">Self-Study (Act/Hrs)</th>
+                                    <th class="p-3 w-44">Theory Class (Act/Hrs)</th>
+                                    <th class="p-3 w-44">Practice (Act/Hrs)</th>
+                                    <th class="p-3 w-24">Assessment</th>
+                                    <th class="p-3 w-24">Materials</th>
+                                    <th class="p-3 w-12 text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="scheduleTableBody" class="divide-y divide-slate-100"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- FORM PANEL 7: POLICIES & SIGNATURES -->
+                <div id="formSection-tab-policies"
+                    class="form-section-content hidden bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80 space-y-5">
+                    <div class="border-b border-slate-100 pb-3">
+                        <h3 class="text-sm font-bold uppercase text-slate-700 flex items-center">
+                            <i class="fa-solid fa-gavel text-blue-500 mr-2"></i>7. Course Policies & Endorsements
+                        </h3>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1.5">Assignment Submission
+                                Rules</label>
+                            <textarea id="inp-policyHomework"
+                                oninput="updateStateField('policies.homework', this.value)" rows="3"
+                                class="w-full p-3 border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/20 transition outline-none"
+                                placeholder="e.g. Late submissions will receive an immediate 10% penalty per calendar day..."></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1.5">Classroom Attendance &
+                                Rules</label>
+                            <textarea id="inp-policyClassroom"
+                                oninput="updateStateField('policies.classroom', this.value)" rows="3"
+                                class="w-full p-3 border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/20 transition outline-none"
+                                placeholder="e.g. Students must attend at least 80% of lectures..."></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1.5">Artificial Intelligence (AI)
+                                Policy</label>
+                            <textarea id="inp-policyAiUsage" oninput="updateStateField('policies.aiUsage', this.value)"
+                                rows="3"
+                                class="w-full p-3 border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/20 transition outline-none"
+                                placeholder="e.g. AI tools are permitted for brainstorming but code and final copy must be purely custom made..."></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1.5">Other Rules &
+                                Requirements</label>
+                            <textarea id="inp-policyOthers" oninput="updateStateField('policies.others', this.value)"
+                                rows="3"
+                                class="w-full p-3 border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/20 transition outline-none"
+                                placeholder="Other considerations..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Signatures Section -->
+                    <div class="border-t border-slate-100 pt-5 space-y-3">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Administration
+                            Endorsements</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-600 mb-1">Dean of Faculty
+                                    Signee</label>
+                                <input type="text" id="inp-sigDean"
+                                    oninput="updateStateField('signatures.dean', this.value)"
+                                    class="w-full px-3.5 py-2 border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/20 transition outline-none"
+                                    placeholder="FullName / Title">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-600 mb-1">Authoring Academic
+                                    Lecturer</label>
+                                <input type="text" id="inp-sigAcademic"
+                                    oninput="updateStateField('signatures.academic', this.value)"
+                                    class="w-full px-3.5 py-2 border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/20 transition outline-none"
+                                    placeholder="FullName / Title">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW 2: PAPER-A4 FIDELITY DOCUMENT PREVIEW -->
+            <div id="view-preview" class="hidden">
+                <!-- Live status bar for high-fidelity rendering -->
+                <div
+                    class="bg-blue-50 border border-blue-200 p-3.5 rounded-2xl flex items-center justify-between mb-4 text-xs text-blue-700">
+                    <span class="font-medium"><i class="fa-solid fa-circle-exclamation mr-1.5"></i> This visual model
+                        depicts the exact paper layout requested for exports.</span>
+                    <button onclick="exportAsPDF()"
+                        class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-3 py-1.5 rounded-xl transition duration-150">
+                        <i class="fa-solid fa-print mr-1"></i> Print PDF
+                    </button>
+                </div>
+
+                <!-- HTML A4 Paper Sheet Wrapper -->
+                <div class="overflow-x-auto p-1 rounded-2xl border border-slate-200 bg-white">
+                    <div id="syllabus-paper-preview" class="paper-page bg-white p-12 text-black shadow-lg">
+                        <!-- Header elements -->
+                        <div class="text-center space-y-1 mb-8" style="font-family: 'Times New Roman', serif;">
+                            <h4 class="font-bold text-sm tracking-wide uppercase">BỘ GIÁO DỤC VÀ ĐÀO TẠO</h4>
+                            <h4 class="font-bold text-sm tracking-wide uppercase">MINISTRY OF EDUCATION AND TRAINING
+                            </h4>
+                            <h3 class="font-bold text-base tracking-wide uppercase">TRƯỜNG ĐẠI HỌC MỞ THÀNH PHỐ HỒ CHÍ
+                                MINH</h3>
+                            <h3 class="font-bold text-base tracking-wide uppercase mb-3">HO CHI MINH CITY OPEN
+                                UNIVERSITY</h3>
+                            <div class="border-t-2 border-black w-36 mx-auto mb-6"></div>
+
+                            <h2 class="font-bold text-lg uppercase tracking-wider" style="font-size: 19px;">ĐỀ CƯƠNG MÔN
+                                HỌC</h2>
+                            <h2 class="font-bold text-lg uppercase tracking-widest" style="font-size: 19px;">COURSE
+                                SPECIFICATION</h2>
+                        </div>
+
+                        <!-- Page Sections -->
+                        <div class="space-y-6 text-sm" style="font-family: 'Times New Roman', serif; line-height: 1.5;">
+
+                            <!-- Section 1 -->
+                            <div>
+                                <h3 class="font-bold uppercase text-sm mb-2">1. Thông tin tổng quát - General
+                                    information</h3>
+                                <div class="grid grid-cols-2 gap-y-1 gap-x-4">
+                                    <div>Tên môn học tiếng Việt: <strong id="prv-titleVi">---</strong></div>
+                                    <div>Mã môn học: <strong id="prv-code">---</strong></div>
+                                    <div>Tên môn học tiếng Anh: <strong id="prv-titleEn">---</strong></div>
+                                    <div>Ngôn ngữ giảng dạy: <strong id="prv-language">---</strong></div>
+                                </div>
+
+                                <div class="mt-2">
+                                    Thuộc thành phần kiến thức/kỹ năng: <strong id="prv-knowledge">---</strong>
+                                </div>
+
+                                <div class="mt-3">
+                                    <h4 class="font-bold text-xs mb-1">Số tín chỉ/Credits:</h4>
+                                    <table class="border-collapse border border-black text-xs w-full text-center">
+                                        <thead>
+                                            <tr class="bg-gray-100">
+                                                <th class="border border-black p-1 text-xs">Tổng số/Total</th>
+                                                <th class="border border-black p-1 text-xs">Lý thuyết/Theory</th>
+                                                <th class="border border-black p-1 text-xs">Thực hành/Practice</th>
+                                                <th class="border border-black p-1 text-xs">Số giờ tự học/Self-study
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="border border-black p-1" id="prv-credTotal">0</td>
+                                                <td class="border border-black p-1" id="prv-credTheory">0</td>
+                                                <td class="border border-black p-1" id="prv-credPractice">0</td>
+                                                <td class="border border-black p-1" id="prv-credSelfStudy">0</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <p class="text-[10px] italic leading-tight text-gray-600 mt-1.5">
+                                        Một tín chỉ được tính tương đương 50 giờ học tập định mức của người học... Đối
+                                        với hoạt động dạy học trên lớp, một tín chỉ yêu cầu thực hiện tối thiểu 15 giờ
+                                        giảng hoặc 30 giờ thực hành...
+                                    </p>
+                                </div>
+
+                                <div class="mt-3 grid grid-cols-1 md:grid-cols-3 gap-2">
+                                    <div>Giảng viên/Academics: <strong id="prv-academics">---</strong></div>
+                                    <div>Email: <strong id="prv-email">---</strong></div>
+                                    <div>Phòng làm việc/Room: <strong id="prv-room">---</strong></div>
+                                </div>
+                            </div>
+
+                            <!-- Section 2 -->
+                            <div class="border-t border-black pt-4">
+                                <h3 class="font-bold uppercase text-sm mb-2">2. Thông tin về môn học - Course overview
+                                </h3>
+                                <div class="mb-3">
+                                    <p class="font-bold text-xs">Mô tả môn học/Course description:</p>
+                                    <p class="whitespace-pre-line text-xs pl-2" id="prv-description">---</p>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-xs mb-1">Môn học điều kiện/Requirements:</p>
+                                    <table class="border-collapse border border-black text-xs w-full">
+                                        <thead>
+                                            <tr class="bg-gray-100">
+                                                <th class="border border-black p-1 w-12 text-center">STT</th>
+                                                <th class="border border-black p-1">Môn học điều kiện / Requirements
+                                                </th>
+                                                <th class="border border-black p-1 w-32 text-center">Mã môn học/Code
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="border border-black p-1 text-center">1</td>
+                                                <td class="border border-black p-1">Môn tiên quyết/Pre-requisites</td>
+                                                <td class="border border-black p-1 text-center" id="prv-reqPrereq">---
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="border border-black p-1 text-center">2</td>
+                                                <td class="border border-black p-1">Môn học trước/Preceding courses</td>
+                                                <td class="border border-black p-1 text-center" id="prv-reqPreceding">
+                                                    ---</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="border border-black p-1 text-center">3</td>
+                                                <td class="border border-black p-1">Môn học song hành/Co-courses</td>
+                                                <td class="border border-black p-1 text-center" id="prv-reqCo">---</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- Section 3 -->
+                            <div class="border-t border-black pt-4">
+                                <h3 class="font-bold uppercase text-sm mb-2">3. Mục tiêu môn học / Course objectives
+                                </h3>
+                                <table class="border-collapse border border-black text-xs w-full">
+                                    <thead>
+                                        <tr class="bg-gray-100">
+                                            <th class="border border-black p-1 w-20 text-center">Mục tiêu</th>
+                                            <th class="border border-black p-1">Mô tả - Description</th>
+                                            <th class="border border-black p-1 w-40 text-center">CĐR CTĐT phân bổ / PLOs
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="prv-objectivesList"></tbody>
+                                </table>
+                            </div>
+
+                            <!-- Section 4 -->
+                            <div class="border-t border-black pt-4">
+                                <h3 class="font-bold uppercase text-sm mb-2">4. Chuẩn đầu ra (CĐR) môn học – Course
+                                    learning outcomes (CLOs)</h3>
+                                <table class="border-collapse border border-black text-xs w-full">
+                                    <thead>
+                                        <tr class="bg-gray-100">
+                                            <th class="border border-black p-1 w-24 text-center">Mục tiêu</th>
+                                            <th class="border border-black p-1 w-24 text-center">CĐR (CLO)</th>
+                                            <th class="border border-black p-1">Mô tả CĐR - Description (Apply SMART)
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="prv-closList"></tbody>
+                                </table>
+                            </div>
+
+                            <!-- Section 5 -->
+                            <div class="border-t border-black pt-4">
+                                <h3 class="font-bold uppercase text-sm mb-2">5. Ma trận tích hợp CĐR Môn học & CĐR
+                                    Chương trình đào tạo (CLOs & PLOs)</h3>
+                                <table class="border-collapse border border-black text-xs w-full text-center">
+                                    <thead id="prv-matrixHeader"></thead>
+                                    <tbody id="prv-matrixBody"></tbody>
+                                </table>
+                                <p class="text-[10px] italic text-gray-500 mt-1">1: Không đáp ứng | 2: Ít đáp ứng | 3:
+                                    Đáp ứng trung bình | 4: Đáp ứng nhiều | 5: Đáp ứng rất nhiều (Chỉ hiển thị &ge; 3)
+                                </p>
+                            </div>
+
+                            <!-- Section 6 -->
+                            <div class="border-t border-black pt-4">
+                                <h3 class="font-bold uppercase text-sm mb-2">6. Học liệu – Textbooks and materials</h3>
+                                <div class="space-y-3 text-xs pl-2">
+                                    <div>
+                                        <h4 class="font-bold">Giáo trình chính (Textbooks):</h4>
+                                        <ol id="prv-textbooksList" class="list-decimal pl-4 space-y-1 mt-1"></ol>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold">Tài liệu tham khảo (References):</h4>
+                                        <ol id="prv-referencesList" class="list-decimal pl-4 space-y-1 mt-1"></ol>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold">Phần mềm / Tools:</h4>
+                                        <ol id="prv-softwareList" class="list-decimal pl-4 space-y-1 mt-1"></ol>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Section 7 -->
+                            <div class="border-t border-black pt-4">
+                                <h3 class="font-bold uppercase text-sm mb-2">7. Đánh giá môn học / Student assessment
+                                </h3>
+                                <table class="border-collapse border border-black text-xs w-full">
+                                    <thead>
+                                        <tr class="bg-gray-100">
+                                            <th class="border border-black p-1">Thành phần đánh giá / Type</th>
+                                            <th class="border border-black p-1">Bài đánh giá / Method</th>
+                                            <th class="border border-black p-1">Thời điểm / Timeline</th>
+                                            <th class="border border-black p-1 w-24">CĐR môn học / CLOs</th>
+                                            <th class="border border-black p-1 w-20">Tỷ lệ % / Weight</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="prv-assessmentList"></tbody>
+                                </table>
+
+                                <div class="mt-3">
+                                    <p class="font-bold text-xs mb-1">Hình thức thi cuối kỳ được xác định:</p>
+                                    <div class="grid grid-cols-2 gap-x-4 gap-y-1 text-xs" id="prv-selectedExamFormats">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Section 8 -->
+                            <div class="border-t border-black pt-4">
+                                <h3 class="font-bold uppercase text-sm mb-2">8. Kế hoạch giảng dạy / Teaching schedule
+                                </h3>
+                                <table class="border-collapse border border-black text-xs w-full"
+                                    style="font-size: 11px;">
+                                    <thead>
+                                        <tr class="bg-gray-100 text-center font-bold">
+                                            <td rowspan="2" class="border border-black p-1">Tuần</td>
+                                            <td rowspan="2" class="border border-black p-1">Nội dung / Content</td>
+                                            <td rowspan="2" class="border border-black p-1">CĐR / CLOs</td>
+                                            <td colspan="2" class="border border-black p-1">Tự học / Self-study</td>
+                                            <td colspan="2" class="border border-black p-1">Lý thuyết / Theory</td>
+                                            <td colspan="2" class="border border-black p-1">Thực hành / Practice</td>
+                                            <td rowspan="2" class="border border-black p-1">Đánh giá</td>
+                                            <td rowspan="2" class="border border-black p-1">Học liệu</td>
+                                        </tr>
+                                        <tr class="bg-gray-100 text-center text-[9px]">
+                                            <td class="border border-black p-1">Hoạt động</td>
+                                            <td class="border border-black p-1">Giờ</td>
+                                            <td class="border border-black p-1">Hoạt động</td>
+                                            <td class="border border-black p-1">Giờ</td>
+                                            <td class="border border-black p-1">Hoạt động</td>
+                                            <td class="border border-black p-1">Giờ</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="prv-scheduleList"></tbody>
+                                </table>
+                            </div>
+
+                            <!-- Section 9 -->
+                            <div class="border-t border-black pt-4">
+                                <h3 class="font-bold uppercase text-sm mb-2">9. Quy định của môn học / Course policy
+                                </h3>
+                                <div class="grid grid-cols-1 gap-3 text-xs pl-2">
+                                    <div>
+                                        <span class="font-bold block">- Quy định về nộp bài tập, bài kiểm tra:</span>
+                                        <p id="prv-policyHomework" class="text-gray-700 italic">---</p>
+                                    </div>
+                                    <div>
+                                        <span class="font-bold block">- Nội quy lớp học:</span>
+                                        <p id="prv-policyClassroom" class="text-gray-700 italic">---</p>
+                                    </div>
+                                    <div>
+                                        <span class="font-bold block">- Quy định về sử dụng AI:</span>
+                                        <p id="prv-policyAiUsage" class="text-gray-700 italic">---</p>
+                                    </div>
+                                    <div>
+                                        <span class="font-bold block">- Quy định khác:</span>
+                                        <p id="prv-policyOthers" class="text-gray-700 italic">---</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Endorsement Signatures -->
+                            <div class="mt-12 text-xs flex justify-between"
+                                style="font-family: 'Times New Roman', serif;">
+                                <div class="text-center w-64">
+                                    <p class="font-bold uppercase mb-1">TRƯỜNG KHOA / BAN</p>
+                                    <p class="italic text-[10px] mb-12">DEAN OF THE FACULTY</p>
+                                    <p class="font-bold" id="prv-sigDean">---</p>
+                                </div>
+                                <div class="text-center w-64">
+                                    <p class="italic mb-1">Thành phố Hồ Chí Minh, ngày....tháng....năm 202...</p>
+                                    <p class="font-bold uppercase mb-1">GIẢNG VIÊN BIÊN SOẠN</p>
+                                    <p class="italic text-[10px] mb-12">ACADEMIC</p>
+                                    <p class="font-bold" id="prv-sigAcademic">---</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- GEMINI API CONFIGURATION MODAL -->
+    <div id="apiKeyModal"
+        class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center z-[99999] p-4 transition duration-200">
+        <div
+            class="bg-white rounded-3xl shadow-xl border border-slate-200/80 max-w-md w-full overflow-hidden transform scale-95 transition-all">
+            <div class="bg-slate-900 px-6 py-4 flex items-center justify-between text-white">
+                <h3 class="font-bold text-sm uppercase tracking-wider flex items-center">
+                    <i class="fa-solid fa-key text-yellow-500 mr-2"></i>Configure Gemini API Credentials
+                </h3>
+                <button onclick="toggleModal('apiKeyModal')" class="text-slate-400 hover:text-white transition">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <div class="p-6 space-y-4">
+                <p class="text-xs text-slate-500 leading-relaxed">
+                    To dynamically process DOCX uploads, enter your Google Gemini API key below.
+                    Your credential key is kept purely local inside your browser's persistent session storage.
+                </p>
+
+                <div>
+                    <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">Gemini API Key</label>
+                    <div class="relative">
+                        <input type="password" id="geminiApiKeyInput"
+                            class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-sm pr-10 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition font-mono"
+                            placeholder="AIzaSy...">
+                        <button onclick="toggleApiKeyVisibility()"
+                            class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
+                            <i class="fa-solid fa-eye" id="apiKeyEyeIcon"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-blue-50 p-3 rounded-xl border border-blue-100 flex items-start space-x-2 text-xs text-blue-700">
+                    <i class="fa-solid fa-shield-halved text-blue-500 mt-0.5"></i>
+                    <span>We respect your data privacy. The extraction process is performed direct client-to-API
+                        securely.</span>
+                </div>
+            </div>
+
+            <div class="bg-slate-50 px-6 py-3.5 border-t border-slate-100 flex justify-end space-x-2">
+                <button onclick="toggleModal('apiKeyModal')"
+                    class="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-xl text-xs font-bold transition">Cancel</button>
+                <button onclick="saveApiKey()"
+                    class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow-sm transition">Save
+                    Key</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 border-t border-slate-800 py-6 mt-12 text-slate-500 text-center text-xs">
+        <div class="max-w-7xl mx-auto px-4 space-y-1">
+            <p>&copy; 2026 HCMOU SyllabusCraft Framework. Dedicated to compliance standard alignment and digital
+                execution.</p>
+            <p>Supports Google Gemini 3 Flash. Built client-side.</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPT LOGIC IMPLEMENTATION -->
+    <script>
+
+        // Application global model state representing standard Phụ lục 5 HCMOU
+        state = {
+            "generalInfo": {
+                "titleVi": "Dự án phát triển hệ thống",
+                "code": "COSC63300",
+                "titleEn": "System Development Project",
+                "language": "Vietnamese",
+                "knowledgeComponent": "Discipline",
+                "credits": {
+                    "total": 3,
+                    "theory": 3,
+                    "practice": 0,
+                    "selfStudy": 105
+                }
+            },
+            "administration": {
+                "academics": "Lê Viết Tuấn",
+                "email": "tuan.lv@ou.edu.vn",
+                "room": "P.604, 35-37 Hồ Hảo Hớn, P. Cầu Ông Lãnh, Tp.HCM."
+            },
+            "overview": {
+                "description": "Học phần cung cấp cho học viên kiến thức toàn diện và kinh nghiệm thực tế trong việc quản lý, thiết kế, phát triển và triển khai một hệ thống thông minh quy mô lớn. Trọng tâm là tích hợp AI/Data Science vào Full-stack AI System, áp dụng Agile/Scrum và MLOps.",
+                "requirements": {
+                    "prereq": "",
+                    "preceding": "",
+                    "cocourse": ""
+                }
+            },
+            "objectives": [
+                {
+                    "id": "CO1",
+                    "description": "Hiểu và áp dụng được quy trình thiết kế kiến trúc hệ thống tích hợp AI, các nguyên lý thiết kế hệ thống tin cậy và có khả năng mở rộng (Scalability).",
+                    "plos": "PLO1, PLO3, PLO4"
+                },
+                {
+                    "id": "CO2",
+                    "description": "Thành thạo kỹ năng lập kế hoạch, quản trị dự án công nghệ, quản lý mã nguồn, thu thập/xử lý dữ liệu và triển khai mô hình AI lên môi trường production.",
+                    "plos": "PLO4, PLO5"
+                },
+                {
+                    "id": "CO3",
+                    "description": "Khả năng làm việc nhóm hiệu quả, tư vấn giải pháp kỹ thuật, viết tài liệu kỹ thuật và thuyết trình dự án trước hội đồng.",
+                    "plos": "PLO5, PLO6, PLO7"
+                }
+            ],
+            "clos": [
+                {
+                    "id": "CLO1",
+                    "coId": "CO1",
+                    "description": "Phân tích và lựa chọn mô hình kiến trúc hệ thống, công nghệ cơ sở dữ liệu và giải pháp AI phù hợp."
+                },
+                {
+                    "id": "CLO2",
+                    "coId": "CO1",
+                    "description": "Thiết kế và xây dựng Full-stack AI System."
+                },
+                {
+                    "id": "CLO3",
+                    "coId": "CO2",
+                    "description": "Áp dụng Agile/Scrum, Git Flow và Docker."
+                },
+                {
+                    "id": "CLO4",
+                    "coId": "CO2",
+                    "description": "Biên soạn Technical Report và trình bày dự án."
+                },
+                {
+                    "id": "CLO5",
+                    "coId": "CO3",
+                    "description": "Thể hiện năng lực làm việc nhóm, phản biện và đạo đức nghề nghiệp."
+                }
+            ],
+            "cloPloMatrix": {
+                "plos": ["PLO1", "PLO2", "PLO3", "PLO4", "PLO5", "PLO6", "PLO7"],
+                "mappings": {
+                    "CLO1": {
+                        "PLO1": 4,
+                        "PLO3": 4,
+                        "PLO4": 4
+                    },
+                    "CLO2": {
+                        "PLO1": 4,
+                        "PLO3": 5,
+                        "PLO4": 5
+                    },
+                    "CLO3": {
+                        "PLO4": 4,
+                        "PLO5": 5
+                    },
+                    "CLO4": {
+                        "PLO4": 4,
+                        "PLO5": 5
+                    },
+                    "CLO5": {
+                        "PLO4": 4,
+                        "PLO5": 5,
+                        "PLO6": 5
+                    }
+                }
+            },
+            "materials": {
+                "textbooks": [
+                    "[1] J. Krohn, G. Beyleveld, and A. Bassens, Deep Learning Illustrated: A Visual, Interactive Guide to Artificial Intelligence, 1st ed. Noida, India: Pearson India Education, 2020. [59644]",
+                    "[2] I. H. Witten, E. Frank, M. A. Hall, C. J. Pal, and R. J. Foulds, Data Mining: Practical Machine Learning Tools and Techniques, Fifth Edition. Elsevier, Morgan Kaufmann, 2026.",
+                    "[3] P. Singh, A. R. Mishra, and P. Garg (Eds.), Data Analytics and Machine Learning: Navigating the Big Data Landscape. Springer, 2024. [64155]",
+                    "[4] S. K. Zhou, H. Greenspan, and D. Shen (Eds.), Deep Learning for Medical Image Analysis, 2nd ed. Academic Press, Elsevier, 2024. [63893]"
+                ],
+                "references": [
+                    "[1] D. V. Godoy, Deep Learning with PyTorch Step-by-Step: A Beginner's Guide, Vol. II: Computer Vision. Independently Published, 2022. [59624]",
+                    "[2] M. Ekman, Learning Deep Learning: Theory and Practice of Neural Networks, Computer Vision, Natural Language Processing, and Transformers Using TensorFlow. Addison-Wesley, 2022. [59730]"
+                ],
+                "software": [
+                    "Python",
+                    "R",
+                    "HTML"
+                ]
+            },
+
+            "assessment": {
+                "formative": [
+                    {
+                        "id": "A1.1",
+                        "method": "Thuyết trình cá nhân hoặc theo nhóm về chuyên đề, bài báo khoa học, kết quả nghiên cứu hoặc bài tập được giảng viên giao; có phần hỏi đáp và thảo luận.",
+                        "time": "Tuần 7–10 (hoặc theo kế hoạch giảng dạy của giảng viên)",
+                        "clos": "CLO4",
+                        "weight": "28"
+                    },
+                    {
+                        "id": "A1.2",
+                        "method": "Đánh giá kỹ năng làm việc nhóm trong bài thuyết trình",
+                        "time": "Tuần 7–10 (hoặc theo kế hoạch giảng dạy của giảng viên)",
+                        "clos": "CLO5",
+                        "weight": "12"
+                    }
+                ],
+                "summative": [
+                    {
+                        "id": "A2",
+                        "method": "Tiểu luận cuối kỳ",
+                        "time": "Cuối học kỳ (theo kế hoạch của môn học)",
+                        "clos": "CLO1, CLO2, CLO3",
+                        "weight": "60"
+                    }
+                ],
+
+                "examFormats": [
+                    8
+                ]
+            },
+
+            "schedule": [
+                {
+                    "week": "1",
+                    "content": "Khởi tạo dự án & Định hình bài toán AI. Giới thiệu tổng quan vòng đời dự án KHMT & AI. Phương pháp luận xác định bài toán, đánh giá tính khả thi (Feasibility). Thành lập nhóm (3-4 học viên/nhóm).",
+                    "clos": "CLO1, CLO2",
+                    "selfStudyAct": "Nghiên cứu xu hướng ứng dụng KHMT và AI; thảo luận nhóm trực tuyến tìm ý tưởng đề tài; đọc tài liệu hướng dẫn viết Project Proposal.",
+                    "selfStudyHrs": 12,
+                    "theoryAct": "Thảo luận lựa chọn đề tài; xây dựng Project Proposal gồm mục tiêu, phạm vi và công nghệ dự kiến.",
+                    "theoryHrs": 5,
+                    "practiceAct": "",
+                    "practiceHrs": 0,
+                    "assessment": "A1.1; A1.2",
+                    "materials": "[1][2][3][4]"
+                },
+                {
+                    "week": "2",
+                    "content": "Quản trị dự án (Agile/Scrum) & Thu thập dữ liệu. Scrum, Jira/Trello, Git Flow, DVC.",
+                    "clos": "CLO2, CLO3, CLO4, CLO5",
+                    "selfStudyAct": "Tìm hiểu Jira/Trello, Git Flow; thu thập dữ liệu; tìm hiểu DVC; cài đặt môi trường; tham gia thảo luận trên LMS.",
+                    "selfStudyHrs": 12,
+                    "theoryAct": "Thiết lập Kanban Board, GitHub/GitLab Repository; xây dựng Backlog và bộ dữ liệu ban đầu.",
+                    "theoryHrs": 5,
+                    "practiceAct": "",
+                    "practiceHrs": 0,
+                    "assessment": "A2",
+                    "materials": "[1][2][3][4]"
+                },
+                {
+                    "week": "3",
+                    "content": "Thiết kế kiến trúc hệ thống & lựa chọn Baseline. Monolith/Microservices, SQL/NoSQL/Vector Database, Baseline Model.",
+                    "clos": "CLO2, CLO3, CLO4, CLO5",
+                    "selfStudyAct": "Nghiên cứu kiến trúc phần mềm, RESTful API; xây dựng Baseline Model.",
+                    "selfStudyHrs": 12,
+                    "theoryAct": "Thiết kế Architecture Diagram, API Specification, báo cáo kết quả Baseline.",
+                    "theoryHrs": 5,
+                    "practiceAct": "",
+                    "practiceHrs": 0,
+                    "assessment": "A1.1; A1.2",
+                    "materials": "[1][2][3][4]"
+                },
+                {
+                    "week": "4",
+                    "content": "Phát triển Module AI nâng cao (Sprint 1). Fine-tuning, Hyperparameter Tuning, Accuracy, F1-score, Latency.",
+                    "clos": "CLO2, CLO3, CLO4, CLO5",
+                    "selfStudyAct": "Nghiên cứu Fine-tuning, Data Augmentation, Transfer Learning; huấn luyện mô hình trên Colab/Kaggle.",
+                    "selfStudyHrs": 12,
+                    "theoryAct": "Huấn luyện mô hình AI nâng cao; xây dựng bảng thực nghiệm.",
+                    "theoryHrs": 5,
+                    "practiceAct": "",
+                    "practiceHrs": 0,
+                    "assessment": "A1.1; A1.2",
+                    "materials": "[1][2][3][4]"
+                },
+                {
+                    "week": "5",
+                    "content": "Phát triển Backend & Tích hợp API (Sprint 2). FastAPI/Flask/Triton, Business Logic.",
+                    "clos": "CLO2, CLO3, CLO4, CLO5",
+                    "selfStudyAct": "Tìm hiểu FastAPI/Flask/NodeJS; đóng gói AI thành Web API; kết nối cơ sở dữ liệu.",
+                    "selfStudyHrs": 12,
+                    "theoryAct": "Lập trình Backend; xây dựng API Inference; Swagger.",
+                    "theoryHrs": 5,
+                    "practiceAct": "",
+                    "practiceHrs": 0,
+                    "assessment": "A1.1; A1.2",
+                    "materials": "[1][2][3][4]"
+                },
+                {
+                    "week": "6",
+                    "content": "Phát triển Frontend & Trải nghiệm người dùng (Sprint 3). Streamlit, Gradio, React, Vue, Flutter.",
+                    "clos": "CLO2, CLO3, CLO4, CLO5",
+                    "selfStudyAct": "Tự học Frontend Framework; lập trình giao diện; kết nối Backend API.",
+                    "selfStudyHrs": 12,
+                    "theoryAct": "Kiểm thử luồng dữ liệu; hoàn thiện Prototype.",
+                    "theoryHrs": 5,
+                    "practiceAct": "",
+                    "practiceHrs": 0,
+                    "assessment": "A1.1; A1.2",
+                    "materials": "[1][2][3][4]"
+                },
+                {
+                    "week": "7",
+                    "content": "Tối ưu hóa & Đảm bảo chất lượng hệ thống. Unit Test, Integration Test, Quantization, ONNX, TensorRT.",
+                    "clos": "CLO2, CLO3, CLO4, CLO5",
+                    "selfStudyAct": "Viết Unit Test, Integration Test; nghiên cứu ONNX và Quantization.",
+                    "selfStudyHrs": 12,
+                    "theoryAct": "Đo thời gian phản hồi; tối ưu hệ thống; xây dựng Testing Report.",
+                    "theoryHrs": 5,
+                    "practiceAct": "",
+                    "practiceHrs": 0,
+                    "assessment": "A2",
+                    "materials": "[1][2][3][4]"
+                },
+                {
+                    "week": "8",
+                    "content": "Triển khai hệ thống & Định hướng MLOps. Docker, docker-compose, GitHub Actions, Model Monitoring.",
+                    "clos": "CLO2, CLO3, CLO4, CLO5",
+                    "selfStudyAct": "Tìm hiểu Docker; viết Dockerfile; docker-compose; nghiên cứu CI/CD.",
+                    "selfStudyHrs": 12,
+                    "theoryAct": "Container hóa toàn bộ hệ thống; triển khai thử nghiệm.",
+                    "theoryHrs": 5,
+                    "practiceAct": "",
+                    "practiceHrs": 0,
+                    "assessment": "A2",
+                    "materials": "[1][2][3][4]"
+                },
+                {
+                    "week": "9",
+                    "content": "Hoàn thiện sản phẩm & Kiểm duyệt nội bộ (Pre-defense). Hoàn thiện báo cáo, chạy End-to-End, Demo.",
+                    "clos": "CLO2, CLO3, CLO4, CLO5",
+                    "selfStudyAct": "Hoàn thiện mã nguồn trên GitHub; viết README; hoàn thiện Technical Report; chuẩn bị Demo.",
+                    "selfStudyHrs": 9,
+                    "theoryAct": "Demo sản phẩm; phản biện; chỉnh sửa báo cáo cuối cùng.",
+                    "theoryHrs": 5,
+                    "practiceAct": "",
+                    "practiceHrs": 0,
+                    "assessment": "A2",
+                    "materials": "[1][2][3][4]"
+                }
+            ],
+
+            "policies": {
+                "homework": "",
+                "classroom": "Sinh viên tham gia đầy đủ các buổi học lý thuyết và thực hành, tham gia các hoạt động trong giờ học.",
+                "aiUsage": "",
+                "others": "Sinh viên tham gia đầy đủ các hoạt động học tập trên LMS theo yêu cầu của giảng viên."
+            },
+
+            "signatures": {
+                "dean": "TS. TRƯƠNG HOÀNG VINH",
+                "academic": "TS. LÊ VIẾT TUẤN"
+            }
+        };
+
+        const defaultState = JSON.parse(JSON.stringify(state));
+
+        // RAW text read from uploaded DOCX file
+        let extractedDocxRawText = "";
+
+        // Window onload sequence
+        window.onload = function () {
+            // Load saved api key if exists
+            const savedKey = localStorage.getItem("gemini_api_key");
+            if (savedKey) {
+                document.getElementById("geminiApiKeyInput").value = savedKey;
+            }
+
+            // Bind inputs, calculate total, render forms and preview
+            syncUiFromState();
+        };
+
+        // Toggle Modal Utility
+        function toggleModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal.classList.contains("hidden")) {
+                modal.classList.remove("hidden");
+                modal.classList.add("flex");
+            } else {
+                modal.classList.remove("flex");
+                modal.classList.add("hidden");
+            }
+        }
+
+        // Toggle API Key Visibility in Modal
+        function toggleApiKeyVisibility() {
+            const input = document.getElementById("geminiApiKeyInput");
+            const icon = document.getElementById("apiKeyEyeIcon");
+            if (input.type === "password") {
+                input.type = "text";
+                icon.classList.remove("fa-eye");
+                icon.classList.add("fa-eye-slash");
+            } else {
+                input.type = "password";
+                icon.classList.remove("fa-eye-slash");
+                icon.classList.add("fa-eye");
+            }
+        }
+
+        // Save API key to Local Storage
+        function saveApiKey() {
+            const key = document.getElementById("geminiApiKeyInput").value.trim();
+            localStorage.setItem("gemini_api_key", key);
+            showToast("API Key saved securely!", "success");
+            toggleModal("apiKeyModal");
+            checkAiBtnState();
+        }
+
+        // Modern Toast system
+        function showToast(message, type = "info") {
+            const container = document.getElementById("toast-container");
+            const toast = document.createElement("div");
+            toast.className = `flex items-center space-x-2.5 px-4 py-3 rounded-xl shadow-lg border text-xs font-bold transition-all duration-300 transform translate-y-2 opacity-0`;
+
+            if (type === "success") {
+                toast.className += " bg-emerald-50 text-emerald-800 border-emerald-200";
+                toast.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-500 text-sm"></i> <span>${message}</span>`;
+            } else if (type === "error") {
+                toast.className += " bg-rose-50 text-rose-800 border-rose-200";
+                toast.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-rose-500 text-sm"></i> <span>${message}</span>`;
+            } else {
+                toast.className += " bg-blue-50 text-blue-800 border-blue-200";
+                toast.innerHTML = `<i class="fa-solid fa-circle-info text-blue-500 text-sm"></i> <span>${message}</span>`;
+            }
+
+            container.appendChild(toast);
+
+            // Trigger entrance transition
+            setTimeout(() => {
+                toast.classList.remove("translate-y-2", "opacity-0");
+            }, 10);
+
+            // Exit transition
+            setTimeout(() => {
+                toast.classList.add("opacity-0", "scale-95");
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+
+        function deepMerge(base, incoming) {
+            if (Array.isArray(base) || Array.isArray(incoming)) {
+                return Array.isArray(incoming) ? incoming : base;
+            }
+            if (base && typeof base === "object" && incoming && typeof incoming === "object") {
+                const merged = { ...base };
+                Object.keys(incoming).forEach(key => {
+                    if (key in merged) {
+                        merged[key] = deepMerge(merged[key], incoming[key]);
+                    } else {
+                        merged[key] = incoming[key];
+                    }
+                });
+                return merged;
+            }
+            return incoming ?? base;
+        }
+
+        function sanitizeFileName(value) {
+            const base = (value || "syllabus").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+            return base || "syllabus";
+        }
+
+        function downloadBlob(blob, fileName) {
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = fileName;
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
+        }
+
+        function loadSampleSyllabus() {
+            state = JSON.parse(JSON.stringify(defaultState));
+            extractedDocxRawText = "";
+            syncUiFromState();
+            showToast("Sample syllabus loaded into the editor.", "success");
+        }
+
+        function exportAsJSON() {
+            const payload = JSON.stringify(state, null, 2);
+            const blob = new Blob([payload], { type: "application/json" });
+            downloadBlob(blob, `${sanitizeFileName(state.generalInfo.code || state.generalInfo.titleEn || "syllabus")}.json`);
+            showToast("Syllabus exported as JSON.", "success");
+        }
+
+        function exportAsPDF() {
+            setWorkspaceMode("preview");
+            renderPreviewLayout();
+            const fileName = `${sanitizeFileName(state.generalInfo.code || state.generalInfo.titleEn || "syllabus")}.pdf`;
+            const preview = document.getElementById("syllabus-paper-preview");
+            const options = {
+                margin: [0.75, 0.75, 0.75, 0.75],   // top, left, bottom, right
+                filename: fileName,
+                image: {
+                    type: "jpeg",
+                    quality: 1
+                },
+                html2canvas: {
+                    scale: 2,
+                    useCORS: true,
+                    letterRendering: true
+                },
+                jsPDF: {
+                    unit: "in",
+                    format: "a4",
+                    orientation: "portrait"
+                },
+                pagebreak: {
+                    mode: ["css", "avoid-all", "legacy"]
+                }
+            };
+            showToast("Preparing PDF export...", "info");
+            html2pdf().set(options).from(preview).save();
+        }
+
+        function exportAsWord() {
+            setWorkspaceMode("preview");
+            renderPreviewLayout();
+            const preview = document.getElementById("syllabus-paper-preview");
+            const html = `<!DOCTYPE html><html><head><meta charset="utf-8" /><style>
+        body{font-family: 'Times New Roman', Times, serif; margin:0; padding:0; color:#000;}
+        .paper-page{font-family: 'Times New Roman', Times, serif; background:white; color:black; width:100%; max-width:850px; margin:0 auto; padding:40px 50px; box-sizing:border-box;}
+        table{border-collapse:collapse; width:100%; margin:12px 0;}
+        th, td{border:1px solid #000; padding:6px 8px; font-size:13px; line-height:1.4;}
+        th{background-color:#f3f4f6; font-weight:bold; text-align:center;}
+      </style></head><body>${preview.outerHTML}</body></html>`;
+            const fileName = `${sanitizeFileName(state.generalInfo.code || state.generalInfo.titleEn || "syllabus")}.docx`;
+            try {
+                const blob = htmlDocx.asBlob(html, { orientation: "portrait", margins: { top: 720, bottom: 720, left: 720, right: 720 } });
+                downloadBlob(blob, fileName);
+                showToast("Syllabus exported as Word document.", "success");
+            } catch (err) {
+                showToast("DOCX export is unavailable in this browser session.", "error");
+                console.error(err);
+            }
+        }
+
+        // Workspace View controller
+        function setWorkspaceMode(mode) {
+            const tabForm = document.getElementById("modeTab-form");
+            const tabPreview = document.getElementById("modeTab-preview");
+            const viewForm = document.getElementById("view-form");
+            const viewPreview = document.getElementById("view-preview");
+
+            if (mode === "form") {
+                tabForm.className = "flex items-center space-x-2 px-4 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-150 bg-blue-600 text-white shadow-sm";
+                tabPreview.className = "flex items-center space-x-2 px-4 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-150 text-slate-500 hover:text-slate-800 hover:bg-slate-100";
+                viewForm.classList.remove("hidden");
+                viewPreview.classList.add("hidden");
+            } else {
+                tabPreview.className = "flex items-center space-x-2 px-4 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-150 bg-blue-600 text-white shadow-sm";
+                tabForm.className = "flex items-center space-x-2 px-4 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-150 text-slate-500 hover:text-slate-800 hover:bg-slate-100";
+                viewForm.classList.add("hidden");
+                viewPreview.classList.remove("hidden");
+
+                // Refresh preview view
+                renderPreviewLayout();
+            }
+        }
+
+        // Tabbed inner form navigator
+        function setFormSectionTab(tabId) {
+            // Hide all panels
+            document.querySelectorAll(".form-section-content").forEach(el => el.classList.add("hidden"));
+            // Show targeted panel
+            document.getElementById("formSection-" + tabId).classList.remove("hidden");
+
+            // Reset inactive styles on tabs
+            document.querySelectorAll("[id^='formTab-']").forEach(btn => {
+                btn.className = "px-3.5 py-2 text-xs font-bold rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition whitespace-nowrap";
+            });
+            // Set active style on selected
+            document.getElementById("formTab-" + tabId).className = "px-3.5 py-2 text-xs font-bold rounded-lg transition-all border-b-2 border-blue-600 text-blue-600 whitespace-nowrap";
+        }
+
+        // Helper functions to update state attributes dynamically
+        function updateStateField(path, value) {
+            const parts = path.split('.');
+            let current = state;
+            for (let i = 0; i < parts.length - 1; i++) {
+                current = current[parts[i]];
+            }
+            current[parts[parts.length - 1]] = value;
+            if (typeof renderPreviewLayout === "function") {
+                renderPreviewLayout();
+            }
+        }
+
+        // Automatic credit and self-study calculation logic
+        function onCreditsChanged(type, value) {
+            const numVal = parseInt(value) || 0;
+            if (type === 'theory') {
+                state.generalInfo.credits.theory = numVal;
+            } else if (type === 'practice') {
+                state.generalInfo.credits.practice = numVal;
+            }
+
+            // Standardize total
+            state.generalInfo.credits.total = state.generalInfo.credits.theory + state.generalInfo.credits.practice;
+
+            // HCMOU standard calculation rules formula trigger
+            // t = theory, p = practice
+            const t = state.generalInfo.credits.theory;
+            const p = state.generalInfo.credits.practice;
+            let calculatedSelfStudy = 0;
+
+            if (t === 0 && p === 1) calculatedSelfStudy = 20;
+            else if (t === 1 && p === 0) calculatedSelfStudy = 35;
+            else if (t === 2 && p === 0) calculatedSelfStudy = 70;
+            else if (t === 2 && p === 1) calculatedSelfStudy = 55;
+            else if (t === 2 && p === 2) calculatedSelfStudy = 40;
+            else if (t === 3 && p === 1) calculatedSelfStudy = 90;
+            else if (t === 3 && p === 0) calculatedSelfStudy = 105;
+            else if (t === 3 && p === 2) calculatedSelfStudy = 75;
+            else if (t === 3 && p === 3) calculatedSelfStudy = 60;
+            else if (t === 4 && p === 0) calculatedSelfStudy = 140;
+            else if (t === 4 && p === 4) calculatedSelfStudy = 80;
+            else if (t === 4 && p === 1) calculatedSelfStudy = 125;
+            else if (t === 6 && p === 0) calculatedSelfStudy = 210;
+            else if (t === 0 && p === 6) calculatedSelfStudy = 120;
+            else {
+                // Fallback formula: (Theory * 35) + (Practice * 20)
+                calculatedSelfStudy = (t * 35) + (p * 20);
+            }
+
+            state.generalInfo.credits.selfStudy = calculatedSelfStudy;
+            document.getElementById("inp-credSelfStudy").value = calculatedSelfStudy;
+            renderPreviewLayout();
+        }
+
+        // Keep inputs UI in sync with state values
+        function syncUiFromState() {
+            // General Info Tab
+            document.getElementById("inp-titleVi").value = state.generalInfo.titleVi || "";
+            document.getElementById("inp-titleEn").value = state.generalInfo.titleEn || "";
+            document.getElementById("inp-code").value = state.generalInfo.code || "";
+            document.getElementById("inp-language").value = state.generalInfo.language || "Both";
+            document.getElementById("inp-knowledge").value = state.generalInfo.knowledgeComponent || "Discipline";
+            document.getElementById("inp-credTheory").value = state.generalInfo.credits.theory ?? 0;
+            document.getElementById("inp-credPractice").value = state.generalInfo.credits.practice ?? 0;
+            document.getElementById("inp-credSelfStudy").value = state.generalInfo.credits.selfStudy ?? 0;
+
+            // Admin & Overview
+            document.getElementById("inp-academics").value = state.administration.academics || "";
+            document.getElementById("inp-adminEmail").value = state.administration.email || "";
+            document.getElementById("inp-adminRoom").value = state.administration.room || "";
+            document.getElementById("inp-description").value = state.overview.description || "";
+            document.getElementById("inp-reqPrereq").value = state.overview.requirements?.prereq || "";
+            document.getElementById("inp-reqPreceding").value = state.overview.requirements?.preceding || "";
+            document.getElementById("inp-reqCo").value = state.overview.requirements?.cocourse || "";
+
+            // Matrices, schedule tables, textbooks and assessments
+            renderObjectivesTable();
+            renderClosTable();
+            renderPloCloMatrixTable();
+            renderMaterialsTab();
+            renderAssessmentTab();
+            renderScheduleTab();
+
+            // Policies & Signatures Tab
+            document.getElementById("inp-policyHomework").value = state.policies.homework || "";
+            document.getElementById("inp-policyClassroom").value = state.policies.classroom || "";
+            document.getElementById("inp-policyAiUsage").value = state.policies.aiUsage || "";
+            document.getElementById("inp-policyOthers").value = state.policies.others || "";
+            document.getElementById("inp-sigDean").value = state.signatures.dean || "";
+            document.getElementById("inp-sigAcademic").value = state.signatures.academic || "";
+
+            // Final Exam Selection
+            for (let i = 1; i <= 10; i++) {
+                const checkbox = document.getElementById("examFmt-" + i);
+                if (checkbox) {
+                    checkbox.checked = state.assessment.examFormats.includes(i);
+                }
+            }
+
+            checkAiBtnState();
+        }
+
+        function checkAiBtnState() {
+            const aiBtn = document.getElementById("aiExtractBtn");
+            const hasKey = !!localStorage.getItem("gemini_api_key");
+            const hasDoc = extractedDocxRawText.trim().length > 0;
+            aiBtn.disabled = !(hasKey && hasDoc);
+        }
+
+
+        // Handlers for dynamic files (Docx Parsing, JSON Import)
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const ext = file.name.split('.').pop().toLowerCase();
+            if (ext === 'json') {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    try {
+                        const parsed = JSON.parse(e.target.result);
+                        state = deepMerge(JSON.parse(JSON.stringify(defaultState)), parsed);
+                        syncUiFromState();
+                        showToast("Syllabus JSON state loaded successfully!", "success");
+                    } catch (err) {
+                        showToast("Failed to parse JSON file structure.", "error");
+                    }
+                };
+                reader.readAsText(file);
+            } else if (ext === 'docx') {
+                showToast("Processing Word Document content...", "info");
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    const arrayBuffer = event.target.result;
+                    mammoth.extractRawText({ arrayBuffer: arrayBuffer })
+                        .then(function (result) {
+                            extractedDocxRawText = result.value; // Extracted raw text representation
+                            showToast("DOCX content extracted, AI Extraction ready!", "success");
+                            checkAiBtnState();
+
+                            // Enable log box visual
+                            const logBox = document.getElementById("aiStatusLog");
+                            logBox.classList.remove("hidden");
+                            addLogEntry("SYSTEM", "Extracted plain text size: " + extractedDocxRawText.length + " bytes.");
+                            addLogEntry("SYSTEM", "Ready to trigger Gemini model pipeline.");
+                        })
+                        .catch(function (err) {
+                            showToast("Failed to read DOCX contents client-side.", "error");
+                            console.error(err);
+                        });
+                };
+                reader.readAsArrayBuffer(file);
+            }
+        }
+
+        function addLogEntry(agent, text) {
+            const container = document.getElementById("statusEntries");
+            const div = document.createElement("div");
+            div.className = "py-0.5 border-b border-slate-800/40 text-[10px]";
+            const timeStr = new Date().toLocaleTimeString();
+            div.innerHTML = `<span class="text-slate-500">[${timeStr}]</span> <strong class="${agent === 'SYSTEM' ? 'text-blue-400' : 'text-purple-400'}">${agent}:</strong> <span class="text-slate-300">${text}</span>`;
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+
+
+        // Integration logic for Google Gemini API Client-Side Calls
+        async function runAiExtraction() {
+            const apiKey = localStorage.getItem("gemini_api_key");
+            if (!apiKey) {
+                showToast("Please save your API key first!", "error");
+                return;
+            }
+            if (!extractedDocxRawText) {
+                showToast("No raw DOCX syllabus content parsed yet.", "error");
+                return;
+            }
+
+            const logBox = document.getElementById("aiStatusLog");
+            logBox.classList.remove("hidden");
+            addLogEntry("SYSTEM", "Initiating Gemini structured parsing...");
+
+            // Prepare system instruction rules
+            const systemInstruction = `You are a world-class educational coordinator. Your goal is to accurately parse raw text extracted from a course syllabus document and fit it strictly into the target JSON structure specified below.
+
+Requirements:
+- Extract all available fields: titles, language, credits (theory, practice, selfStudy), administration details, description, prerequisites, COs, CLOs, PLO matrix alignment (values 1 to 5), textbook citations (IEEE style), references, software, assessments (formative & summative), schedule (weeks, contents, hours mapping), policies, and signatures.
+- For language: output "Vietnamese", "English", or "Both".
+- For knowledgeComponent: output "General", "Foundation", "Discipline", or "Thesis".
+- Translate empty descriptors if appropriate. Preserve both English and Vietnamese formats where visible.
+- Return ONLY valid, structured JSON. Do not write any markdown explanation before or after the JSON block.`;
+
+            // Define our required schema structure matching our javascript 'state' object
+            const jsonSchema = {
+                type: "OBJECT",
+                properties: {
+                    generalInfo: {
+                        type: "OBJECT",
+                        properties: {
+                            titleVi: { type: "STRING" },
+                            code: { type: "STRING" },
+                            titleEn: { type: "STRING" },
+                            language: { type: "STRING" },
+                            knowledgeComponent: { type: "STRING" },
+                            credits: {
+                                type: "OBJECT",
+                                properties: {
+                                    total: { type: "NUMBER" },
+                                    theory: { type: "NUMBER" },
+                                    practice: { type: "NUMBER" },
+                                    selfStudy: { type: "NUMBER" }
+                                }
+                            }
+                        }
+                    },
+                    administration: {
+                        type: "OBJECT",
+                        properties: {
+                            academics: { type: "STRING" },
+                            email: { type: "STRING" },
+                            room: { type: "STRING" }
+                        }
+                    },
+                    overview: {
+                        type: "OBJECT",
+                        properties: {
+                            description: { type: "STRING" },
+                            requirements: {
+                                type: "OBJECT",
+                                properties: {
+                                    prereq: { type: "STRING" },
+                                    preceding: { type: "STRING" },
+                                    cocourse: { type: "STRING" }
+                                }
+                            }
+                        }
+                    },
+                    objectives: {
+                        type: "ARRAY",
+                        items: {
+                            type: "OBJECT",
+                            properties: {
+                                id: { type: "STRING" },
+                                description: { type: "STRING" },
+                                plos: { type: "STRING" }
+                            }
+                        }
+                    },
+                    clos: {
+                        type: "ARRAY",
+                        items: {
+                            type: "OBJECT",
+                            properties: {
+                                id: { type: "STRING" },
+                                coId: { type: "STRING" },
+                                description: { type: "STRING" }
+                            }
+                        }
+                    },
+                    materials: {
+                        type: "OBJECT",
+                        properties: {
+                            textbooks: { type: "ARRAY", items: { type: "STRING" } },
+                            references: { type: "ARRAY", items: { type: "STRING" } },
+                            software: { type: "ARRAY", items: { type: "STRING" } }
+                        }
+                    },
+                    assessment: {
+                        type: "OBJECT",
+                        properties: {
+                            formative: {
+                                type: "ARRAY",
+                                items: {
+                                    type: "OBJECT",
+                                    properties: {
+                                        id: { type: "STRING" },
+                                        method: { type: "STRING" },
+                                        time: { type: "STRING" },
+                                        clos: { type: "STRING" },
+                                        weight: { type: "STRING" }
+                                    }
+                                }
+                            },
+                            summative: {
+                                type: "ARRAY",
+                                items: {
+                                    type: "OBJECT",
+                                    properties: {
+                                        id: { type: "STRING" },
+                                        method: { type: "STRING" },
+                                        time: { type: "STRING" },
+                                        clos: { type: "STRING" },
+                                        weight: { type: "STRING" }
+                                    }
+                                }
+                            },
+                            examFormats: { type: "ARRAY", items: { type: "NUMBER" } }
+                        }
+                    },
+                    schedule: {
+                        type: "ARRAY",
+                        items: {
+                            type: "OBJECT",
+                            properties: {
+                                week: { type: "STRING" },
+                                content: { type: "STRING" },
+                                clos: { type: "STRING" },
+                                selfStudyAct: { type: "STRING" },
+                                selfStudyHrs: { type: "NUMBER" },
+                                theoryAct: { type: "STRING" },
+                                theoryHrs: { type: "NUMBER" },
+                                practiceAct: { type: "STRING" },
+                                practiceHrs: { type: "NUMBER" },
+                                assessment: { type: "STRING" },
+                                materials: { type: "STRING" }
+                            }
+                        }
+                    },
+                    policies: {
+                        type: "OBJECT",
+                        properties: {
+                            homework: { type: "STRING" },
+                            classroom: { type: "STRING" },
+                            aiUsage: { type: "STRING" },
+                            others: { type: "STRING" }
+                        }
+                    },
+                    signatures: {
+                        type: "OBJECT",
+                        properties: {
+                            dean: { type: "STRING" },
+                            academic: { type: "STRING" }
+                        }
+                    }
+                }
+            };
+
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{ parts: [{ text: "Parse and structure the following raw syllabus text:\n\n" + extractedDocxRawText }] }],
+                generationConfig: {
+                    responseMimeType: "application/json",
+                    responseSchema: jsonSchema
+                },
+                systemInstruction: {
+                    parts: [{ text: systemInstruction }]
+                }
+            };
+
+            try {
+                addLogEntry("AI", "Sending payload to Gemini engine...");
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    throw new Error("HTTP connection error: status " + response.status);
+                }
+
+                const data = await response.json();
+                const jsonText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                if (jsonText) {
+                    addLogEntry("AI", "Response received, processing JSON compilation...");
+                    const parsed = JSON.parse(jsonText);
+
+                    // Re-populate system state
+                    state = deepMerge(JSON.parse(JSON.stringify(defaultState)), parsed);
+
+                    // Ensure matrix maps correctly with default mapping set for newly processed CLOs
+                    buildDefaultMatrix();
+
+                    syncUiFromState();
+                    addLogEntry("SYSTEM", "State synced successfully. Forms updated!");
+                    showToast("Syllabus processed and forms populated successfully!", "success");
+                } else {
+                    throw new Error("Invalid structure returned from model.");
+                }
+            } catch (err) {
+                addLogEntry("SYSTEM", "Extraction failed: " + err.message);
+                showToast("Gemini AI extraction model encountered an issue: " + err.message, "error");
+            }
+        }
+
+        // Creates dummy alignments for mapped outcomes
+        function buildDefaultMatrix() {
+            state.cloPloMatrix = {
+                plos: ["PLO1", "PLO2", "PLO3", "PLO4"],
+                mappings: {}
+            };
+            state.clos.forEach(clo => {
+                state.cloPloMatrix.mappings[clo.id] = {
+                    "PLO1": 4,
+                    "PLO2": 3
+                };
+            });
+        }
+
+
+        // Dynamically render CO objectives table row-blocks
+        function renderObjectivesTable() {
+            const tbody = document.getElementById("coTableBody");
+            tbody.innerHTML = "";
+            state.objectives.forEach((co, idx) => {
+                const tr = document.createElement("tr");
+                tr.className = "hover:bg-slate-50 transition";
+                tr.innerHTML = `
+          <td class="p-3"><input type="text" value="${co.id}" onchange="state.objectives[${idx}].id = this.value; syncUiFromState();" class="w-full bg-transparent border-b border-slate-200 outline-none font-bold text-slate-700"></td>
+          <td class="p-3"><textarea onchange="state.objectives[${idx}].description = this.value; renderPreviewLayout();" rows="2" class="w-full bg-transparent border border-slate-200 p-1.5 rounded-lg text-xs">${co.description}</textarea></td>
+          <td class="p-3"><input type="text" value="${co.plos}" onchange="state.objectives[${idx}].plos = this.value; renderPreviewLayout();" class="w-full bg-transparent border-b border-slate-200 text-xs"></td>
+          <td class="p-3 text-center"><button onclick="deleteObjectiveRow(${idx})" class="text-rose-500 hover:text-rose-700 transition"><i class="fa-solid fa-trash"></i></button></td>
+        `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function addObjectiveRow() {
+            const nextId = "CO" + (state.objectives.length + 1);
+            state.objectives.push({ id: nextId, description: "New Course Objective details...", plos: "PLO1.1" });
+            syncUiFromState();
+        }
+
+        function deleteObjectiveRow(idx) {
+            state.objectives.splice(idx, 1);
+            syncUiFromState();
+        }
+
+        // Dynamically render CLO learning outcomes table
+        function renderClosTable() {
+            const tbody = document.getElementById("cloTableBody");
+            tbody.innerHTML = "";
+            state.clos.forEach((clo, idx) => {
+                const tr = document.createElement("tr");
+                tr.className = "hover:bg-slate-50 transition";
+
+                let coOptions = state.objectives.map(co => `<option value="${co.id}" ${co.id === clo.coId ? 'selected' : ''}>${co.id}</option>`).join("");
+
+                tr.innerHTML = `
+          <td class="p-3"><input type="text" value="${clo.id}" onchange="state.clos[${idx}].id = this.value; syncUiFromState();" class="w-full bg-transparent border-b border-slate-200 outline-none font-bold text-slate-700"></td>
+          <td class="p-3"><select onchange="state.clos[${idx}].coId = this.value; renderPreviewLayout();" class="bg-slate-50 p-1 border rounded text-xs w-full">${coOptions}</select></td>
+          <td class="p-3"><textarea onchange="state.clos[${idx}].description = this.value; renderPreviewLayout();" rows="2" class="w-full bg-transparent border border-slate-200 p-1.5 rounded-lg text-xs">${clo.description}</textarea></td>
+          <td class="p-3 text-center"><button onclick="deleteCloRow(${idx})" class="text-rose-500 hover:text-rose-700 transition"><i class="fa-solid fa-trash"></i></button></td>
+        `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function addCloRow() {
+            const nextId = "CLO" + (state.clos.length + 1);
+            const parentCo = state.objectives[0]?.id || "CO1";
+            state.clos.push({ id: nextId, coId: parentCo, description: "Describe measurable and observable student criteria..." });
+            syncUiFromState();
+        }
+
+        function deleteCloRow(idx) {
+            state.clos.splice(idx, 1);
+            syncUiFromState();
+        }
+
+
+        // Dynamically render the dynamic Integrated Matrix Header & Matrix Body
+        function renderPloCloMatrixTable() {
+            const headerTr = document.getElementById("matrixHeader");
+            const matrixBody = document.getElementById("matrixBody");
+
+            headerTr.innerHTML = `<th class="p-3 w-28">CLOs / PLOs</th>`;
+            state.cloPloMatrix.plos.forEach(plo => {
+                headerTr.innerHTML += `<th class="p-3 text-center w-24">
+          <div class="flex items-center justify-between px-1">
+            <span>${plo}</span>
+            <button onclick="deletePloColumn('${plo}')" class="text-rose-500 hover:text-rose-700 text-[10px] ml-1"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+        </th>`;
+            });
+
+            matrixBody.innerHTML = "";
+            state.clos.forEach(clo => {
+                const tr = document.createElement("tr");
+                tr.className = "hover:bg-slate-50 transition";
+                tr.innerHTML = `<td class="p-3 font-bold text-slate-700 bg-slate-50/50">${clo.id}</td>`;
+
+                state.cloPloMatrix.plos.forEach(plo => {
+                    const mappingObj = state.cloPloMatrix.mappings[clo.id] || {};
+                    const cellVal = mappingObj[plo] !== undefined ? mappingObj[plo] : "";
+                    tr.innerHTML += `
+            <td class="p-2 text-center">
+              <input type="number" min="1" max="5" placeholder="-" value="${cellVal}" oninput="updateMatrixMapping('${clo.id}', '${plo}', this.value)" class="w-12 text-center bg-transparent border-b border-slate-200 outline-none focus:border-blue-500 text-xs font-semibold text-blue-600">
+            </td>
+          `;
+                });
+                matrixBody.appendChild(tr);
+            });
+        }
+
+        function updateMatrixMapping(cloId, ploId, val) {
+            if (!state.cloPloMatrix.mappings[cloId]) {
+                state.cloPloMatrix.mappings[cloId] = {};
+            }
+            const parsedVal = parseInt(val);
+            if (isNaN(parsedVal)) {
+                delete state.cloPloMatrix.mappings[cloId][ploId];
+            } else {
+                state.cloPloMatrix.mappings[cloId][ploId] = Math.max(1, Math.min(5, parsedVal));
+            }
+            renderPreviewLayout();
+        }
+
+        function addPloColumn() {
+            const nextNum = state.cloPloMatrix.plos.length + 1;
+            const newPlo = "PLO" + nextNum;
+            state.cloPloMatrix.plos.push(newPlo);
+            syncUiFromState();
+        }
+
+        function deletePloColumn(plo) {
+            const index = state.cloPloMatrix.plos.indexOf(plo);
+            if (index > -1) {
+                state.cloPloMatrix.plos.splice(index, 1);
+                // clean maps
+                for (let key in state.cloPloMatrix.mappings) {
+                    delete state.cloPloMatrix.mappings[key][plo];
+                }
+            }
+            syncUiFromState();
+        }
+
+        // Material List Renderers
+        function renderMaterialsTab() {
+            const booksBox = document.getElementById("textbooksContainer");
+            const refBox = document.getElementById("referencesContainer");
+            const softBox = document.getElementById("softwareContainer");
+
+            booksBox.innerHTML = "";
+            state.materials.textbooks.forEach((item, idx) => {
+                booksBox.appendChild(createMaterialRowItem('textbooks', item, idx));
+            });
+
+            refBox.innerHTML = "";
+            state.materials.references.forEach((item, idx) => {
+                refBox.appendChild(createMaterialRowItem('references', item, idx));
+            });
+
+            softBox.innerHTML = "";
+            state.materials.software.forEach((item, idx) => {
+                softBox.appendChild(createMaterialRowItem('software', item, idx));
+            });
+        }
+
+        function createMaterialRowItem(type, val, idx) {
+            const div = document.createElement("div");
+            div.className = "flex items-center space-x-2";
+            div.innerHTML = `
+        <span class="text-xs text-slate-400 font-bold">${idx + 1}.</span>
+        <input type="text" value="${val}" onchange="state.materials.${type}[${idx}] = this.value; renderPreviewLayout();" class="flex-grow px-3 py-1.5 border border-slate-300 rounded-xl text-xs focus:ring-1 focus:ring-blue-500">
+        <button onclick="deleteMaterialRow('${type}', ${idx})" class="text-rose-500 hover:text-rose-700 transition text-sm p-1"><i class="fa-solid fa-xmark"></i></button>
+      `;
+            return div;
+        }
+
+        function addMaterialRow(type) {
+            state.materials[type].push("New item detailed description...");
+            syncUiFromState();
+        }
+
+        function deleteMaterialRow(type, idx) {
+            state.materials[type].splice(idx, 1);
+            syncUiFromState();
+        }
+
+        // Assessment Format handlers
+        function renderAssessmentTab() {
+            const fBody = document.getElementById("assessmentFormativeBody");
+            const sBody = document.getElementById("assessmentSummativeBody");
+
+            fBody.innerHTML = "";
+            state.assessment.formative.forEach((item, idx) => {
+                const tr = document.createElement("tr");
+                tr.className = "hover:bg-slate-50 transition";
+                tr.innerHTML = `
+          <td class="p-3"><input type="text" value="${item.id}" onchange="state.assessment.formative[${idx}].id = this.value; renderPreviewLayout();" class="w-full bg-transparent border-b font-semibold"></td>
+          <td class="p-3"><input type="text" value="${item.method}" onchange="state.assessment.formative[${idx}].method = this.value; renderPreviewLayout();" class="w-full bg-transparent border-b"></td>
+          <td class="p-3"><input type="text" value="${item.time}" onchange="state.assessment.formative[${idx}].time = this.value; renderPreviewLayout();" class="w-full bg-transparent border-b"></td>
+          <td class="p-3"><input type="text" value="${item.clos}" onchange="state.assessment.formative[${idx}].clos = this.value; renderPreviewLayout();" class="w-full bg-transparent border-b"></td>
+          <td class="p-3"><input type="number" value="${item.weight}" onchange="state.assessment.formative[${idx}].weight = this.value; renderPreviewLayout();" class="w-full bg-transparent border-b"></td>
+          <td class="p-3 text-center"><button onclick="deleteAssessmentRow('formative', ${idx})" class="text-rose-500 hover:text-rose-700 transition"><i class="fa-solid fa-trash"></i></button></td>
+        `;
+                fBody.appendChild(tr);
+            });
+
+            sBody.innerHTML = "";
+            state.assessment.summative.forEach((item, idx) => {
+                const tr = document.createElement("tr");
+                tr.className = "hover:bg-slate-50 transition";
+                tr.innerHTML = `
+          <td class="p-3"><input type="text" value="${item.id}" onchange="state.assessment.summative[${idx}].id = this.value; renderPreviewLayout();" class="w-full bg-transparent border-b font-semibold"></td>
+          <td class="p-3"><input type="text" value="${item.method}" onchange="state.assessment.summative[${idx}].method = this.value; renderPreviewLayout();" class="w-full bg-transparent border-b"></td>
+          <td class="p-3"><input type="text" value="${item.time}" onchange="state.assessment.summative[${idx}].time = this.value; renderPreviewLayout();" class="w-full bg-transparent border-b"></td>
+          <td class="p-3"><input type="text" value="${item.clos}" onchange="state.assessment.summative[${idx}].clos = this.value; renderPreviewLayout();" class="w-full bg-transparent border-b"></td>
+          <td class="p-3"><input type="number" value="${item.weight}" onchange="state.assessment.summative[${idx}].weight = this.value; renderPreviewLayout();" class="w-full bg-transparent border-b"></td>
+          <td class="p-3 text-center"><button onclick="deleteAssessmentRow('summative', ${idx})" class="text-rose-500 hover:text-rose-700 transition"><i class="fa-solid fa-trash"></i></button></td>
+        `;
+                sBody.appendChild(tr);
+            });
+        }
+
+        function addAssessmentRow(type) {
+            const list = state.assessment[type];
+            const nextId = type === 'formative' ? ("A1." + (list.length + 1)) : "A2";
+            list.push({ id: nextId, method: "New evaluation criteria...", time: "Schedule weeks", clos: "CLO1", weight: "10" });
+            syncUiFromState();
+        }
+
+        function deleteAssessmentRow(type, idx) {
+            state.assessment[type].splice(idx, 1);
+            syncUiFromState();
+        }
+
+        function updateExamFormat(index, checked) {
+            if (checked) {
+                if (!state.assessment.examFormats.includes(index)) {
+                    state.assessment.examFormats.push(index);
+                }
+            } else {
+                const pos = state.assessment.examFormats.indexOf(index);
+                if (pos > -1) {
+                    state.assessment.examFormats.splice(pos, 1);
+                }
+            }
+            renderPreviewLayout();
+        }
+
+        // Weekly schedule dynamic table builder
+        function renderScheduleTab() {
+            const tbody = document.getElementById("scheduleTableBody");
+            tbody.innerHTML = "";
+            state.schedule.forEach((row, idx) => {
+                const tr = document.createElement("tr");
+                tr.className = "hover:bg-slate-50 transition text-xs";
+                tr.innerHTML = `
+          <td class="p-2"><input type="text" value="${row.week}" onchange="state.schedule[${idx}].week = this.value; renderPreviewLayout();" class="w-full bg-transparent border-b font-semibold text-center"></td>
+          <td class="p-2"><textarea onchange="state.schedule[${idx}].content = this.value; renderPreviewLayout();" rows="2" class="w-full bg-transparent border border-slate-200 p-1 rounded text-[11px]">${row.content}</textarea></td>
+          <td class="p-2"><input type="text" value="${row.clos}" onchange="state.schedule[${idx}].clos = this.value; renderPreviewLayout();" class="w-full bg-transparent border-b text-[11px]"></td>
+          <td class="p-2">
+            <div class="flex flex-col gap-1">
+              <input type="text" placeholder="Activity" value="${row.selfStudyAct}" onchange="state.schedule[${idx}].selfStudyAct = this.value; renderPreviewLayout();" class="w-full bg-transparent border-b text-[10px]">
+              <input type="number" placeholder="Hrs" value="${row.selfStudyHrs}" onchange="state.schedule[${idx}].selfStudyHrs = parseInt(this.value) || 0; renderPreviewLayout();" class="w-16 bg-transparent border-b text-[10px]">
+            </div>
+          </td>
+          <td class="p-2">
+            <div class="flex flex-col gap-1">
+              <input type="text" placeholder="Activity" value="${row.theoryAct}" onchange="state.schedule[${idx}].theoryAct = this.value; renderPreviewLayout();" class="w-full bg-transparent border-b text-[10px]">
+              <input type="number" placeholder="Hrs" value="${row.theoryHrs}" onchange="state.schedule[${idx}].theoryHrs = parseInt(this.value) || 0; renderPreviewLayout();" class="w-16 bg-transparent border-b text-[10px]">
+            </div>
+          </td>
+          <td class="p-2">
+            <div class="flex flex-col gap-1">
+              <input type="text" placeholder="Activity" value="${row.practiceAct}" onchange="state.schedule[${idx}].practiceAct = this.value; renderPreviewLayout();" class="w-full bg-transparent border-b text-[10px]">
+              <input type="number" placeholder="Hrs" value="${row.practiceHrs}" onchange="state.schedule[${idx}].practiceHrs = parseInt(this.value) || 0; renderPreviewLayout();" class="w-16 bg-transparent border-b text-[10px]">
+            </div>
+          </td>
+          <td class="p-2"><input type="text" value="${row.assessment}" onchange="state.schedule[${idx}].assessment = this.value; renderPreviewLayout();" class="w-full bg-transparent border-b text-[11px]"></td>
+          <td class="p-2"><input type="text" value="${row.materials}" onchange="state.schedule[${idx}].materials = this.value; renderPreviewLayout();" class="w-full bg-transparent border-b text-[11px]"></td>
+          <td class="p-2 text-center"><button onclick="deleteScheduleRow(${idx})" class="text-rose-500 hover:text-rose-700 transition"><i class="fa-solid fa-trash"></i></button></td>
+        `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function addScheduleRow() {
+            const nextW = (state.schedule.length + 1).toString();
+            state.schedule.push({
+                week: nextW,
+                content: "Draft syllabus session content mapping...",
+                clos: "CLO1",
+                selfStudyAct: "Self-reading program",
+                selfStudyHrs: 6,
+                theoryAct: "Lecturing block",
+                theoryHrs: 2,
+                practiceAct: "Lab training",
+                practiceHrs: 2,
+                assessment: "A1.1",
+                materials: "Textbook [1]"
+            });
+            syncUiFromState();
+        }
+
+        function deleteScheduleRow(idx) {
+            state.schedule.splice(idx, 1);
+            syncUiFromState();
+        }
+
+        // High fidelity template renderer mapping state values directly to elements
+        function renderPreviewLayout() {
+            document.getElementById("prv-titleVi").innerText = state.generalInfo.titleVi || "---";
+            document.getElementById("prv-code").innerText = state.generalInfo.code || "---";
+            document.getElementById("prv-titleEn").innerText = state.generalInfo.titleEn || "---";
+
+            const langMapping = { "Vietnamese": "Tiếng Việt / Vietnamese", "English": "Tiếng Anh / English", "Both": "Cả hai / Both" };
+            document.getElementById("prv-language").innerText = langMapping[state.generalInfo.language] || "---";
+
+            const knowMapping = { "General": "Kiến thức chung / General", "Foundation": "Kiến thức cơ sở / Foundation", "Discipline": "Kiến thức ngành / Discipline", "Thesis": "Luận văn tốt nghiệp / Thesis" };
+            document.getElementById("prv-knowledge").innerText = knowMapping[state.generalInfo.knowledgeComponent] || "---";
+
+            // Credits Table
+            document.getElementById("prv-credTotal").innerText = state.generalInfo.credits.total ?? 0;
+            document.getElementById("prv-credTheory").innerText = state.generalInfo.credits.theory ?? 0;
+            document.getElementById("prv-credPractice").innerText = state.generalInfo.credits.practice ?? 0;
+            document.getElementById("prv-credSelfStudy").innerText = state.generalInfo.credits.selfStudy ?? 0;
+
+            document.getElementById("prv-academics").innerText = state.administration.academics || "---";
+            document.getElementById("prv-email").innerText = state.administration.email || "---";
+            document.getElementById("prv-room").innerText = state.administration.room || "---";
+            document.getElementById("prv-description").innerText = state.overview.description || "---";
+            document.getElementById("prv-reqPrereq").innerText = state.overview.requirements?.prereq || "---";
+            document.getElementById("prv-reqPreceding").innerText = state.overview.requirements?.preceding || "---";
+            document.getElementById("prv-reqCo").innerText = state.overview.requirements?.cocourse || "---";
+
+            const objectivesList = document.getElementById("prv-objectivesList");
+            if (objectivesList) {
+                objectivesList.innerHTML = state.objectives.map((co, idx) => `
+          <tr>
+            <td class="border border-black p-1 text-center">${idx + 1}</td>
+            <td class="border border-black p-1">${co.description || "---"}</td>
+            <td class="border border-black p-1 text-center">${co.plos || "---"}</td>
+          </tr>
+        `).join("");
+            }
+
+            const closList = document.getElementById("prv-closList");
+            if (closList) {
+                closList.innerHTML = state.clos.map(clo => `
+          <tr>
+            <td class="border border-black p-1 text-center">${clo.coId || "---"}</td>
+            <td class="border border-black p-1 text-center">${clo.id || "---"}</td>
+            <td class="border border-black p-1">${clo.description || "---"}</td>
+          </tr>
+        `).join("");
+            }
+
+            const matrixHeader = document.getElementById("prv-matrixHeader");
+            const matrixBody = document.getElementById("prv-matrixBody");
+            if (matrixHeader && matrixBody) {
+                matrixHeader.innerHTML = `<tr class="bg-gray-100"><th class="border border-black p-1">CLOs / PLOs</th>${state.cloPloMatrix.plos.map(plo => `<th class="border border-black p-1">${plo}</th>`).join("")}</tr>`;
+                matrixBody.innerHTML = state.clos.map(clo => {
+                    const mapping = state.cloPloMatrix.mappings[clo.id] || {};
+                    const values = state.cloPloMatrix.plos.map(plo => {
+                        const value = mapping[plo];
+                        return value !== undefined && value >= 3 ? `<td class="border border-black p-1 text-center">${value}</td>` : "<td class=\"border border-black p-1 text-center\">-</td>";
+                    }).join("");
+                    return `<tr><td class="border border-black p-1 text-center font-bold">${clo.id}</td>${values}</tr>`;
+                }).join("");
+            }
+
+            const textbooksList = document.getElementById("prv-textbooksList");
+            const referencesList = document.getElementById("prv-referencesList");
+            const softwareList = document.getElementById("prv-softwareList");
+            if (textbooksList) textbooksList.innerHTML = (state.materials.textbooks || []).map(item => `<li>${item}</li>`).join("");
+            if (referencesList) referencesList.innerHTML = (state.materials.references || []).map(item => `<li>${item}</li>`).join("");
+            if (softwareList) softwareList.innerHTML = (state.materials.software || []).map(item => `<li>${item}</li>`).join("");
+
+            const assessmentList = document.getElementById("prv-assessmentList");
+            if (assessmentList) {
+                const rows = [...(state.assessment.formative || []), ...(state.assessment.summative || [])];
+                assessmentList.innerHTML = rows.map(item => `
+          <tr>
+            <td class="border border-black p-1">${item.id || "---"}</td>
+            <td class="border border-black p-1">${item.method || "---"}</td>
+            <td class="border border-black p-1">${item.time || "---"}</td>
+            <td class="border border-black p-1">${item.clos || "---"}</td>
+            <td class="border border-black p-1 text-center">${item.weight || "---"}</td>
+          </tr>
+        `).join("");
+            }
+
+            const selectedExamFormats = document.getElementById("prv-selectedExamFormats");
+            if (selectedExamFormats) {
+                const labels = {
+                    1: "Essay (Tiểu luận)",
+                    2: "Practicum Computer",
+                    3: "Multiple Choice MCQ",
+                    4: "Written & Oral MCQ",
+                    5: "Computer MCQ",
+                    6: "Audio-Oral",
+                    7: "4 Skills Combo",
+                    8: "Subjective Essay",
+                    9: "Oral Exam",
+                    10: "Other Format"
+                };
+                selectedExamFormats.innerHTML = (state.assessment.examFormats || []).map(index => `<div>${labels[index] || index}</div>`).join("");
+            }
+
+            const scheduleList = document.getElementById("prv-scheduleList");
+            if (scheduleList) {
+                scheduleList.innerHTML = (state.schedule || []).map(row => `
+          <tr>
+            <td class="border border-black p-1 text-center">${row.week || "---"}</td>
+            <td class="border border-black p-1">${row.content || "---"}</td>
+            <td class="border border-black p-1">${row.clos || "---"}</td>
+            <td class="border border-black p-1">${row.selfStudyAct || "---"}</td>
+            <td class="border border-black p-1 text-center">${row.selfStudyHrs ?? "---"}</td>
+            <td class="border border-black p-1">${row.theoryAct || "---"}</td>
+            <td class="border border-black p-1 text-center">${row.theoryHrs ?? "---"}</td>
+            <td class="border border-black p-1">${row.practiceAct || "---"}</td>
+            <td class="border border-black p-1 text-center">${row.practiceHrs ?? "---"}</td>
+            <td class="border border-black p-1">${row.assessment || "---"}</td>
+            <td class="border border-black p-1">${row.materials || "---"}</td>
+          </tr>
+        `).join("");
+            }
+
+            document.getElementById("prv-policyHomework").innerText = state.policies.homework || "---";
+            document.getElementById("prv-policyClassroom").innerText = state.policies.classroom || "---";
+            document.getElementById("prv-policyAiUsage").innerText = state.policies.aiUsage || "---";
+            document.getElementById("prv-policyOthers").innerText = state.policies.others || "---";
+            document.getElementById("prv-sigDean").innerText = state.signatures.dean || "---";
+            document.getElementById("prv-sigAcademic").innerText = state.signatures.academic || "---";
+        }
+
+    </script>
+</body>
+
+</html>
